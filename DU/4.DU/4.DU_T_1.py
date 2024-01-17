@@ -70,26 +70,44 @@ seq1 = [int(num) for num in list(str_seq1.split(" "))]
 seq2 = [int(num) for num in list(str_seq2.split(" "))]
 seq3 = [int(num) for num in list(str_seq3.split(" "))]
 
+seq = [int(num) for num in list(str_seq[2].split(" "))]
+
+print(seq)
+print()
+
 print(seq1)
 print(seq2)
 print(seq3)
 
 print()
 
+lenSeq = len(seq)
 len_seq1 = len(seq1)
 len_seq2 = len(seq2)
-len_seq3 = len(seq3)
+lenSeq = len(seq3)
 
-print(f"Len_Seq 1: {len_seq1} // 2 = {len_seq1 // 2}")
-print(f"Len_Seq 2: {len_seq2} // 2 = {len_seq2 // 2}")
-print(f"Len_Seq 3: {len_seq3} // 2 = {len_seq3 // 2}")
+print(f"Max Len Seq:   {lenSeq} // 2 = {lenSeq // 2}\n")
+print(f"Max Len_Seq 1: {len_seq1} // 2 = {len_seq1 // 2}")
+print(f"Max Len_Seq 2: {len_seq2} // 2 = {len_seq2 // 2}")
+print(f"Max Len_Seq 3: {lenSeq} // 2 = {lenSeq // 2}")
 
-LCS_Mat = [[0 for i in range(len_seq3+1)] for j in range(len_seq3+1)]
+LCS_Mat = [[0 for i in range(lenSeq + 1)] for j in range(lenSeq + 1)]
 
 TST_Mat = [[1, 0, 0, 1],
            [0, 2, 0, 0],
            [0, 3, 4, 0],
            [0, 0, 0, 5]]
+
+# Tri_Mat = [["o" for c in range(5)] for r in range(5)]
+#
+# print()
+# for row in range(len(Tri_Mat)):
+#     for col in range(row, len(Tri_Mat)):
+#         Tri_Mat[row][col] = "X"
+#
+#     for col in range(len(Tri_Mat)):
+#         print(Tri_Mat[row][col], end="")
+#     print()
 
 tstLen = len(TST_Mat)
 
@@ -97,18 +115,23 @@ tstLen = len(TST_Mat)
 
 result = 0
 res_index = []
+maxSeq = [[]]
+mSCnt = len(maxSeq)
 
-for i in range(len_seq3+1):
-    for j in range(len_seq3+1):
-        if (i == 0 or j == 0):
-            LCS_Mat[i][j] = 0
-        elif (seq3[i-1] == seq3[j-1]):
-            LCS_Mat[i][j] = LCS_Mat[i-1][j-1] + 1
-            if LCS_Mat[i][j] > result:
-                res_index = [i, j]
-            result = max(result, LCS_Mat[i][j])
+for r in range(lenSeq + 1):
+    for c in range(r, lenSeq + 1):
+        if (r == 0 or c == 0 or (r == c)):
+            LCS_Mat[r][c] = 0
+
+        elif (seq[r-1] == seq[c-1]):
+            LCS_Mat[r][c] = LCS_Mat[r-1][c-1] + 1
+            # maxSeq[mSCnt-1].append(LCS_Mat[r][c])
+            if LCS_Mat[r][c] > result:
+                res_index = [r, c]
+            result = max(result, LCS_Mat[r][c])
+
         else:
-            LCS_Mat[i][j] = 0
+            LCS_Mat[r][c] = 0
 
 # print("\n\t", end="")
 # # print()
@@ -133,26 +156,29 @@ for i in range(len_seq3+1):
 
 
 print("\n\n\t   |", end="")
-for b in range(len_seq3):
-    print(f" {seq3[b]:2} |", end="")
+for b in range(lenSeq):
+    print(f" {seq[b]:2} |", end="")
 print("\n\t", end="")
 
-for r in range(1, len_seq3+2):
+for r in range(1, lenSeq + 2):
     print(" --", end="")
-    for b in range(1, len_seq3+1):
+    for b in range(1, lenSeq + 1):
         print("+----", end="")
     print("+\n\t", end="")
     # print()
 
-    if r == len_seq3+1:
+    if r == lenSeq+1:
         break
     print(f"{seq3[r-1]:2} ", end="")
 
-    for c in range(1, len_seq3+1):
+    for c in range(1, lenSeq + 1):
         # for b in range(tstLen):
         #     print("+---", end="")
         # print("+")
-        print(f"| {LCS_Mat[r][c]:2} ", end="")
+        if LCS_Mat[r][c]:
+            print(f"| {LCS_Mat[r][c]:2} ", end="")
+        else:
+            print(f"|    ", end="")
         # print(LCS_Mat[r][c], end=" ")
 
     print("|\n\t", end="")
