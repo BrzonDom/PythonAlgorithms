@@ -98,16 +98,43 @@ TST_Mat = [[1, 0, 0, 1],
            [0, 3, 4, 0],
            [0, 0, 0, 5]]
 
-# Tri_Mat = [["o" for c in range(5)] for r in range(5)]
-#
-# print()
+Tri_Mat = [["o" for c in range(5)] for r in range(5)]
+
+print()
+for row in Tri_Mat:
+    for col in row:
+        print(col, end="")
+    print()
+
+# (0, 1)  (1, 2)  (2, 3)  (3, 4)  (4, 5)
+# (0, 2)  (1, 3)  (2, 4)  (3, 5)
+# (0, 3)  (1, 4)  (2, 5)
+# (0, 4)  (1, 5)
+# (0, 5)
+
+print()
+
+add = 0
+for row in range(5, -1, -1):
+    add += 1
+    for col in range(row):
+        print(f"({col}, {col+add}) ", end=" ")
+    print()
+
 # for row in range(len(Tri_Mat)):
 #     for col in range(row, len(Tri_Mat)):
+#         # print(f"{row}, {row+1}   ", end="")
 #         Tri_Mat[row][col] = "X"
 #
 #     for col in range(len(Tri_Mat)):
 #         print(Tri_Mat[row][col], end="")
 #     print()
+
+# for rep in range(len(Tri_Mat) - 1):
+#     for row in range
+# for row in range(len(Tri_Mat)-1, 0, -1):
+#     for col in range(row, )
+
 
 tstLen = len(TST_Mat)
 
@@ -116,7 +143,8 @@ tstLen = len(TST_Mat)
 result = 0
 res_index = []
 maxSeq = [[]]
-mSCnt = len(maxSeq)
+mSCon = False
+mSCnt = 0
 
 for r in range(lenSeq + 1):
     for c in range(r, lenSeq + 1):
@@ -125,12 +153,19 @@ for r in range(lenSeq + 1):
 
         elif (seq[r-1] == seq[c-1]):
             LCS_Mat[r][c] = LCS_Mat[r-1][c-1] + 1
-            # maxSeq[mSCnt-1].append(LCS_Mat[r][c])
+            # maxSeq[mSCnt].append(seq[r-1])
+            # mSCon = True
+
             if LCS_Mat[r][c] > result:
                 res_index = [r, c]
             result = max(result, LCS_Mat[r][c])
 
         else:
+            # if mSCon:
+            #     maxSeq.append([])
+            #     mSCnt += 1
+            #     mSCon = False
+
             LCS_Mat[r][c] = 0
 
 # print("\n\t", end="")
@@ -155,35 +190,37 @@ for r in range(lenSeq + 1):
 
 
 
-print("\n\n\t   |", end="")
-for b in range(lenSeq):
-    print(f" {seq[b]:2} |", end="")
-print("\n\t", end="")
+# print("\n\n\t   |", end="")
+# for b in range(lenSeq):
+#     print(f" {seq[b]:2} |", end="")
+# print("\n\t", end="")
+#
+# for r in range(1, lenSeq + 2):
+#     print(" --", end="")
+#     for b in range(1, lenSeq + 1):
+#         print("+----", end="")
+#     print("+\n\t", end="")
+#     # print()
+#
+#     if r == lenSeq+1:
+#         break
+#     print(f"{seq3[r-1]:2} ", end="")
+#
+#     for c in range(1, lenSeq + 1):
+#         # for b in range(tstLen):
+#         #     print("+---", end="")
+#         # print("+")
+#         if LCS_Mat[r][c]:
+#             print(f"| {LCS_Mat[r][c]:2} ", end="")
+#         else:
+#             print(f"|    ", end="")
+#         # print(LCS_Mat[r][c], end=" ")
+#
+#     print("|\n\t", end="")
 
-for r in range(1, lenSeq + 2):
-    print(" --", end="")
-    for b in range(1, lenSeq + 1):
-        print("+----", end="")
-    print("+\n\t", end="")
-    # print()
 
-    if r == lenSeq+1:
-        break
-    print(f"{seq3[r-1]:2} ", end="")
-
-    for c in range(1, lenSeq + 1):
-        # for b in range(tstLen):
-        #     print("+---", end="")
-        # print("+")
-        if LCS_Mat[r][c]:
-            print(f"| {LCS_Mat[r][c]:2} ", end="")
-        else:
-            print(f"|    ", end="")
-        # print(LCS_Mat[r][c], end=" ")
-
-    print("|\n\t", end="")
-
-
+# print()
+# print(maxSeq)
 
 # for i in range(2*(len_seq3+1)):
 #     for j in range(2*(len_seq3+1)):
