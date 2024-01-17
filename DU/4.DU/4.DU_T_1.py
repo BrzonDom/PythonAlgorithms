@@ -101,10 +101,10 @@ TST_Mat = [[1, 0, 0, 1],
 Tri_Mat = [["o" for c in range(5)] for r in range(5)]
 
 print()
-for row in Tri_Mat:
-    for col in row:
-        print(col, end="")
-    print()
+# for row in Tri_Mat:
+#     for col in row:
+#         print(col, end="")
+#     print()
 
 # (0, 1)  (1, 2)  (2, 3)  (3, 4)  (4, 5)
 # (0, 2)  (1, 3)  (2, 4)  (3, 5)
@@ -115,10 +115,17 @@ for row in Tri_Mat:
 print()
 
 add = 0
-for row in range(5, -1, -1):
+for row in range(5-1, -1, -1):
     add += 1
+    print(add)
     for col in range(row):
-        print(f"({col}, {col+add}) ", end=" ")
+        # print(f"({col}, {col+add}) ", end=" ")
+        Tri_Mat[col][col+add] = "X"
+
+    for mRow in Tri_Mat:
+        for mCol in mRow:
+            print(mCol, end="")
+        print()
     print()
 
 # for row in range(len(Tri_Mat)):
