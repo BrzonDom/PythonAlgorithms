@@ -10,6 +10,13 @@ Výpočet Fibonacciho posloupnosti
         F_0 = 0 a F_1 = 1.
 
 """
+def fibRec(n):
+   if n <= 1:
+       # print(f"F({n}) = {n}")
+       return n
+   else:
+       # print(f"F({n}) = F({n-1}) + F({n-2})")
+       return(fibRec(n-1) + fibRec(n-2))
 
 print("Fibonacci sequence:")
 
@@ -44,6 +51,10 @@ for num in Fib_list:
 
 print(f"\tF({n}) = {Fib_num}")
 
+print()
+
+print("Fibonacci sequence function:")
+print(f"\tF({n}) = {fibRec(n)}")
 
 
 
