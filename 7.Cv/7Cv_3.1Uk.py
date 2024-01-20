@@ -29,10 +29,24 @@ def fibRec(n):
        # print(f"F({n}) = F({n-1}) + F({n-2})")
        return(fibRec(n-1) + fibRec(n-2))
 
+def fibLst(n):
+
+    if n <= 1:
+        return n
+
+    elif n < len(fib_list):
+        return fib_list[n]
+
+    else:
+        fib_list.append(fibLst(n-1) + fibLst(n-2))
+        return fib_list[n]
+
 fib_dic = {
     0 : 0,
     1 : 1
 }
+
+fib_list = [0, 1]
 
 fib_num = 0
 n = 6
@@ -41,20 +55,10 @@ print("Fibonacci sequence function:")
 print(f"\tF({n}) = {fibRec(n)}")
 print()
 
-for num in range(1, n+1):
-    if num < 2:
-        fib_num += num
-    else:
-        if num in fib_dic:
-            fib_num += fib_dic[num]
-        else:
-            fib_dic[num] = fib_dic[num-1] + fib_dic[num-2]
 
-
-
-print("Fibonacci dictionary:")
-print(f"\tF({n}) = {fib_dic[n]}")
+print("Fibonacci list:")
+print(f"\tF({n}) = {fibLst(n)}")
 print()
 
-for key in fib_dic:
-    print(f"\t\tF({key}) = {fib_dic[key]}")
+for num, itm in enumerate(fib_list):
+    print(f"\t\tF({num}) = {itm}")
