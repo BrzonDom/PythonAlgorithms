@@ -61,22 +61,25 @@ c[4] = 4
 
 print("1.Part")
 
+print(f"\ta: {a}")
 print(f"\tA:", end="\t")
 for itm in a:
     print(f"{itm:2}", end=" ")
-print()
+print("\n")
 
+print(f"\tb: {b}")
 print(f"\tB:", end="\t")
 for itm in b:
     print(f"{itm:2}", end=" ")
-print()
+print("\n")
 
+print(f"\tc: {c}")
 print(f"\tC:", end="\t")
 for itm in c:
     print(f"{itm:2}", end=" ")
-print()
+print("\n")
 
-
+print(f"\td: {d}")
 print(f"\tD:", end="\t")
 for itm in d:
     print(f"{itm:2}", end=" ")
@@ -109,51 +112,58 @@ c[0], c[1] = c[1], c[0]
 d[1][0] = -3
 e[1][1] = -4
 
-print(f"\tA:", end="\n\t")
+print(f"\ta: {a}")
+print(f"\tA:", end="\n\t  ")
 for row in a:
     for itm in row:
         print(f"{itm:2}", end=" ")
-    print("", end="\n\t")
-print()
+    print("", end="\n\t  ")
+print("\n")
 
-print(f"\tB:", end="\n\t")
+print(f"\tb: {b}")
+print(f"\tB:", end="\n\t  ")
 for row in b:
     for itm in row:
         print(f"{itm:2}", end=" ")
-    print("", end="\n\t")
-print()
+    print("", end="\n\t  ")
+print("\n")
 
-print(f"\tC:", end="\n\t")
+print(f"\tc: {c}")
+print(f"\tC:", end="\n\t  ")
 for row in c:
     for itm in row:
         print(f"{itm:2}", end=" ")
-    print("", end="\n\t")
-print()
+    print("", end="\n\t  ")
+print("\n")
 
-print(f"\tD:", end="\n\t")
+print(f"\td: {d}")
+print(f"\tD:", end="\n\t  ")
 for row in d:
     for itm in row:
         print(f"{itm:2}", end=" ")
-    print("", end="\n\t")
-print()
+    print("", end="\n\t  ")
+print("\n")
 
-print(f"\tE:", end="\n\t")
+print(f"\te: {e}")
+print(f"\tE:", end="\n\t  ")
 for row in e:
     for itm in row:
         print(f"{itm:2}", end=" ")
-    print("", end="\n\t")
-print()
+    print("", end="\n\t  ")
+print("\n")
 
-print(f"\tF:", end="\n\t")
+print(f"\tf: {f}")
+print(f"\tF:", end="\n\t  ")
 for row in f:
     for itm in row:
         print(f"{itm:2}", end=" ")
-    print("", end="\n\t")
-print()
+    print("", end="\n\t  ")
+print("\n")
 
-print(f"\tG:", end="\n\t")
+print(f"\tg: {g}")
+print(f"\tG:", end="\n\t  ")
 for row in g:
     for itm in row:
         print(f"{itm:2}", end=" ")
-    print("", end="\n\t")
+    print("", end="\n\t  ")
 print()
