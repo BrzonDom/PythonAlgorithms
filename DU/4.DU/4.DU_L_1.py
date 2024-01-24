@@ -94,24 +94,15 @@ for i in range(len_seq1 + 1):
 #
 # print()
 #
-for i in range(len_seq1 + 1):
-    for j in range(len_seq2 + 1):
-        if i == 0 or j == 0:
-            continue
-
-        print(LCS_Mat[i][j], end=" ")
-    print()
+# for i in range(len_seq1 + 1):
+#     for j in range(len_seq2 + 1):
+#         if i == 0 or j == 0:
+#             continue
+#
+#         print(LCS_Mat[i][j], end=" ")
+#     print()
 #
 # print()
-# print(result)
-# res_index[0] -= result
-# res_index[1] -= result
-# print(res_index)
-#
-# print()
-# print(f"Sequence lenght: {result}")
-# print(f"\t\tStart index: {res_index[0]}\n\t\tEnd index:   {res_index[1]}")
-
 def LCS_2Vis(seq, Mat):
 
     seq1 = seq[0]
@@ -148,3 +139,9 @@ def LCS_2Vis(seq, Mat):
         print("|\n\t", end="")
 
 LCS_2Vis(seq, LCS_Mat)
+
+print()
+print(f"Sequence lenght: {result}")
+res_index[0] -= result
+res_index[1] -= result
+print(f"\t\tStart index: {res_index[0]}\n\t\tEnd index:   {res_index[1]}")
