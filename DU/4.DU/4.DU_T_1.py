@@ -61,35 +61,40 @@ Příklady:
         
 """
 
-str_seq1 = "3 3 3 3 3 3 3 3 3"
-str_seq2 = "1 1 1 6 2 2 2 6 1 1 1"
-str_seq3 = "1 2 5 -6 8 -3 2 1 1 2 2 5 -6 8 -3 2 3"
-str_seq = ["3 3 3 3 3 3 3 3 3", "1 1 1 6 2 2 2 6 1 1 1", "1 2 5 -6 8 -3 2 1 1 2 2 5 -6 8 -3 2 3"]
+# str_seq1 = "3 3 3 3 3 3 3 3 3"
+# str_seq2 = "1 1 1 6 2 2 2 6 1 1 1"
+# str_seq3 = "1 2 5 -6 8 -3 2 1 1 2 2 5 -6 8 -3 2 3"
+str_seq_list = ["3 3 3 3 3 3 3 3 3",
+                "1 1 1 6 2 2 2 6 1 1 1",
+                "1 2 5 -6 8 -3 2 1 1 2 2 5 -6 8 -3 2 3",
+                "1 2 3 4 4 4 4 4 3 2 1"]
 
-seq1 = [int(num) for num in list(str_seq1.split(" "))]
-seq2 = [int(num) for num in list(str_seq2.split(" "))]
-seq3 = [int(num) for num in list(str_seq3.split(" "))]
+# seq1 = [int(num) for num in list(str_seq1.split(" "))]
+# seq2 = [int(num) for num in list(str_seq2.split(" "))]
+# seq3 = [int(num) for num in list(str_seq3.split(" "))]
 
-seq = [int(num) for num in list(str_seq[2].split(" "))]
+str_seq = str_seq_list[2]
 
-print(seq)
-print()
+seq = [int(num) for num in list(str_seq.split(" "))]
 
-print(seq1)
-print(seq2)
-print(seq3)
-
-print()
+# print(seq1)
+# print(seq2)
+# print(seq3)
+# print()
 
 lenSeq = len(seq)
-len_seq1 = len(seq1)
-len_seq2 = len(seq2)
-lenSeq = len(seq3)
+# len_seq1 = len(seq1)
+# len_seq2 = len(seq2)
+# len_seq3 = len(seq3)
 
-print(f"Max Len Seq:   {lenSeq} // 2 = {lenSeq // 2}\n")
-print(f"Max Len_Seq 1: {len_seq1} // 2 = {len_seq1 // 2}")
-print(f"Max Len_Seq 2: {len_seq2} // 2 = {len_seq2 // 2}")
-print(f"Max Len_Seq 3: {lenSeq} // 2 = {lenSeq // 2}")
+print(f"Sequence: {seq}")
+print(f"\tSeq Len:      {lenSeq}")
+print(f"\tMax Len Seq:  {lenSeq // 2}\n")
+
+# print(f"Max Len Seq: {lenSeq} // 2 = {lenSeq // 2}\n")
+# print(f"Max Len_Seq 1: {len_seq1} // 2 = {len_seq1 // 2}")
+# print(f"Max Len_Seq 2: {len_seq2} // 2 = {len_seq2 // 2}")
+# print(f"Max Len_Seq 3: {lenSeq} // 2 = {lenSeq // 2}")
 
 LCS_Mat = [[0 for i in range(lenSeq + 1)] for j in range(lenSeq + 1)]
 
@@ -100,11 +105,6 @@ TST_Mat = [[1, 0, 0, 1],
 
 Tri_Mat = [["o" for c in range(5)] for r in range(5)]
 
-print()
-# for row in Tri_Mat:
-#     for col in row:
-#         print(col, end="")
-#     print()
 
 # (0, 1)  (1, 2)  (2, 3)  (3, 4)  (4, 5)
 # (0, 2)  (1, 3)  (2, 4)  (3, 5)
@@ -112,40 +112,22 @@ print()
 # (0, 4)  (1, 5)
 # (0, 5)
 
-print()
 
-add = 0
-for row in range(5-1, -1, -1):
-    add += 1
-    print(add)
-    for col in range(row):
-        # print(f"({col}, {col+add}) ", end=" ")
-        Tri_Mat[col][col+add] = "X"
-
-    for mRow in Tri_Mat:
-        for mCol in mRow:
-            print(mCol, end="")
-        print()
-    print()
-
-# for row in range(len(Tri_Mat)):
-#     for col in range(row, len(Tri_Mat)):
-#         # print(f"{row}, {row+1}   ", end="")
-#         Tri_Mat[row][col] = "X"
+"""Test diagonal fill of Mat"""
+# add = 0
+# for row in range(5-1, -1, -1):
+#     add += 1
+#     print(add)
+#     for col in range(row):
+#         # print(f"({col}, {col+add}) ", end=" ")
+#         Tri_Mat[col][col+add] = "X"
 #
-#     for col in range(len(Tri_Mat)):
-#         print(Tri_Mat[row][col], end="")
+#     for mRow in Tri_Mat:
+#         for mCol in mRow:
+#             print(mCol, end="")
+#         print()
 #     print()
 
-# for rep in range(len(Tri_Mat) - 1):
-#     for row in range
-# for row in range(len(Tri_Mat)-1, 0, -1):
-#     for col in range(row, )
-
-
-tstLen = len(TST_Mat)
-
-# print(LCS_Mat)
 
 result = 0
 res_index = []
@@ -158,50 +140,68 @@ print()
 
 ad = 0
 
-for row in range(lenSeq, 0, -1):
-    ad += 1
-    for col in range(1, row):
+"""Diagonal LSC_Mat analysis"""
+# for row in range(lenSeq, 0, -1):
+#     ad += 1
+#     for col in range(1, row):
+#
+#         if (seq[col-1] == seq[col+ad-1]):
+#             LCS_Mat[col][col+ad] = LCS_Mat[col-1][col+ad-1] + 1
+#
+#             if LCS_Mat[col][col+ad] > result:
+#                 res_index = [col, col+ad]
+#             result = max(result, LCS_Mat[col][col+ad])
 
-        if (seq[col-1] == seq[col+ad-1]):
-            LCS_Mat[col][col+ad] = LCS_Mat[col-1][col+ad-1] + 1
-
-            if LCS_Mat[col][col+ad] > result:
-                res_index = [col, col+ad]
-            result = max(result, LCS_Mat[col][col+ad])
-
+"""Diagonal coordinates print"""
     #     print(f"({col}, {col + ad}) ", end=" ")
     #     LCS_Mat[col][col+ad] = 1
     # print()
-#
+
+
+"""Whole LCS_Mat print"""
 # for row in LCS_Mat:
 #     for col in row:
 #         print(col, end=" ")
 #     print()
 
 
-"""
-for r in range(lenSeq + 1):
-    for c in range(r, lenSeq + 1):
-        if (r == 0 or c == 0 or (r == c)):
-            LCS_Mat[r][c] = 0
+"""Line LCS_Mat analysis"""
+# for r in range(lenSeq + 1):
+#     for c in range(r, lenSeq + 1):
+#         if (r == 0 or c == 0 or (r == c)):
+#             LCS_Mat[r][c] = 0
+#
+#         elif (seq[r-1] == seq[c-1]):
+#             LCS_Mat[r][c] = LCS_Mat[r-1][c-1] + 1
+#             # maxSeq[mSCnt].append(seq[r-1])
+#             # mSCon = True
+#
+#             if LCS_Mat[r][c] > result:
+#                 res_index = [r, c]
+#             result = max(result, LCS_Mat[r][c])
+#
+#         else:
+#             # if mSCon:
+#             #     maxSeq.append([])
+#             #     mSCnt += 1
+#             #     mSCon = False
+#
+#             LCS_Mat[r][c] = 0
 
-        elif (seq[r-1] == seq[c-1]):
-            LCS_Mat[r][c] = LCS_Mat[r-1][c-1] + 1
-            # maxSeq[mSCnt].append(seq[r-1])
-            # mSCon = True
 
-            if LCS_Mat[r][c] > result:
-                res_index = [r, c]
-            result = max(result, LCS_Mat[r][c])
-
+"""Whole line LCS_Mat analysis"""
+for i in range(lenSeq+1):
+    for j in range(lenSeq+1):
+        if (i == 0 or j == 0):
+            LCS_Mat[i][j] = 0
+        elif (seq[i-1] == seq[j-1]):
+            LCS_Mat[i][j] = LCS_Mat[i-1][j-1] + 1
+            if LCS_Mat[i][j] > result:
+                res_index = [i, j]
+            result = max(result, LCS_Mat[i][j])
         else:
-            # if mSCon:
-            #     maxSeq.append([])
-            #     mSCnt += 1
-            #     mSCon = False
+            LCS_Mat[i][j] = 0
 
-            LCS_Mat[r][c] = 0
-"""
 
 
 def LCS_1Vis(seq, Mat):
