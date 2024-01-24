@@ -72,3 +72,63 @@ inNum_list = [[21, 9, 8, 7, 6],
 inNum = inNum_list[0]
 
 print(f"Number input: {inNum}")
+
+print(f"\n\tBase number:             {inNum[0]}")
+print(f"\tNumber of numbers:       {len(inNum)}")
+print(f"\tNumber of test numbers:  {len(inNum) - 1}")
+
+# maxNum = 1000
+# primNumLst = [2]
+#
+# for curNum in range(2, maxNum+1):
+#     for primNum in primNumLst:
+#         if curNum % primNum == 0:
+#             break
+#         if primNum == primNumLst[-1]:
+#             primNumLst.append(curNum)
+#
+# print(primNumLst)
+
+def primNum(num):
+
+    primNumLst = [2]
+
+    for curNum in range(2, num + 1):
+        for primNum in primNumLst:
+            if curNum % primNum == 0:
+                break
+            if primNum == primNumLst[-1]:
+                primNumLst.append(curNum)
+    # print(primNumLst)
+    return primNumLst
+
+def primDec(num):
+
+    primNumLst = primNum(num)
+    primDecLst = [1]
+
+    while num != 1:
+        for prim in primNumLst:
+            if num % prim == 0:
+                num = num // prim
+                primDecLst.append(prim)
+                break
+    # print(primDecLst)
+    return primDecLst
+
+
+print("\nNumber decomposition:")
+
+for num in inNum:
+    numDec = primDec(num)
+    numDecStr = ""
+    print(f"\t{num}", end=" = ")
+    for prim in numDec[1:]:
+        # if prim == numDec[-1]:
+        #     print(f"{prim}")
+        # else:
+        #     print(f"{prim} * ", end="")
+        numDecStr += f"{prim} * "
+    print(numDecStr[:-3])
+
+
