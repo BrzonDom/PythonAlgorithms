@@ -90,7 +90,7 @@ for row in Graph_list:
         # Graph_dict[row[0]].append(row[1])
         Graph_dict[row[0]] = [Graph_dict[row[0]], row[1]]
     else:
-        # Graph_dict[row[0]] = {}
+        # Graph_dict[row[0]] = []
         Graph_dict[row[0]] = row[1]
 
 print(Graph_dict)
