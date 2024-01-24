@@ -1,5 +1,5 @@
 """
-Napište program int_sum.py, který v posloupnosti čísel najde podposloupnost, která má největší součet.
+Napište program max_seq.py, který v posloupnosti čísel najde podposloupnost, která má největší součet.
 
 Vstup:
     - jedna řádka ze standarního vstupu
@@ -36,6 +36,11 @@ Příklady:
         1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3
     Výstup:
         8 12
+        
+    Vstup:
+        3 1 -6 2 4 1 -3 2 -5 4 -5
+    Výstup:
+        3 7
 """
 import copy
 
@@ -52,8 +57,12 @@ def sumArr(Arr):
 # Input = "-2 -1 -3 -4 -5 -6"
 # Input = "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3"
 
-Input_list = ["1 2 3 4 5 6", "-2 -1 -3 -4 -5 -6", "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3"]
-Input = Input_list[2]
+
+Input_list = ["1 2 3 4 5 6",
+              "-2 -1 -3 -4 -5 -6",
+              "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3",
+              "3 1 -6 2 4 1 -3 2 -5 4 -5"]
+Input = Input_list[3]
 
 
 # Input = input()
