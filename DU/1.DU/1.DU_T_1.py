@@ -70,36 +70,44 @@ Input = Input_list[3]
 print("Input: ", end="")
 print(Input)
 
-numList = [0]
-numCnt = add = 0
-pol = 1
-
 In_Len = len(Input)
-print("Input Character Lenght: ", end="")
-print(In_Len)
-
-for char in Input:
-    if (char != ' '):
-        if (char == '-'):
-            pol = -1
-            # print("Minus")
-        elif (('0' <= char) & (char <= '9')):
-            numList[numCnt] = numList[numCnt] * 10 + pol * int(char)
-            # print("Number: ", end="")
-            # print(Input[i])
-    else:
-        numCnt += 1
-        pol = 1
-        numList.append(0)
-numCnt += 1
-
+print(f"Input Character Lenght: {In_Len}")
 print()
+
+# numList = [0]
+# numCnt = add = 0
+# pol = 1
+
+"""     Manual convert from string to int list  """
+# for char in Input:
+#     if (char != ' '):
+#         if (char == '-'):
+#             pol = -1
+#             # print("Minus")
+#         elif (('0' <= char) & (char <= '9')):
+#             numList[numCnt] = numList[numCnt] * 10 + pol * int(char)
+#             # print("Number: ", end="")
+#             # print(Input[i])
+#     else:
+#         numCnt += 1
+#         pol = 1
+#         numList.append(0)
+# numCnt += 1
+
+numList = list(map(int, Input.split()))
+
 print("List of numbers: ", end="")
 
-for i in range(numCnt-1):
-    print(numList[i], end=", ")
-print(numList[numCnt-1])
+# for i in range(numCnt-1):
+#     print(numList[i], end=", ")
+# print(numList[numCnt-1])
 
+for num in numList[:-1]:
+    print(f"{num} ", end="")
+print(numList[-1])
+
+numCnt = len(numList)
+print(f"Number of numbers: {len(numList)}")
 print()
 
 maxSeq = [0]
