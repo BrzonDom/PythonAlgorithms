@@ -44,6 +44,7 @@ Příklady:
 """
 import copy
 
+
 def sumArr(Arr):
 
     sum = 0
@@ -52,6 +53,73 @@ def sumArr(Arr):
         sum = sum + num
 
     return(sum)
+
+
+def seqMax(seq):
+
+    seqCnt = len(seq)
+
+    """     Prints the original sequence    """
+    # print(f"Sequence: {seq}")
+    # print(f"\tLen of sequence: {seqCnt}")
+
+    maxSeq = curSeq = [0]
+
+    """     Count of the sequence   """
+    maxCnt = curCnt = 0
+    """     Sum of the sequence     """
+    maxTot = curTot = 0
+    i = 2
+
+    for num in range(seqCnt):
+
+        """     1. instance - initial values
+                    Skips 1. loop   """
+        if num == 0:
+            maxSeq = curSeq = [seq[0]]
+            maxTot = curTot = seq[0]
+            maxCnt = curCnt = 1
+            continue
+
+        """     Prints the sequence that has been analysed  """
+        # print("\nSeq: ", end="")
+        # for _ in range(i):
+        #     print(seq[_], end=" ")
+        # print()
+        # i += 1
+
+        """     Updates current sequence    """
+        curSeq.append(seq[num])
+        curTot += seq[num]
+        curCnt += 1
+
+        """     If current total is less than added num
+                    Resets current values   """
+        if curTot < seq[num]:
+            curSeq = [seq[num]]
+            curTot = seq[num]
+            curCnt = 1
+
+        """     Prints current sequence, total & count  """
+        # print("\tCurSeq: ", end="")
+        # for _ in range(curCnt):
+        #     print(curSeq[_], end=" ")
+        # print(f"\n\t\tTot: {curTot}  |  Cnt: {curCnt}")
+
+        """     If max total is less than current total
+                    Updates max values  """
+        if maxTot < curTot:
+            maxSeq = copy.deepcopy(curSeq)
+            maxTot = curTot
+            maxCnt = curCnt
+            # print(maxSeq)
+
+            # print("\t! MaxSeq !")
+            # for _ in range(maxCnt):
+            #     print(maxSeq[_], end=" ")
+            # print(f"\n\t\tTot: {maxTot}  |  Cnt: {maxCnt}")
+
+    return maxSeq
 
 # Input = "1 2 3 4 5 6"
 # Input = "-2 -1 -3 -4 -5 -6"
@@ -110,72 +178,76 @@ numCnt = len(numList)
 print(f"Number of numbers: {len(numList)}")
 print()
 
-maxSeq = [0]
-curSeq = [0]
-
-"""     Count of the sequence   """
-maxCnt = curCnt = 0
-"""     Sum of the sequence     """
-maxTot = curTot = 0
-i = 2
-
-
-for num in range(numCnt):
-
-    """     1. instance - initial values
-                Skips 1. loop   """
-    if num == 0:
-        maxSeq = curSeq = [numList[0]]
-        maxTot = curTot = numList[0]
-        maxCnt = curCnt = 1
-        continue
-
-    # print(f"{numList[num]}\n")
-
-    """     Prints the sequence that has been analysed  """
-    print("\nSeq: ", end="")
-    for _ in range(i):
-       print(numList[_], end=" ")
-    print()
-    i += 1
-
-    """     Updates current sequence    """
-    curSeq.append(numList[num])
-    curTot += numList[num]
-    curCnt += 1
-
-    """     If current total is less than added num
-                Resets current values   """
-    if curTot < numList[num]:
-        curSeq = [numList[num]]
-        curTot = numList[num]
-        curCnt = 1
-
-    """     Prints current sequence, total & count  """
-    print("\tCurSeq: ", end="")
-    for _ in range(curCnt):
-        print(curSeq[_], end=" ")
-    print(f"\n\t\tTot: {curTot}  |  Cnt: {curCnt}")
-
-    """     If max total is less than current total
-                Updates max values  """
-    if maxTot < curTot:
-        maxSeq = copy.deepcopy(curSeq)
-        maxTot = curTot
-        maxCnt = curCnt
-        # print(maxSeq)
-
-        print("\t! MaxSeq !")
-        # for _ in range(maxCnt):
-        #     print(maxSeq[_], end=" ")
-        # print(f"\n\t\tTot: {maxTot}  |  Cnt: {maxCnt}")
+# maxSeq = [0]
+# curSeq = [0]
+#
+# """     Count of the sequence   """
+# maxCnt = curCnt = 0
+# """     Sum of the sequence     """
+# maxTot = curTot = 0
+# i = 2
+#
+#
+# for num in range(numCnt):
+#
+#     """     1. instance - initial values
+#                 Skips 1. loop   """
+#     if num == 0:
+#         maxSeq = curSeq = [numList[0]]
+#         maxTot = curTot = numList[0]
+#         maxCnt = curCnt = 1
+#         continue
+#
+#     # print(f"{numList[num]}\n")
+#
+#     """     Prints the sequence that has been analysed  """
+#     print("\nSeq: ", end="")
+#     for _ in range(i):
+#        print(numList[_], end=" ")
+#     print()
+#     i += 1
+#
+#     """     Updates current sequence    """
+#     curSeq.append(numList[num])
+#     curTot += numList[num]
+#     curCnt += 1
+#
+#     """     If current total is less than added num
+#                 Resets current values   """
+#     if curTot < numList[num]:
+#         curSeq = [numList[num]]
+#         curTot = numList[num]
+#         curCnt = 1
+#
+#     """     Prints current sequence, total & count  """
+#     print("\tCurSeq: ", end="")
+#     for _ in range(curCnt):
+#         print(curSeq[_], end=" ")
+#     print(f"\n\t\tTot: {curTot}  |  Cnt: {curCnt}")
+#
+#     """     If max total is less than current total
+#                 Updates max values  """
+#     if maxTot < curTot:
+#         maxSeq = copy.deepcopy(curSeq)
+#         maxTot = curTot
+#         maxCnt = curCnt
+#         # print(maxSeq)
+#
+#         print("\t! MaxSeq !")
+#         # for _ in range(maxCnt):
+#         #     print(maxSeq[_], end=" ")
+#         # print(f"\n\t\tTot: {maxTot}  |  Cnt: {maxCnt}")
 
 
 # print("\n\nDone\n")
 print("\n")
 
+maxSeq = seqMax(numList)
 print(f"MaxSeq: {maxSeq}")
 
+maxCnt = len(maxSeq)
 print(f"\tMaxCnt: {maxCnt}")
+
+maxTot = sumArr(maxSeq)
 print(f"\tMaxTot: {maxTot}")
 
