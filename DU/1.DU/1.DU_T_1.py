@@ -37,6 +37,7 @@ Příklady:
     Výstup:
         8 12
 """
+import copy
 
 def sumArr(Arr):
 
@@ -129,9 +130,10 @@ for num in range(numCnt):
     print(f"\n\t\tTot: {curTot}  |  Cnt: {curCnt}")
 
     if maxTot < curTot:
-        maxSeq = curSeq
+        maxSeq = copy.deepcopy(curSeq)
         maxTot = curTot
         maxCnt = curCnt
+        # print(maxSeq)
         print("\t! MaxSeq !")
         # for _ in range(maxCnt):
         #     print(maxSeq[_], end=" ")
@@ -144,6 +146,11 @@ for num in range(numCnt):
 
 
 
-print("\n\nDone")
+print("\n\nDone\n")
+
+print(f"MaxSeq: {maxSeq}")
+
+print(f"\tMaxCnt: {maxCnt}")
+print(f"\tMaxTot: {maxTot}")
 
 
