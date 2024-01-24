@@ -153,12 +153,6 @@ maxSeq = [[]]
 mSCon = False
 mSCnt = 0
 
-for r in range(lenSeq+1):
-    print(r, end=", ")
-print()
-for r in range(lenSeq, 0, -1):
-    print(r, end=", ")
-print()
 
 print()
 
@@ -210,34 +204,67 @@ for r in range(lenSeq + 1):
 """
 
 
+def LCS_1Vis(seq, Mat):
+    len_seq = len(seq)
+
+    # LCS_Mat = [[0 for i in range(lenSeq + 1)] for j in range(lenSeq + 1)]
+
+    print("\n\n\t   |", end="")
+    for b in range(lenSeq):
+        print(f" {seq[b]:2} |", end="")
+    print("\n\t", end="")
+
+    for r in range(1, lenSeq + 2):
+        print(" --", end="")
+        for b in range(1, lenSeq + 1):
+            print("+----", end="")
+        print("+\n\t", end="")
+        # print()
+
+        if r == lenSeq + 1:
+            break
+        print(f"{seq[r - 1]:2} ", end="")
+
+        for c in range(1, lenSeq + 1):
+
+            # print(f"| {Mat[r][c]:2} ", end="")
+
+            if LCS_Mat[r][c]:
+                print(f"| {Mat[r][c]:2} ", end="")
+            else:
+                print(f"|    ", end="")
+
+        print("|\n\t", end="")
 
 
-print("\n\n\t   |", end="")
-for b in range(lenSeq):
-    print(f" {seq[b]:2} |", end="")
-print("\n\t", end="")
 
-for r in range(1, lenSeq + 2):
-    print(" --", end="")
-    for b in range(1, lenSeq + 1):
-        print("+----", end="")
-    print("+\n\t", end="")
-    # print()
+LCS_1Vis(seq, LCS_Mat)
 
-    if r == lenSeq+1:
-        break
-    print(f"{seq3[r-1]:2} ", end="")
-
-    for c in range(1, lenSeq + 1):
-        # for b in range(tstLen):
-        #     print("+---", end="")
-        # print("+")
-        if LCS_Mat[r][c]:
-            print(f"| {LCS_Mat[r][c]:2} ", end="")
-        else:
-            print(f"|    ", end="")
-        # print(LCS_Mat[r][c], end=" ")
-
-    print("|\n\t", end="")
-
+# print("\n\n\t   |", end="")
+# for b in range(lenSeq):
+#     print(f" {seq[b]:2} |", end="")
+# print("\n\t", end="")
+#
+# for r in range(1, lenSeq + 2):
+#     print(" --", end="")
+#     for b in range(1, lenSeq + 1):
+#         print("+----", end="")
+#     print("+\n\t", end="")
+#     # print()
+#
+#     if r == lenSeq+1:
+#         break
+#     print(f"{seq[r-1]:2} ", end="")
+#
+#     for c in range(1, lenSeq + 1):
+#
+#         # print(f"| {LCS_Mat[r][c]:2} ", end="")
+#
+#         if LCS_Mat[r][c]:
+#             print(f"| {LCS_Mat[r][c]:2} ", end="")
+#         else:
+#             print(f"|    ", end="")
+#
+#
+#     print("|\n\t", end="")
 
