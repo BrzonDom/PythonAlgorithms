@@ -56,7 +56,7 @@ def GCD1(num1, num2):
         else:
             b -= a
 
-    print(f"GCD1({num1},{num2}) = {a}\n\tSteps: {steps}\n")
+    print(f"GCD.1: ({num1},{num2}) = {a}\n\tSteps: {steps}\n")
 
     return a
 
@@ -83,7 +83,7 @@ def GCD2(num1, num2):
         b = a % b
         a = t
 
-    print(f"GCD1({num1},{num2}) = {a}\n\tSteps: {steps}\n")
+    print(f"GCD.2: ({num1},{num2}) = {a}\n\tSteps: {steps}\n")
 
     return a
 
