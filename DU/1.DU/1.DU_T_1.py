@@ -55,8 +55,6 @@ def sumArr(Arr):
 Input_list = ["1 2 3 4 5 6", "-2 -1 -3 -4 -5 -6", "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3"]
 Input = Input_list[2]
 
-# Input = "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3"
-
 
 # Input = input()
 
@@ -87,7 +85,7 @@ for char in Input:
 numCnt += 1
 
 print()
-print("List of numbers:")
+print("List of numbers: ", end="")
 
 for i in range(numCnt-1):
     print(numList[i], end=", ")
@@ -97,11 +95,18 @@ print()
 
 maxSeq = [0]
 curSeq = [0]
-maxCnt = curCnt = maxTot = curTot = 0
+
+"""     Count of the sequence   """
+maxCnt = curCnt = 0
+"""     Sum of the sequence     """
+maxTot = curTot = 0
 i = 2
 
 
 for num in range(numCnt):
+
+    """     1. instance - initial values
+                Skips 1. loop   """
     if num == 0:
         maxSeq = curSeq = [numList[0]]
         maxTot = curTot = numList[0]
@@ -109,48 +114,51 @@ for num in range(numCnt):
         continue
 
     # print(f"{numList[num]}\n")
+
+    """     Prints the sequence that has been analysed  """
     print("\nSeq: ", end="")
     for _ in range(i):
-        print(numList[_], end=" ")
+       print(numList[_], end=" ")
     print()
     i += 1
 
+    """     Updates current sequence    """
     curSeq.append(numList[num])
     curTot += numList[num]
     curCnt += 1
 
+    """     If current total is less than added num
+                Resets current values   """
     if curTot < numList[num]:
         curSeq = [numList[num]]
         curTot = numList[num]
         curCnt = 1
 
+    """     Prints current sequence, total & count  """
     print("\tCurSeq: ", end="")
     for _ in range(curCnt):
         print(curSeq[_], end=" ")
     print(f"\n\t\tTot: {curTot}  |  Cnt: {curCnt}")
 
+    """     If max total is less than current total
+                Updates max values  """
     if maxTot < curTot:
         maxSeq = copy.deepcopy(curSeq)
         maxTot = curTot
         maxCnt = curCnt
         # print(maxSeq)
+
         print("\t! MaxSeq !")
         # for _ in range(maxCnt):
         #     print(maxSeq[_], end=" ")
         # print(f"\n\t\tTot: {maxTot}  |  Cnt: {maxCnt}")
 
 
-
-
-
-
-
-
-print("\n\nDone\n")
+# print("\n\nDone\n")
+print("\n")
 
 print(f"MaxSeq: {maxSeq}")
 
 print(f"\tMaxCnt: {maxCnt}")
 print(f"\tMaxTot: {maxTot}")
-
 
