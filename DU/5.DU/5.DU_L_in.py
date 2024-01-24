@@ -154,12 +154,39 @@ def coN(num):
 #     6 : "g",
 #     7 : "h" }
 
+
+file_list = ["setup_L_01", "setup_L_02", "setup_L_03"]
+
+file_name = file_list[0]
+# file_name = "setup_L_01"
+file_path = "data\\" + file_name + ".txt"
+
+file = open(file_path, "r")
+print(f"File: {file_name}.txt\n")
+
+
 board = [[0 for i in range(8 + 2)] for j in range(8 + 2)]
 
 # for i in range(10):
 #     for j in range(10):
 #         if (i == 0 or j == 0 or i == 10 or j == 10):
 
+inBoard = []
+
+for line in file:
+    inBoard.append(list(map(int, line.split())))
+file.close()
+
+for row in inBoard:
+    print(f"\t{row}")
+print()
+
+print("", end="\t")
+for row in inBoard:
+    for col in row:
+        print(col, end=" ")
+    print("", end="\n\t")
+print()
 
 input_board = [[0, 0, 0, 0, 0, 0, 0, 0],
                [0, 0, 0, 0, 0, 0, 0, 0],
@@ -182,11 +209,11 @@ input_board = [[0, 0, 0, 0, 0, 0, 0, 0],
 # print("\n")
 
 
-for i in range(8):
-    for j in range(8):
-        board[i + 1][j + 1] = input_board[i][j]
-        print(board[i + 1][j + 1], end=" ")
-    print()
+# for i in range(8):
+#     for j in range(8):
+#         board[i + 1][j + 1] = input_board[i][j]
+#         print(board[i + 1][j + 1], end=" ")
+#     print()
 
 moves = []
 coord_list = []
@@ -229,13 +256,70 @@ for r in range(8):
                         continue
                 break
 
-            # if (r-1) in boarder and (c-1) in boarder:
-            #     if not
+# moves = []
+# move_stack = []
+# coord_list = []
+# boarder = [0, 1, 2, 3, 4, 5, 6, 7]
+# move_Cnt = 0
+#
+# for r in range(8):
+#     for c in range(8):
+#         if input_board[r][c] == 1:
+#             coord_list.append(coL(c)+coN(r))
+#             move_stack.append([r, c])
+#             moves.append([r, c])
+#
+#             while(len(move_stack) > 0):
+#                 if (moves[move_Cnt][0] - 1) in boarder and (moves[move_Cnt][1] - 1) in boarder:
+#                     if input_board[moves[move_Cnt][0]-1][moves[move_Cnt][1]-1] == 0:
+#
+#                         moves.append([moves[move_Cnt][0]-1, moves[move_Cnt][1]-1])
+#                         coord_list.append(coL(moves[move_Cnt][1]-1) + coN(moves[move_Cnt][0]-1))
+#                         move_Cnt += 1
+#                         continue
+#
+#                 if (moves[move_Cnt][0] - 1) in boarder and (moves[move_Cnt][1] + 1) in boarder:
+#                     if input_board[moves[move_Cnt][0]-1][moves[move_Cnt][1]+1] == 0:
+#
+#                         moves.append([moves[move_Cnt][0]-1, moves[move_Cnt][1]+1])
+#                         coord_list.append(coL(moves[move_Cnt][1]+1) + coN(moves[move_Cnt][0]-1))
+#                         move_Cnt += 1
+#                         continue
+#
+#                 if (moves[move_Cnt][0] - 2) in boarder and (moves[move_Cnt][1] - 2) in boarder:
+#                     if input_board[moves[move_Cnt][0] - 2][moves[move_Cnt][1] - 2] == 0:
+#
+#                         moves.append([moves[move_Cnt][0] - 2, moves[move_Cnt][1] - 2])
+#                         coord_list.append(coL(moves[move_Cnt][1] - 2) + coN(moves[move_Cnt][0] - 2))
+#                         move_Cnt += 1
+#                         continue
+#
+#                 if (moves[move_Cnt][0] - 2) in boarder and (moves[move_Cnt][1] + 2) in boarder:
+#                     if input_board[moves[move_Cnt][0] - 2][moves[move_Cnt][1] + 2] == 0:
+#                         moves.append([moves[move_Cnt][0] - 2, moves[move_Cnt][1] + 2])
+#                         coord_list.append(coL(moves[move_Cnt][1] + 2) + coN(moves[move_Cnt][0] - 2))
+#                         move_Cnt += 1
+#                         continue
+#                 break
 
-            # if (r == 0):
-            #     continue
-            # # elif (c == 0):
-            # #     if input_board[r+1][c+1] == 0:
+print()
+print(moves)
+print(coord_list)
+
+print()
+
+for r in range(8):
+    for c in range(8):
+        # print(f"{r}{c}", end=" ")
+        if [r, c] == moves[0]:
+            print("🟥", end="")
+        elif [r, c] in moves:
+            print("🟩", end="")
+        elif input_board[r][c] == 3:
+            print("⬛", end="")
+        else:
+            print("⬜", end="")
+    print()
 
 # print(moves)
 """
