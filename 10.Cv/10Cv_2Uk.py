@@ -71,6 +71,30 @@ def Route(graph, start, goal):
 
     return []
 
+file_name = "graph_path"
+file_path = "data\\" + file_name + ".txt"
+
+file = open(file_path, 'rt')
+Graph_list = []
+
+for line in file:
+    Graph_list.append(list(map(int, line.split())))
+file.close()
+
+Graph_dict = {}
+print(Graph_list)
+
+for row in Graph_list:
+
+    if row[0] in Graph_dict:
+        # Graph_dict[row[0]].append(row[1])
+        Graph_dict[row[0]] = [Graph_dict[row[0]], row[1]]
+    else:
+        # Graph_dict[row[0]] = {}
+        Graph_dict[row[0]] = row[1]
+
+print(Graph_dict)
+
 
 Graph = {}
 Graph[1] = [2, 9]
