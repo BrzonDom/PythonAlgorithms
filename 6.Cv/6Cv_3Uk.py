@@ -19,7 +19,7 @@ Krok 3: Úprava řádku
     Napište funkci do_line(M, i), která zavolá funkci swap_rows(M, i) a pokud:
         M[i][i] != 0:
             celý řádek i matice M vydělí hodnotou M[i][i]
-            od všech řádků r v rozsahu range(i + 1, len(M)) odečte M[r][i]-násobek řádku i
+            od všech řádků r v rozsahu range(i + 1, len(M)) odečte M[r][i] - násobek řádku i
             vrátí hodnotu True
         jinak vrátí False
 
@@ -38,12 +38,19 @@ Příklad
 
 """
 
-# def maximum(Mat, col):
-#
-#     index = 0
-#     Max = Mat[0][col]
-#
-#     for c in range(len(Mat)):
+
+def maximum(Mat, col):
+
+    Max = abs(Mat[0][col])
+    index = 0
+
+    for row in range(1, len(Mat)):
+
+        if Max < abs(Mat[row][col]):
+            Max = abs(Mat[row][col])
+            index = row
+
+    return index
 
 Mat = [[12, -7,  3, 26],
        [ 4,  5, -6, -5],
@@ -54,7 +61,11 @@ cols = len(Mat[0])
 
 print(f"Rows:    {rows}")
 print(f"Columns: {cols}")
-
+print("Mat:", end="\n\t")
+for row in Mat:
+    for col in row:
+        print(f"{col:2}", end=" ")
+    print("", end="\n\t")
 print()
 
 for c in range(cols):
@@ -72,22 +83,27 @@ for c in range(cols):
         index += 1
 
     print(f"Col {c}: Max = {Max} on row = {row_Max}")
-
-
-print("\n")
+print()
 
 for c in range(cols):
-    index = c
-    for r in range(c, rows):
-        # print(Mat[r][c], end=" ")
+    r = maximum(Mat, c)
+    print(f"Col {c}: Max = {Mat[r][c]} on Row {r}")
 
-        if r == c:
-            Max = abs(Mat[c][c])
-            row_Max = c
-        elif Mat[r][c] > Max:
-            Max = abs(Mat[r][c])
-            row_Max = index
 
-        index += 1
-
-    print(f"Col {c}: Max = {Max} on row = {row_Max}")
+# print("\n")
+#
+# for c in range(cols):
+#     index = c
+#     for r in range(c, rows):
+#         # print(Mat[r][c], end=" ")
+#
+#         if r == c:
+#             Max = abs(Mat[c][c])
+#             row_Max = c
+#         elif Mat[r][c] > Max:
+#             Max = abs(Mat[r][c])
+#             row_Max = index
+#
+#         index += 1
+#
+#     print(f"Col {c}: Max = {Max} on row = {row_Max}")
