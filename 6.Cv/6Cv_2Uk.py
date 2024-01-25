@@ -41,6 +41,41 @@ def matMult(matA, matB):
         return mat
 
 
+def rowSwap(mat, swap):
+
+    """     Switch out of range     """
+    if not (swap[0] and swap[1]) in range(len(mat)):
+        return 0
+
+    """     Switch doesn't have effect  """
+    if swap[0] == swap[1]:
+        return 1
+
+    else:
+        dim = len(mat)
+
+        """     Create an identity matrix   """
+        perMat = [[0 for c in range(dim)] for r in range(dim)]
+
+        for r in range(dim):
+            for c in range(dim):
+                if r == c:
+                    perMat[r][c] = 1
+
+        """     Create a permutation matrix   """
+        swapped = [copy.deepcopy(perMat[swap[0]]), copy.deepcopy(perMat[swap[1]])]
+
+        perMat[swap[1]] = swapped[0]
+        perMat[swap[0]] = swapped[1]
+
+        # return perMat
+
+        """     Swap rows by matrix multiplication  """
+        swapMat = matMult(perMat, mat)
+
+        return swapMat
+
+
 """     Input matrix    """
 # matrix = []
 # print("Zadejte matici řádek po řádku. Když skončíte, zadejte 'end'.")
@@ -111,10 +146,10 @@ for r in range(row):
     # print()
 
 """     Create a permutation matrix   """
-swaped = [copy.deepcopy(perMat[row_swap[0]]), copy.deepcopy(perMat[row_swap[1]])]
+swapped = [copy.deepcopy(perMat[row_swap[0]]), copy.deepcopy(perMat[row_swap[1]])]
 
-perMat[row_swap[1]] = swaped[0]
-perMat[row_swap[0]] = swaped[1]
+perMat[row_swap[1]] = swapped[0]
+perMat[row_swap[0]] = swapped[1]
 
 """     Print a permutation matrix   """
 print()
@@ -133,9 +168,23 @@ for line in mat:
 
 print("=")
 
+"""     Create a swapped matrix     """
 swapMat = matMult(perMat, mat)
 
+"""     Print a swapped matrix      """
 for line in swapMat:
+    for itm in line:
+        print(f"{itm:2}", end=" ")
+    print()
+print()
+
+"""     Print a swapped matrix of function      """
+
+swapFunMat = rowSwap(mat, row_swap)
+# for line in swapFunMat:
+#     print(line)
+
+for line in swapFunMat:
     for itm in line:
         print(f"{itm:2}", end=" ")
     print()
