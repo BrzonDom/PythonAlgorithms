@@ -39,7 +39,7 @@ Příklad
 """
 
 
-def maximum(Mat, col):
+def maximumAll(Mat, col):
 
     Max = abs(Mat[0][col])
     index = 0
@@ -52,6 +52,23 @@ def maximum(Mat, col):
 
     return index
 
+
+def maximum(Mat, col):
+
+    if col >= len(Mat):
+        return -1
+
+    else:
+        Max = abs(Mat[col][col])
+        index = col
+
+        for row in range(col+1, len(Mat)):
+
+            if Max < abs(Mat[row][col]):
+                Max = abs(Mat[row][col])
+                index = row
+
+        return index
 
 # def swap_rows(Mat, col):
 
@@ -76,7 +93,7 @@ for row in Mat:
     print("", end="\n\t")
 print()
 
-"""     Manual maximum of a column  """
+"""     Manual maximum of all the columns  """
 
 """     Loop through all columns    """
 for c in range(cols):
@@ -107,7 +124,56 @@ for c in range(cols):
     print(f"Col {c}: Max = {Max} on row = {row_Max}")
 print()
 
-"""     Function maximum of a column    """
+
+"""     Function maximum of all columns    """
+
+"""     Loop through all columns    """
+for c in range(cols):
+
+    """     Find maximum of the column      """
+    r = maximumAll(Mat, c)
+
+    """     Print max values of the column      """
+    print(f"Col {c}: Max = {Mat[r][c]} on Row {r}")
+print("\n")
+
+
+"""     Manual maximum of matrix columns  """
+
+"""     Loop through all columns    """
+for c in range(cols):
+    maxLoop = False
+
+    """     Loop through rows under diagonal
+                to find Max     """
+    for r in range(c, rows):
+        # print(Mat[r][c], end=" ")
+
+
+        if r == c:
+            """     1. instance = initial values
+                        Skips 1.loop    """
+
+            Max = abs(Mat[r][c])
+            maxLoop = True
+            index = c
+            row_Max = c
+
+        elif (abs(Mat[r][c]) > Max):
+            """     Find the max of the column      """
+
+            Max = abs(Mat[r][c])
+            row_Max = index
+
+        index += 1
+
+    """     Print max values of the column    """
+    if maxLoop:
+        print(f"Col {c}: Max = {Max} on Row {row_Max}")
+print()
+
+
+"""     Function maximum of matrix columns  """
 
 """     Loop through all columns    """
 for c in range(cols):
@@ -116,6 +182,9 @@ for c in range(cols):
     r = maximum(Mat, c)
 
     """     Print max values of the column      """
+    if r == -1:
+        continue
     print(f"Col {c}: Max = {Mat[r][c]} on Row {r}")
+print("\n")
 
 
