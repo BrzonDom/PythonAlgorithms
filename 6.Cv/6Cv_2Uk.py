@@ -93,18 +93,22 @@ print()
 """     What rows to switch     """
 row_swap = [0, 3]
 
-"""     Create an identity matrix   """
+print(f"To swap:")
+print(f"\trow {row_swap[0]} : {mat[row_swap[0]]}")
+print(f"\trow {row_swap[1]} : {mat[row_swap[1]]}")
+
 perMat = [[0 for c in range(row)] for r in range(row)]
 
-print("Identity matrix:")
+"""     Create an identity matrix   """
+# print("Identity matrix:")
 for r in range(row):
     for c in range(row):
         if r == c:
             perMat[r][c] = 1
 
         """     Print an identity matrix   """
-        print(perMat[r][c], end=" ")
-    print()
+    #     print(perMat[r][c], end=" ")
+    # print()
 
 """     Create a permutation matrix   """
 swaped = [copy.deepcopy(perMat[row_swap[0]]), copy.deepcopy(perMat[row_swap[1]])]
@@ -114,11 +118,24 @@ perMat[row_swap[0]] = swaped[1]
 
 """     Print a permutation matrix   """
 print()
-print("Permutation matrix:")
-for r in range(row):
-    for c in range(row):
-        # if r == c:
-        #     perMat[r][c] = 1
+# print("Permutation matrix:")
+for line in perMat:
+    for itm in line:
+        print(f"{itm:2}", end=" ")
+    print()
 
-        print(perMat[r][c], end=" ")
+print("*")
+
+for line in mat:
+    for itm in line:
+        print(f"{itm:2}", end=" ")
+    print()
+
+print("=")
+
+swapMat = matMult(perMat, mat)
+
+for line in swapMat:
+    for itm in line:
+        print(f"{itm:2}", end=" ")
     print()
