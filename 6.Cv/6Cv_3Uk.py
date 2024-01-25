@@ -70,13 +70,19 @@ def maximum(Mat, col):
 
         return index
 
-# def swap_rows(Mat, col):
-#
-#     row = maximum(Mat, col)
-#
-#     if col != row:
+def swap_rows(Mat, col):
 
+    row = maximum(Mat, col)
 
+    if col != row:
+
+        swap = [col, row]
+        swap_row = [copy.deepcopy(Mat[col]), copy.deepcopy(Mat[row])]
+
+        Mat[swap[1]] = swap_row[0]
+        Mat[swap[0]] = swap_row[1]
+
+    return Mat
 
 
 Mat = [[12, -7,  3, 26],
@@ -264,4 +270,30 @@ for c in range(cols):
     print(f"\tCol {c}: Max = {Mat[r][c]} on Row {r}")
 print("")
 
+"""     Function swap of rows     """
 
+print("Func. swap.rows:")
+print("\tFunc. max.:")
+MatSwap = copy.deepcopy(Mat)
+
+for c in range(cols):
+    """     Loop through all columns    """
+
+    """     Find maximum of the column      """
+    r = maximum(MatSwap, c)
+
+    """     Print max values of the column      """
+    if r == -1:
+        continue
+    print(f"\t\tCol {c}: Max = {abs(MatSwap[r][c])} on Row {r}")
+
+    MatSwap = swap_rows(MatSwap, c)
+
+print()
+
+print("\tFunc. swap.mat.:", end="\n\t\t")
+for row in MatSwap:
+    for col in row:
+        print(f"{col:2}", end=" ")
+    print("", end="\n\t\t")
+print()
