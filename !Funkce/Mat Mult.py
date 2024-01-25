@@ -1,4 +1,38 @@
 
+def matMult(matA, matB):
+
+    rowA = len(matA)
+    colA = len(matA[0])
+
+    rowB = len(matB)
+    colB = len(matB[0])
+
+    """     Control of matrix dimensions    """
+    if colA != rowB:
+        return 0
+    else:
+        row = rowA
+        col = colB
+
+        mat = [[0 for c in range(col)] for r in range(row)]
+
+        for r in range(row):
+            for c in range(col):
+
+                """     Dot product calculation     """
+                add = 0
+                for d in range(colA):
+                    add += matA[r][d] * matB[d][c]
+
+                mat[r][c] = add
+
+                """     Final matrix print      """
+            #     print(f"{mat[r][c]:2}", end=" ")
+            # print()
+
+        return mat
+
+
 """     List matrix     """
 mat_list = [[[-1, -2, 3],
              [-3, 5, 6],
@@ -32,8 +66,10 @@ rowA = len(matA)
 colA = len(matA[0])
 
 rowB = len(matB)
-colB = len(matB)
+colB = len(matB[0])
 
+
+"""     Print matrix A * B =    """
 for row in matA:
     for col in row:
         print(f"{col:2}", end=" ")
@@ -51,6 +87,7 @@ print("\t=")
 # for row in matC:
 #     print(row)
 
+"""     Control of matrix dimensions    """
 if colA == rowB:
 
     rowC = rowA
@@ -60,10 +97,21 @@ if colA == rowB:
 
     for r in range(rowC):
         for c in range(colC):
+
+            """     Dot product calculation     """
             add = 0
             for d in range(colA):
                 add += matA[r][d] * matB[d][c]
 
             matC[r][c] = add
+
+            """     Final matrix print      """
             print(f"{matC[r][c]:2}", end=" ")
         print()
+
+print()
+mat = matMult(matA, matB)
+for row in mat:
+    for col in row:
+        print(f"{col:2}", end=" ")
+    print()
