@@ -83,7 +83,7 @@ Příklady:
 """
 
 
-def coL(num):
+def coCL(num):
     coordLet_dict = {
         0: "a",
         1: "b",
@@ -98,7 +98,7 @@ def coL(num):
     return coord
 
 
-def coN(num):
+def coRN(num):
     coordNum_dict = {
         7: "1",
         6: "2",
@@ -116,7 +116,7 @@ def coN(num):
 
 file_list = ["setup_L_01", "setup_L_02", "setup_L_03"]
 
-file_name = file_list[0]
+file_name = file_list[2]
 # file_name = "setup_L_01"
 file_path = "data\\" + file_name + ".txt"
 
@@ -143,17 +143,17 @@ for row in inBoard:
     print("", end="\n\t")
 print()
 
-input_board = [[0, 0, 0, 0, 0, 0, 0, 0],
-               [0, 0, 0, 0, 0, 0, 0, 0],
-               [0, 0, 0, 0, 0, 0, 0, 0],
-               [0, 0, 0, 0, 0, 0, 0, 0],
-               [0, 0, 0, 0, 0, 0, 0, 0],
-               [0, 0, 0, 0, 0, 0, 0, 0],
-               [0, 3, 0, 0, 0, 0, 0, 0],
-               [1, 0, 0, 0, 0, 0, 0, 0]]
+# input_board = [[0, 0, 0, 0, 0, 0, 0, 0],
+#                [0, 0, 0, 0, 0, 0, 0, 0],
+#                [0, 0, 0, 0, 0, 0, 0, 0],
+#                [0, 0, 0, 0, 0, 0, 0, 0],
+#                [0, 0, 0, 0, 0, 0, 0, 0],
+#                [0, 0, 0, 0, 0, 0, 0, 0],
+#                [0, 3, 0, 0, 0, 0, 0, 0],
+#                [1, 0, 0, 0, 0, 0, 0, 0]]
 
 # print()
-
+#
 # for i in range(9):
 #     for j in range(9):
 #         if (i == 0 or j == 0):
@@ -162,14 +162,14 @@ input_board = [[0, 0, 0, 0, 0, 0, 0, 0],
 #     print()
 #
 # print("\n")
-
-
+#
+#
 # for i in range(8):
 #     for j in range(8):
 #         board[i + 1][j + 1] = input_board[i][j]
 #         print(board[i + 1][j + 1], end=" ")
 #     print()
-
+#
 # moves = []
 # coord_list = []
 # boarder = [0, 1, 2, 3, 4, 5, 6, 7]
@@ -178,38 +178,39 @@ input_board = [[0, 0, 0, 0, 0, 0, 0, 0],
 # for r in range(8):
 #     for c in range(8):
 #         if inBoard[r][c] == 1:
-#             coord_list.append(coL(c) + coN(r))
+#             coord_list.append(coCL(c) + coRN(r))
 #             moves.append([r, c])
 #
 #             while (True):
 #                 if (moves[move_Cnt][0] - 1) in boarder and (moves[move_Cnt][1] - 1) in boarder:
 #                     if inBoard[moves[move_Cnt][0] - 1][moves[move_Cnt][1] - 1] == 0:
 #                         moves.append([moves[move_Cnt][0] - 1, moves[move_Cnt][1] - 1])
-#                         coord_list.append(coL(moves[move_Cnt][1] - 1) + coN(moves[move_Cnt][0] - 1))
+#                         coord_list.append(coCL(moves[move_Cnt][1] - 1) + coRN(moves[move_Cnt][0] - 1))
 #                         move_Cnt += 1
 #                         continue
 #
 #                 if (moves[move_Cnt][0] - 1) in boarder and (moves[move_Cnt][1] + 1) in boarder:
 #                     if inBoard[moves[move_Cnt][0] - 1][moves[move_Cnt][1] + 1] == 0:
 #                         moves.append([moves[move_Cnt][0] - 1, moves[move_Cnt][1] + 1])
-#                         coord_list.append(coL(moves[move_Cnt][1] + 1) + coN(moves[move_Cnt][0] - 1))
+#                         coord_list.append(coCL(moves[move_Cnt][1] + 1) + coRN(moves[move_Cnt][0] - 1))
 #                         move_Cnt += 1
 #                         continue
 #
 #                 if (moves[move_Cnt][0] - 2) in boarder and (moves[move_Cnt][1] - 2) in boarder:
 #                     if inBoard[moves[move_Cnt][0] - 2][moves[move_Cnt][1] - 2] == 0:
 #                         moves.append([moves[move_Cnt][0] - 2, moves[move_Cnt][1] - 2])
-#                         coord_list.append(coL(moves[move_Cnt][1] - 2) + coN(moves[move_Cnt][0] - 2))
+#                         coord_list.append(coCL(moves[move_Cnt][1] - 2) + coRN(moves[move_Cnt][0] - 2))
 #                         move_Cnt += 1
 #                         continue
 #
 #                 if (moves[move_Cnt][0] - 2) in boarder and (moves[move_Cnt][1] + 2) in boarder:
 #                     if inBoard[moves[move_Cnt][0] - 2][moves[move_Cnt][1] + 2] == 0:
 #                         moves.append([moves[move_Cnt][0] - 2, moves[move_Cnt][1] + 2])
-#                         coord_list.append(coL(moves[move_Cnt][1] + 2) + coN(moves[move_Cnt][0] - 2))
+#                         coord_list.append(coCL(moves[move_Cnt][1] + 2) + coRN(moves[move_Cnt][0] - 2))
 #                         move_Cnt += 1
 #                         continue
 #                 break
+
 
 moves = []
 move_stack = []
@@ -220,7 +221,9 @@ move_Cnt = 0
 for r in range(8):
     for c in range(8):
         if inBoard[r][c] == 1:
-            # coords.append(coL(c) + coN(r))
+
+            notJump = True
+
             move_stack.append([r, c])
             moves.append([r, c])
 
@@ -229,54 +232,56 @@ for r in range(8):
                 move_stack.pop(0)
 
                 # print(f"{move_Cnt}. {move[0]} , {move[1]}")
+                if notJump:
+                    if (move[0] - 1) in boarder and (move[1] - 1) in boarder:
+                        if inBoard[move[0] - 1][move[1] - 1] == 0:
+                            moves.append([move[0] - 1, move[1] - 1])
+                            move_stack.append([move[0] - 1, move[1] - 1])
 
-                if (move[0] - 1) in boarder and (move[1] - 1) in boarder:
-                    if inBoard[move[0] - 1][move[1] - 1] == 0:
-                        moves.append([move[0] - 1, move[1] - 1])
-                        move_stack.append([move[0] - 1, move[1] - 1])
 
-
-                if (move[0] - 1) in boarder and (move[1] + 1) in boarder:
-                    if inBoard[move[0] - 1][move[1] + 1] == 0:
-                        moves.append([move[0] - 1, move[1] + 1])
-                        move_stack.append([move[0] - 1, move[1] + 1])
+                    if (move[0] - 1) in boarder and (move[1] + 1) in boarder:
+                        if inBoard[move[0] - 1][move[1] + 1] == 0:
+                            moves.append([move[0] - 1, move[1] + 1])
+                            move_stack.append([move[0] - 1, move[1] + 1])
+                notJump = False
 
 
                 if (move[0] - 2) in boarder and (move[1] - 2) in boarder:
-                    if inBoard[move[0] - 2][move[1] - 2] == 0:
+                    if inBoard[move[0] - 2][move[1] - 2] == 0 and inBoard[move[0] - 1][move[1] - 1] not in [0, 1, 2]:
                         moves.append([move[0] - 2, move[1] - 2])
                         move_stack.append([move[0] - 2, move[1] - 2])
 
 
                 if (move[0] - 2) in boarder and (move[1] + 2) in boarder:
-                    if inBoard[move[0] - 2][move[1] + 2] == 0:
+                    if inBoard[move[0] - 2][move[1] + 2] == 0 and inBoard[move[0] - 1][move[1] + 1] not in [0, 1, 2]:
                         moves.append([move[0] - 2, move[1] + 2])
                         move_stack.append([move[0] - 2, move[1] + 2])
 
 
 print()
-print(moves)
-# print(coord_list)
 
-print()
+for m, move in enumerate(moves):
+    coords.append(coCL(move[1]) + coRN(move[0]))
+    # print(f"{move} : {coords[m]}", end="")
+
+    if (m+1) % 3 == 0:
+        print(f"{m+1:3}. {move} : {coords[m]}")
+    else:
+        print(f"{m+1:3}. {move} : {coords[m]}", end="    |    ")
+
+print("\n")
 
 for r in range(8):
     for c in range(8):
         # print(f"{r}{c}", end=" ")
-        if [r, c] == moves[0]:
+        if inBoard[r][c] == 1:
             print("🟥", end="")
         elif [r, c] in moves:
             print("🟩", end="")
-        elif inBoard[r][c] == 3:
+        elif inBoard[r][c] in (3, 4):
             print("⬛", end="")
         else:
             print("⬜", end="")
     print()
 
 # print(moves)
-"""
-legal move checks
-
-
-
-"""
