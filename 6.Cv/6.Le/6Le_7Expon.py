@@ -7,7 +7,7 @@ Rekurze: Umocňování
     Základní (bázový) případ: x^0 = 1
 """
 
-def expon(x, n):
+def expon_iter(x, n):
 
     res = 1
 
@@ -16,15 +16,25 @@ def expon(x, n):
 
     return res
 
+def expon_recur(x, n):
+
+    if n == 0:
+        return 1
+
+    return x * expon_recur(x, n-1)
+
 print("Exponentiation")
 x = 10
 n = 0
-print(f"\tx^n = {x}^{n} = {expon(x, n)}")
+print(f"\tx^n = {x}^{n} = {expon_iter(x, n)}")
+print(f"\tx^n = {x}^{n} = {expon_recur(x, n)}")
 
 x = 2
 n = 10
-print(f"\tx^n = {x}^{n} = {expon(x, n)}")
+print(f"\tx^n = {x}^{n} = {expon_iter(x, n)}")
+print(f"\tx^n = {x}^{n} = {expon_recur(x, n)}")
 
 x = 2**(0.5)
 n = 2
-print(f"\tx^n = {x}^{n} = {expon(x, n)}")
+print(f"\tx^n = {x}^{n} = {expon_iter(x, n)}")
+print(f"\tx^n = {x}^{n} = {expon_recur(x, n)}")
