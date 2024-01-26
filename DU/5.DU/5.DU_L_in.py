@@ -42,6 +42,7 @@ Lehká varianta
             sachovnice = open(sys.argv[1], "rt")
 
 """
+import copy
 
 """
 Příklady:
@@ -132,9 +133,9 @@ for line in file:
     inBoard.append(list(map(int, line.split())))
 file.close()
 
-for row in inBoard:
-    print(f"\t{row}")
-print()
+# for row in inBoard:
+#     print(f"\t{row}")
+# print()
 
 print("", end="\t")
 for row in inBoard:
@@ -211,18 +212,21 @@ print()
 #                         continue
 #                 break
 
-
-moves = []
+moves_list = []
 move_stack = []
-coords = []
+moveCnt = 0
+
 boarder = [0, 1, 2, 3, 4, 5, 6, 7]
-move_Cnt = 0
+
 
 for r in range(8):
     for c in range(8):
         if inBoard[r][c] == 1:
 
             notJump = True
+
+            moves_list.append([])
+            moves = moves_list[len(moves_list) - 1]
 
             move_stack.append([r, c])
             moves.append([r, c])
@@ -260,23 +264,51 @@ for r in range(8):
 
 print()
 
-for m, move in enumerate(moves):
-    coords.append(coCL(move[1]) + coRN(move[0]))
-    # print(f"{move} : {coords[m]}", end="")
+moves_all = []
+moves_res = []
+for m, moves in enumerate(moves_list):
 
-    if (m+1) % 3 == 0:
-        print(f"{m+1:3}. {move} : {coords[m]}")
-    else:
-        print(f"{m+1:3}. {move} : {coords[m]}", end="    |    ")
+    if len(moves_res) < len(moves):
+        moves_res = copy.deepcopy(moves)
 
+    print(f"{m+1}.", end=" ")
+
+    for mov in moves:
+        moves_all.append(mov)
+        print(f"{coCL(mov[1])}{coRN(mov[0])}:{mov}", end=" ")
+    print()
+print()
+
+print("Result moves:", end="\n\t")
+for mov in moves_res:
+    print(f" {coCL(mov[1])}{coRN(mov[0])}", end="    ")
+print("\n", end="\t")
+
+for mov in moves_res:
+    print(f"{mov}", end=" ")
 print("\n")
+
+# coords = []
+# for m, move in enumerate(moves):
+#     coords.append(coCL(move[1]) + coRN(move[0]))
+#     # print(f"{move} : {coords[m]}", end="")
+#
+#     if (m+1) % 3 == 0:
+#         print(f"{m+1:3}. {move} : {coords[m]}")
+#     else:
+#         print(f"{m+1:3}. {move} : {coords[m]}", end="    |    ")
+#
+# print("\n")
+#
 
 for r in range(8):
     for c in range(8):
         # print(f"{r}{c}", end=" ")
         if inBoard[r][c] == 1:
             print("🟥", end="")
-        elif [r, c] in moves:
+        elif [r, c] in moves_res:
+            print("🟨", end="")
+        elif [r, c] in moves_all:
             print("🟩", end="")
         elif inBoard[r][c] in (3, 4):
             print("⬛", end="")
