@@ -7,5 +7,11 @@ def sortAB(a, b):
         return b, a
 
 x, y = sortAB(10, -1)
-
+print(type(x))
 print(x, y)
+print()
+
+z = sortAB(10, -1)
+print(type(z))
+print(z)
+
