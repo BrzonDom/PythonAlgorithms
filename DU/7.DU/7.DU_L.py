@@ -29,24 +29,42 @@ Lehká varianta
 def combination(numbers, amount):
 
     if amount == 0:
+        """     Base case for amount 0      """
         return [[]]
     if not numbers:
+        """     Base case for no numbers    """
         return []
 
+    """     List of all combinations adding to amount   """
     result = []
+
     for i in range(len(numbers)):
+        """     Loops through all numbers   """
         num = numbers[i]
+
+        """     Remaining numbers, excluding current and previous numbers   """
         remNumbers = numbers[i+1:]
 
         for comb in combination(remNumbers, amount-num):
+            """     Recursively calls combination function      """
+
             result.append([num] + comb)
+
     return result
 
 
+in_num_list = [[23, 1, 6, 3, 10, 20, 15],
+           [81, 15, 10, 51, 34, 51, 26, 15, 43],
+           [78, 44, 34, 16, 18, 55, 25, 42]]
 
-numbers = [1, 6, 3, 10, 20, 15]
-amount = 23
+in_num = in_num_list[0]
 
+numbers = in_num[1:]
+amount = in_num[0]
+
+print(f"Amount: {amount}")
+print(f"List of numbers: {numbers}")
+print()
 # result = []
 
 print(combination(numbers, amount))
