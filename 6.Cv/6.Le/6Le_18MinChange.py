@@ -3,7 +3,6 @@ Mince
 
     Vstupem je hodnota a seznam mincí
 
-
     Hledáme nejmenší počet mincí (o známých hodnotách), které poskládají
     vstupní částku
 
@@ -20,6 +19,7 @@ def solve (amount ,result ,coins):
             result.append([num, c])
             solve(amount, result, coins[:i] + coins[i:])
             break
+
 
 result = []
 solve (37, result, [1, 2, 5, 10])

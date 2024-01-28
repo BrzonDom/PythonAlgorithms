@@ -27,7 +27,8 @@ def allChanges (amount, coins, result, i):
         if i < len(coins)-1:
             allChanges(amount, coins, result, i+1)
 
-coins = [1,2,5,10]
+
+coins = [1, 2, 5, 10]
 s = [0] * len(coins)
 allChanges(12, coins, s, 0)
 
