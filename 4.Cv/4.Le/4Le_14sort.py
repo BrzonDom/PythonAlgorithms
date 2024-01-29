@@ -28,7 +28,7 @@ print(set, " Sorted: ", isSort(set))
 print()
 
 set = [100, -10, 0, 1, -3, 5, 4]
-print(f"List: {set}")
+print(f"1.List: {set}")
 
 print("\t", set)
 
@@ -42,7 +42,7 @@ print()
 
 set = [100, -10, 0, 1, -3, 5, 4]
 
-print(f"List: {set}")
+print(f"2.List: {set}")
 
 print("\t", set)
 
@@ -52,8 +52,21 @@ print("\t", set)
 print()
 
 set = [100, -10, 0, 1, -3, 5, 4]
+print(f"3.List: {set}")
 
-print(f"List: {set}")
+print("\t", set)
+
+for r in range(len(set)-1, 0, -1):
+    for i in range(r):
+        if set[i] > set[i+1]:
+            set[i], set[i+1] = set[i+1], set[i]
+
+print("\t", set)
+print()
+
+set = [100, -10, 0, 1, -3, 5, 4]
+
+print(f"4.List: {set}")
 
 print("\t", set)
 
