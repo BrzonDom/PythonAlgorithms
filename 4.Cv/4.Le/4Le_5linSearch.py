@@ -7,7 +7,22 @@ def findItm(set, theItm):
     return False
 
 
+def findItmIndx(set, theItm):
+
+    for i in range(len(set)):
+        if set[i] == theItm:
+            return i
+
+    return -1
+
 a = [0, 1, 0, 2]
 
-print(findItm(a, 0))
+search = findItm(a, 0)
+print(search)
+
+if search:
+    index = findItmIndx(a, 0)
+    print(index)
+print()
+
 print(findItm(a, '0'))
