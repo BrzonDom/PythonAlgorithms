@@ -11,33 +11,32 @@ Nalezení maxima
 def my_findMax(Set):
 
     if len(Set) == 0:
-        return -1
+        print("Set of numbers not given")
+        return False, []
 
-    index_list = []
-    index = 0
+    index = []
     Max = Set[0]
 
-    for num in Set:
+    for n, num in enumerate(Set):
 
         if num > Max:
             Max = num
-            index_list = [index]
+            index = [n]
 
         elif num == Max:
-            index_list.append(index)
-
-        index += 1
+            index.append(n)
 
     print(f"Max: {Max}\n\tIndex: ", end="")
-    for i in index_list:
+    for i in index:
         print(i, end=" ")
 
-    return [num, index_list]
-
+    return num, index
 
 
 
 Set = [-20, -19, -5, -2, -1, 20, 5, 6, 7, 20, 9, 12, 16, 19, 8]
+
+print(f"List of numbers: {Set}\n")
 
 Max = max(Set)
 
@@ -55,6 +54,14 @@ for i in index_list:
 
 print("\n")
 
-my_findMax(Set)
+Max, index = my_findMax(Set)
+
+print("\n")
+
+if type(Max) != bool:
+    print(f"Maximum: {Max}")
+    print(f"Found at index: ", end="")
+    for i in index:
+        print(i, end=" ")
 
 
