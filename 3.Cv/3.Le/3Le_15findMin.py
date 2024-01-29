@@ -27,6 +27,7 @@ def my_findMax(Set):
     return [num, index_list]
 """
 
+
 def my_findMin(Set):
 
     if len(Set) == 0:
@@ -49,6 +50,21 @@ def my_findMin(Set):
         print(i, end=" ")
 
     return num, index
+
+
+def findMin(numbers):
+
+    numLen = len(numbers)
+
+    if numLen == 0:
+        return None
+
+    min = numbers[0]
+    for i in range(numLen):
+        if numbers[i] < min:
+            min = numbers[i]
+
+    return min
 
 
 numbers = [1, 6, 1, -1, 0, -1]
@@ -84,3 +100,9 @@ print(f"Minimum: {min}")
 print(f"Found at index: ", end="")
 for i in index:
     print(i, end=" ")
+
+print("\n")
+
+min = findMin(numbers)
+
+print(f"Minimum: {min}")
