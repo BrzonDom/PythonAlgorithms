@@ -15,6 +15,18 @@ def findItmIndx(set, theItm):
 
     return -1
 
+
+def findItms(set, theItm):
+
+    index = []
+
+    for i in range(len(set)):
+        if set[i] == theItm:
+            index.append(i)
+
+    return index
+
+
 a = [0, 1, 0, 2]
 
 search = findItm(a, 0)
@@ -26,3 +38,11 @@ if search:
 print()
 
 print(findItm(a, '0'))
+print()
+
+a = ['a', 'b', 'aa', 'a', 'bb', 'a']
+
+index = findItms(a, 'a')
+print(index)
+index = findItms(a, 'A')
+print(index)
