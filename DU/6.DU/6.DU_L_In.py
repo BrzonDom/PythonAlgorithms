@@ -76,7 +76,9 @@ Příklady:
 
 file_list = ["PrL_1", "PrL_2", "PrL_3"]
 
-file_name = file_list[0]
+file_pick = 1
+
+file_name = file_list[file_pick]
 file_path = "data\\" + file_name + ".txt"
 
 file = open(file_path, "r")
@@ -96,7 +98,7 @@ print()
 
 fileIn_list = ["PrLIn_1", "PrLIn_2", "PrLIn_3"]
 
-file_name = fileIn_list[0]
+file_name = fileIn_list[file_pick]
 file_path = "data\\" + file_name + ".txt"
 
 file = open(file_path, "r")
@@ -112,3 +114,54 @@ for str_line in file:
 
 file.close()
 
+coordFound = False
+
+
+for r in range(len(data)-len(dataIn)+1):
+    for c in range(len(data[0])-len(dataIn[0])+1):
+        if coordFound:
+            break
+
+        # print(data[r][c], end=" ")
+        forDebug = data[r][c]
+        sameCheck = False
+        sameFirst = False
+        for rIn in range(len(dataIn)):
+            if sameCheck:
+                break
+
+            for cIn in range(len(dataIn[0])):
+                if sameCheck:
+                    break
+
+                forInDebug = data[r+rIn][c+cIn]
+
+                if dataIn[rIn][cIn] == 0:
+                    continue
+                elif dataIn[rIn][cIn] == 1:
+                    if not sameFirst:
+                        same = data[r+rIn][c+cIn]
+                        sameFirst = True
+                        continue
+                    else:
+                        if data[r+rIn][c+cIn] != same:
+                            sameCheck = True
+
+        if not sameCheck:
+            coord = [r, c]
+            coordFound = True
+
+
+if coord:
+    print()
+    print("Match found!")
+    print(f"\tRow: {coord[0]}")
+    rCo = coord[0]
+    print(f"\tCol: {coord[1]}")
+    cCo = coord[1]
+    print("\n", end="\t")
+
+    for r in range(len(dataIn)):
+        for c in range(len(dataIn[0])):
+            print(data[r+rCo][c+cCo], end=" ")
+        print("\n", end="\t")
