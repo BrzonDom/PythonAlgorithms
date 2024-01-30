@@ -4,7 +4,7 @@ solBoard = []
 
 def solve(board, piec_lst):
 
-    if not piec_lst:
+    if leftSpace(board) == 0:
         if board not in solBoard:
             solBoard.append(copy.deepcopy(board))
             for row in board:
@@ -73,6 +73,18 @@ def canPlace(board, coord, piece):
     return True
 
 
+def leftSpace(board):
+
+    spaces = 0
+
+    for row in board:
+        for col in row:
+            if col == 0:
+                spaces += 1
+
+    return spaces
+
+
 """
 ⬜⬛
 🔲🔳
@@ -89,7 +101,12 @@ colBor = len(board[0])
 for row in board:
     print(row)
 
-pieces = [[[0, 0], [0, 1], [1, 1]], [[0, 0]], [[0, 0], [1, 0], [2, 0]], [[0, 0], [0, 1]]]
+pieces = [[[0, 0], [0, 1], [1, 1]],
+          [[0, 0]],
+          [[0, 0], [1, 0], [2, 0]],
+          [[0, 0], [0, 1]],
+          [[0, 0], [1, 0], [1, 1], [2, 0]]]
+
 # pieces = [[[0, 0], [0, 1], [1, 1]], [[0, 0]]]
 
 print()
