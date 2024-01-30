@@ -34,15 +34,11 @@
 """
 
 import base
-import sys
 
-    # nacteni vstupnich parametru z prikazove radky do promennych size, inputFile, outputFile
-# size = int(sys.argv[1])
-# board = base.Board(size)
-# stones = base.loadStones(sys.argv[2])
 
-# file_list = ["PrL_1", "PrL_2", "PrL_3"]
-# file_name = file_list[0]
+def isIn(row, col, size):
+    return (col >= 0) and (col < size) and (row >= -(col // 2)) and (row < (size - col // 2))
+
 
 file_name = "PrL_1"
 fileOpen = "data\\" + file_name + ".txt"
@@ -60,7 +56,10 @@ data = []
 for str_line in file:
 
     line = list(map(int, str_line.split()))
-    print("\t", line)
+    print("\t", end="")
+    for itm in line:
+        print(itm, end=" ")
+    print()
     data.append(line)
 
 file.close()
@@ -73,21 +72,20 @@ for st in range(len(data)):
         # print(stCo, end=" ")
         stones[st].append([data[st][stCo], data[st][stCo+1]])
         # # print(data[st][stCo], end=" ")
-    print(stones[st])
+    # print(stones[st])
 
+board = {}
+for p in range(-size, size):
+    for q in range(-size, size):
 
+        if isIn(p, q, size):
+            if not p in board:
+                board[p] = {}
 
+            board[p][q] = 0
 
-#     # program hledajici rozmísteni kamenu, ktery svuj vysledek zapisuje do board.board
-#
-#     # vytvoreni, ci otevreni vystupniho souboru do handleru f
-# f = open(fileWrite, "w")
-#
-# # if reseni_exist:
-# #     for p in board.board:
-# #         for q in board.board[p]:
-# #             f.write("{} {} {}\n".format(p, q, board.board[p][q]))
-# # else:
-# #     f.write("NOSOLUTION")
-#
-# f.close()
+print()
+print(board)
+print()
+for line in board:
+    print(board[line])
