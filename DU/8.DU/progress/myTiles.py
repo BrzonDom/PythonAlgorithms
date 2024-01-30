@@ -162,4 +162,13 @@ solve(board, pieces)
 #                     print()
 #                 print()
 
+symbols = ["⬜", "🟨", "🟥", "🟦", "🟩", "🟧", "🟪", "🟫"]
+
 print(solBoard)
+print()
+for sol in solBoard:
+    for row in sol:
+        for col in row:
+            print(symbols[col], end="")
+        print()
+    print()
