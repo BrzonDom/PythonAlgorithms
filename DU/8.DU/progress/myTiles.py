@@ -2,36 +2,37 @@ import copy
 
 solBoard = []
 
-def solve(board, piec_lst, colPiece):
+def solve(board, piec_lst):
 
     if not piec_lst:
-        solBoard.append(copy.deepcopy(board))
-        for row in board:
-            for col in row:
-                print(col, end=" ")
+        if board not in solBoard:
+            solBoard.append(copy.deepcopy(board))
+            for row in board:
+                for col in row:
+                    print(col, end=" ")
+                print()
             print()
-        print()
 
+    for row in range(len(board)):
+        for col in range(len(board[0])):
 
-    for piece in piec_lst:
-        for r in range(len(board)):
-            for c in range(len(board[0])):
-                if board[r][c] == 0:
-                    if canPlace(board, [r, c], piece):
-                        for block in piece:
-                            rB = r + block[0]
-                            cB = c + block[1]
-                            board[rB][cB] = colPiece + 1
+            for piece in piec_lst:
+                if canPlace(board, [row, col], piece):
 
-                        new_piec_list = copy.deepcopy(piec_lst)
-                        new_piec_list.remove(piece)
+                    for block in piece:
+                        rB = row + block[0]
+                        cB = col + block[1]
+                        board[rB][cB] = pieces.index(piece) + 1
 
-                        solve(board, new_piec_list, colPiece+1)
+                    new_piec_list = copy.deepcopy(piec_lst)
+                    new_piec_list.remove(piece)
 
-                        for block in piece:
-                            rB = r + block[0]
-                            cB = c + block[1]
-                            board[r][c] = 0
+                    solve(board, new_piec_list)
+
+                    for block in piece:
+                        rB = row + block[0]
+                        cB = col + block[1]
+                        board[rB][cB] = 0
 
 
     # for piece in piec_lst:
@@ -78,7 +79,9 @@ def canPlace(board, coord, piece):
 🟩🟨🟧🟥🟪🟦🟫
 """
 
-board = [[0 for c in range(2)] for r in range(2)]
+size = 3
+
+board = [[0 for c in range(size)] for r in range(size)]
 
 rowBor = len(board)
 colBor = len(board[0])
@@ -86,8 +89,8 @@ colBor = len(board[0])
 for row in board:
     print(row)
 
-# pieces = [[[0, 0], [0, 1], [1, 1]], [[0, 0]], [[0, 0], [1, 0], [2, 0]], [[0, 0], [0, 1]]]
-pieces = [[[0, 0], [0, 1], [1, 1]], [[0, 0]]]
+pieces = [[[0, 0], [0, 1], [1, 1]], [[0, 0]], [[0, 0], [1, 0], [2, 0]], [[0, 0], [0, 1]]]
+# pieces = [[[0, 0], [0, 1], [1, 1]], [[0, 0]]]
 
 print()
 
@@ -133,11 +136,10 @@ print()
 #             if blcFit:
 #                 print()
 
-solve(board, pieces, 0)
+solve(board, pieces)
 
 
 """     All positions for pieces     """
-
 
 # for row in range(len(board)):
 #     for col in range(len(board[0])):
