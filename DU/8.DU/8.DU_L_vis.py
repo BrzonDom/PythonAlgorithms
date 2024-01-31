@@ -283,3 +283,38 @@ solve(board, stones, 3)
 
 print()
 print(solBoard)
+print()
+
+"""     Visual print    """
+visCnt = 1
+
+for dict in solBoard:
+    print(type(dict))
+    print(dict)
+    print()
+
+    inOut_board = myBoard(size)
+    inOut_board.board = dict
+    inOut_board.saveImage(f"visual\\{file_name}.{visCnt}_out.png")
+
+    visCnt += 1
+
+# dict = solBoard[0]
+# print(type(dict))
+# print(dict)
+# print()
+#
+# inOut_board = myBoard(size)
+# inOut_board.board = dict
+# inOut_board.saveImage(f"visual\\{file_name}.{visCnt}_out.png")
+#
+# visCnt = 2
+#
+# dict = solBoard[1]
+# print(type(dict))
+# print(dict)
+# print()
+#
+# inOut_board = myBoard(size)
+# inOut_board.board = dict
+# inOut_board.saveImage(f"visual\\{file_name}.{visCnt}_out.png")
