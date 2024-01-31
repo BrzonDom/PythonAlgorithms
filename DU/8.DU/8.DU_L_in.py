@@ -32,12 +32,27 @@
         Pro usnadnění práce na domácí úloze si stáhněte program base.py (na konci této stránky), který vám nabízí užitečné nástroje
 
 """
+import copy
 
 import base
 
 
+# def solve(board, piec_lst):
+
 def isIn(row, col, size):
     return (col >= 0) and (col < size) and (row >= -(col // 2)) and (row < (size - col // 2))
+
+
+def lestSpace(board):
+
+    spaces = 0
+
+    for row in board:
+        for col in board[row]:
+            if board[row][col] == 0:
+                spaces += 1
+
+    return spaces
 
 
 file_name = "PrL_1"
@@ -46,7 +61,7 @@ fileWrite = "data\\" + file_name + "_out.txt"
 
 size = 3
 board = base.Board(size)
-stones = base.loadStones(fileOpen)
+stones_In = base.loadStones(fileOpen)
 
 print(f"File: {file_name}.txt")
 
@@ -64,15 +79,18 @@ for str_line in file:
 
 file.close()
 
-stones = []
+stones_In = []
 
 for st in range(len(data)):
-    stones.append([])
+    stones_In.append([])
     for stCo in range(0, len(data[st]),  2):
         # print(stCo, end=" ")
-        stones[st].append([data[st][stCo], data[st][stCo+1]])
+        stones_In[st].append([data[st][stCo], data[st][stCo + 1]])
         # # print(data[st][stCo], end=" ")
     # print(stones[st])
+
+# print(stones)
+
 
 board = {}
 for p in range(-size, size):
@@ -89,3 +107,128 @@ print(board)
 print()
 for line in board:
     print(board[line])
+
+print()
+
+space = 0
+for line in board:
+    # if board[line] == 0:
+    #     space += 1
+    for tile in board[line]:
+        if board[line][tile] == 0:
+            space += 1
+
+        # print(tile, end=" ")
+        # print(f"{tile} : {board[line][tile]}", end=" , ")
+    # print()
+
+# print(space)
+
+stones = copy.deepcopy(stones_In)
+# for stone in stones:
+#     print(stone)
+# print()
+
+
+"""     Shift till in board     """
+
+# pShift = True
+# qShift = True
+
+# while not [0, 0] in stone:
+    # if not (pShift or qShift):
+    #     break
+    #
+    # pShift = True
+    #
+    # for block in stone:
+    #     rBl = block[0]
+    #     cBl = block[1]
+    #
+    #     if not isIn(rBl-1, cBl, 5):
+    #         pShift = False
+    #
+    # if pShift:
+    #     for block in stone:
+    #         block[0] -= 1
+    #
+    # qShift = True
+    #
+    # for block in stone:
+    #     rBl = block[0]
+    #     cBl = block[1]
+    #
+    #     if not isIn(rBl, cBl-1, 5):
+    #         qShift = False
+    #
+    # if qShift:
+    #     for block in stone:
+    #         block[1] -= 1
+
+
+"""     Shift using min path    """
+for stone in stones:
+    # print(stone[0], end="\n\t")
+    # print(stone)
+
+    min = stone[0][1]
+    if stone[0][0] > 0:
+        min += stone[0][0]
+
+    min_co = [stone[0][0], stone[0][1]]
+
+    for block in stone[1:]:
+
+        sum = block[1]
+        if block[0] > 0:
+            sum += block[0]
+
+        if sum < min:
+            min = sum
+            min_co = [block[0], block[1]]
+
+    if min:
+        for block in stone:
+            block[0] -= min_co[0]
+            block[1] -= min_co[1]
+
+    # print(f"{min}, {min_co}")
+    #     print(block, end=" ")
+    # print()
+
+print("Before shift:")
+for stone in stones_In:
+    print("\t", stone)
+print()
+
+print("After shift:")
+for stone in stones:
+    print("\t", stone)
+# print(stone)
+
+
+
+
+# print(pShift)
+# print(qShift)
+
+# pShift = True
+# qShift = True
+
+# for stone in stones:
+#     while pShift or qShift:
+#         for block in stone:
+#             rBl = block[0]
+#             cBl = block[1]
+
+            # if pShift:
+            #     if isIn(rBl-1, cBl, 5):
+            #         block[0] -= 1
+            #     else:
+            #         pShift = False
+            #
+            # if qShift:
+            #     if isIn(rBl, cBl-1, 5):
+            #         block[1] -= 1
+            #     else:
+            #         qShift = False
