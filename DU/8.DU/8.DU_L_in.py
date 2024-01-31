@@ -37,7 +37,7 @@ import base
 
 solBoard = []
 
-def solve(board, piec_lst, size):
+def solve(board, piec_lst, piec_ind, size):
 
     if leftSpace(board) == 0:
         if board not in solBoard:
@@ -61,11 +61,11 @@ def solve(board, piec_lst, size):
                     for b, block in enumerate(piece):
                         rB = row + block[0]
                         cB = col + block[1]
-                        new_board[rB][cB] = stones.index(piece) + 1
+                        new_board[rB][cB] = piec_ind[p]
 
                     # new_piec_list = copy.deepcopy(piec_lst)
                     # new_piec_list.remove(piece)
-                    solve(new_board, piec_lst[:p] + piec_lst[p+1:], size)
+                    solve(new_board, piec_lst[:p] + piec_lst[p+1:], piec_ind[:p] + piec_ind[p+1:], size)
 
                     # for block in piece:
                     #     rB = row + block[0]
@@ -242,11 +242,25 @@ for stone in stones:
 # print(stone)
 
 
+stones_index = []
 print()
-solve(board, stones, size)
+for s, stone in enumerate(stones):
+    stones_index.append(s+1)
+    print(f"{stones_index[-1]}:", end=" ")
+    print(stone)
 
 print()
-print(solBoard)
+solve(board, stones, stones_index, size)
+
+print()
+for sol in solBoard:
+    for row in sol:
+        for col in sol[row]:
+            print(sol[row][col], end=" ")
+        print()
+    print()
+
+# print(solBoard)
 
 """     Test leftSpace      """
 # for p in range(-size, size):
