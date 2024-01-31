@@ -140,23 +140,24 @@ def solve(board, piec_lst, size):
     for row in range(len(board)):
         for col in range(len(board[0])):
 
-            for piece in piec_lst:
+            for p, piece in enumerate(piec_lst):
                 if canPlace(board, [row, col], piece, size):
 
-                    for block in piece:
+                    new_board = copy.deepcopy(board)
+
+                    for b, block in enumerate(piece):
                         rB = row + block[0]
                         cB = col + block[1]
-                        board[rB][cB] = stones.index(piece) + 1
+                        new_board[rB][cB] = stones.index(piece) + 1
 
-                    new_piec_list = copy.deepcopy(piec_lst)
-                    new_piec_list.remove(piece)
+                    # new_piec_list = copy.deepcopy(piec_lst)
+                    # new_piec_list.remove(piece)
+                    solve(new_board, piec_lst[:p] + piec_lst[p+1:], size)
 
-                    solve(board, new_piec_list, size)
-
-                    for block in piece:
-                        rB = row + block[0]
-                        cB = col + block[1]
-                        board[rB][cB] = 0
+                    # for block in piece:
+                    #     rB = row + block[0]
+                    #     cB = col + block[1]
+                    #     board[rB][cB] = 0
 
 
 def canPlace(board, coord, piece, size):
@@ -188,7 +189,7 @@ def leftSpace(board):
     return spaces
 
 
-file_name = "PrL_1"
+file_name = "PrL_4"
 fileOpen = "data\\" + file_name + ".txt"
 fileWrite = "data\\" + file_name + "_out.txt"
 
@@ -279,7 +280,7 @@ for stone in stones:
 # print(stone)
 
 print()
-solve(board, stones, 3)
+solve(board, stones, size)
 
 print()
 print(solBoard)
@@ -298,23 +299,3 @@ for dict in solBoard:
     inOut_board.saveImage(f"visual\\{file_name}.{visCnt}_out.png")
 
     visCnt += 1
-
-# dict = solBoard[0]
-# print(type(dict))
-# print(dict)
-# print()
-#
-# inOut_board = myBoard(size)
-# inOut_board.board = dict
-# inOut_board.saveImage(f"visual\\{file_name}.{visCnt}_out.png")
-#
-# visCnt = 2
-#
-# dict = solBoard[1]
-# print(type(dict))
-# print(dict)
-# print()
-#
-# inOut_board = myBoard(size)
-# inOut_board.board = dict
-# inOut_board.saveImage(f"visual\\{file_name}.{visCnt}_out.png")
