@@ -33,17 +33,67 @@
 
 """
 import copy
-
 import base
 
+solBoard = []
 
-# def solve(board, piec_lst):
+def solve(board, piec_lst, size):
+
+    if leftSpace(board) == 0:
+        if board not in solBoard:
+
+            solBoard.append(copy.deepcopy(board))
+            print(board)
+            # for row in board:
+            #     for col in board[row]:
+            #         print(board[row][col], end=" ")
+            #     print()
+            # print()
+
+    for row in range(len(board)):
+        for col in range(len(board[0])):
+
+            for piece in piec_lst:
+                if canPlace(board, [row, col], piece, size):
+
+                    for block in piece:
+                        rB = row + block[0]
+                        cB = col + block[1]
+                        board[rB][cB] = stones.index(piece) + 1
+
+                    new_piec_list = copy.deepcopy(piec_lst)
+                    new_piec_list.remove(piece)
+
+                    solve(board, new_piec_list, size)
+
+                    for block in piece:
+                        rB = row + block[0]
+                        cB = col + block[1]
+                        board[rB][cB] = 0
+
 
 def isIn(row, col, size):
     return (col >= 0) and (col < size) and (row >= -(col // 2)) and (row < (size - col // 2))
 
 
-def lestSpace(board):
+def canPlace(board, coord, piece, size):
+    rwCo = coord[0]
+    clCo = coord[1]
+
+    for block in piece:
+        rwBl = rwCo + block[0]
+        clBl = clCo + block[1]
+
+        if isIn(rwBl, clBl, size):
+            if board[rwBl][clBl] != 0:
+                return False
+        else:
+            return False
+
+    return True
+
+
+def leftSpace(board):
 
     spaces = 0
 
@@ -55,13 +105,14 @@ def lestSpace(board):
     return spaces
 
 
+
 file_name = "PrL_1"
 fileOpen = "data\\" + file_name + ".txt"
 fileWrite = "data\\" + file_name + "_out.txt"
 
 size = 3
-board = base.Board(size)
-stones_In = base.loadStones(fileOpen)
+# board = base.Board(size)
+# stones_In = base.loadStones(fileOpen)
 
 print(f"File: {file_name}.txt")
 
@@ -206,6 +257,10 @@ for stone in stones:
     print("\t", stone)
 # print(stone)
 
+
+solve(board, stones, 3)
+
+# print(solBoard)
 
 
 
