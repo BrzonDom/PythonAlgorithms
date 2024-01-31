@@ -1,5 +1,13 @@
 
 """
+    Abstraktní datová struktura obsahující předem neznámý počet párů
+        klíč-hodnota
+
+    Operace:
+        vložení páru: insert(key, value)
+        nalezení hodnoty asociované s klíčem: get(key)
+        smazání klíče remove(key)
+
     ’points’ is associative array
 """
 
