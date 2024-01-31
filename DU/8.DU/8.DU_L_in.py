@@ -53,23 +53,24 @@ def solve(board, piec_lst, size):
     for row in range(len(board)):
         for col in range(len(board[0])):
 
-            for piece in piec_lst:
+            for p, piece in enumerate(piec_lst):
                 if canPlace(board, [row, col], piece, size):
 
-                    for block in piece:
+                    new_board = copy.deepcopy(board)
+
+                    for b, block in enumerate(piece):
                         rB = row + block[0]
                         cB = col + block[1]
-                        board[rB][cB] = stones.index(piece) + 1
+                        new_board[rB][cB] = stones.index(piece) + 1
 
-                    new_piec_list = copy.deepcopy(piec_lst)
-                    new_piec_list.remove(piece)
+                    # new_piec_list = copy.deepcopy(piec_lst)
+                    # new_piec_list.remove(piece)
+                    solve(new_board, piec_lst[:p] + piec_lst[p+1:], size)
 
-                    solve(board, new_piec_list, size)
-
-                    for block in piece:
-                        rB = row + block[0]
-                        cB = col + block[1]
-                        board[rB][cB] = 0
+                    # for block in piece:
+                    #     rB = row + block[0]
+                    #     cB = col + block[1]
+                    #     board[rB][cB] = 0
 
 
 def isIn(row, col, size):
@@ -106,11 +107,11 @@ def leftSpace(board):
 
 
 
-file_name = "PrL_1"
+file_name = "PrL_2"
 fileOpen = "data\\" + file_name + ".txt"
 fileWrite = "data\\" + file_name + "_out.txt"
 
-size = 3
+size = 4
 # board = base.Board(size)
 # stones_In = base.loadStones(fileOpen)
 
@@ -156,24 +157,7 @@ for p in range(-size, size):
 print()
 print(board)
 print()
-for line in board:
-    print(board[line])
 
-print()
-
-space = 0
-for line in board:
-    # if board[line] == 0:
-    #     space += 1
-    for tile in board[line]:
-        if board[line][tile] == 0:
-            space += 1
-
-        # print(tile, end=" ")
-        # print(f"{tile} : {board[line][tile]}", end=" , ")
-    # print()
-
-# print(space)
 
 stones = copy.deepcopy(stones_In)
 # for stone in stones:
@@ -258,10 +242,86 @@ for stone in stones:
 # print(stone)
 
 
-solve(board, stones, 3)
+print()
+solve(board, stones, size)
 
-# print(solBoard)
+print()
+print(solBoard)
 
+"""     Test leftSpace      """
+# for p in range(-size, size):
+#     for q in range(-size, size):
+#
+#         if isIn(p, q, size):
+#             if not p in board:
+#                 board[p] = {}
+#
+#             board[p][q] = 2
+#
+# print()
+# print(board)
+# board[1][2] = 0
+# board[1][1] = 0
+# print(board)
+#
+# print(leftSpace(board))
+
+# space = 0
+# for line in board:
+#     # if board[line] == 0:
+#     #     space += 1
+#     for tile in board[line]:
+#         if board[line][tile] == 0:
+#             space += 1
+#
+#         # print(tile, end=" ")
+#         # print(f"{tile} : {board[line][tile]}", end=" , ")
+#     # print()
+
+
+"""     Test can place      """
+
+# # def canPlace(board, coord, piece, size):
+# #     rwCo = coord[0]
+# #     clCo = coord[1]
+# #
+# #     for block in piece:
+# #         rwBl = rwCo + block[0]
+# #         clBl = clCo + block[1]
+# #
+# #         if isIn(rwBl, clBl, size):
+# #             if board[rwBl][clBl] != 0:
+# #                 return False
+# #         else:
+# #             return False
+# #
+# #     return True
+#
+# print()
+# stone = stones[1]
+#
+# for p in board:
+#     for q in board[p]:
+#
+#         if canPlace(board, [p, q], stone, size):
+#             for block in stone:
+#                 pB = p + block[0]
+#                 qB = q + block[1]
+#                 board[pB][qB] = 1
+#
+#             print(board)
+#             for pp in board:
+#                 for qp in board[pp]:
+#                     print(board[pp][qp], end=" ")
+#                 print()
+#             print()
+#             for block in stone:
+#                 pB = p + block[0]
+#                 qB = q + block[1]
+#                 board[pB][qB] = 0
+
+    #     print(board[p][q], end=" ")
+    # print()
 
 
 # print(pShift)
