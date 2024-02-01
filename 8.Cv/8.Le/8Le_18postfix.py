@@ -1,5 +1,5 @@
 
-def expEval(ex):
+def postfix(ex):
 
     stack = []
 
@@ -29,14 +29,15 @@ exp_lst = ["3 4 +",
 
 i = 0
 
-print(f"{i+1}.Exp:\n\t\t3 + 4 = evalExp(3 4 +) = {expEval(exp_lst[i])}")
+
+print(f"{i+1}.Exp:\n\t\t3 + 4 = evalExp(3 4 +) = {postfix(exp_lst[i])}")
 i += 1
-print(f"{i+1}.Exp:\n\t\t3 - 4 = evalExp(3 4 -) = {expEval(exp_lst[i])}")
+print(f"{i+1}.Exp:\n\t\t3 - 4 = evalExp(3 4 -) = {postfix(exp_lst[i])}")
 i += 1
-print(f"{i+1}.Exp:\n\t\t3 * 4 = evalExp(3 4 *) = {expEval(exp_lst[i])}")
+print(f"{i+1}.Exp:\n\t\t3 * 4 = evalExp(3 4 *) = {postfix(exp_lst[i])}")
 i += 1
-print(f"{i+1}.Exp:\n\t\t3 / 4 = evalExp(3 4 /) = {expEval(exp_lst[i])}")
+print(f"{i+1}.Exp:\n\t\t3 / 4 = evalExp(3 4 /) = {postfix(exp_lst[i])}")
 i += 1
-print(f"{i+1}.Exp:\n\t\t3 * 4 - 2 = evalExp(3 4 * 2 -) = {expEval(exp_lst[i])}")
+print(f"{i+1}.Exp:\n\t\t3 * 4 - 2 = evalExp(3 4 * 2 -) = {postfix(exp_lst[i])}")
 i += 1
-print(f"{i+1}.Exp:\n\t\t3 * (4 - 2) = evalExp(3 4 2 - *) = {expEval(exp_lst[i])}")
+print(f"{i+1}.Exp:\n\t\t3 * (4 - 2) = evalExp(3 4 2 - *) = {postfix(exp_lst[i])}")
