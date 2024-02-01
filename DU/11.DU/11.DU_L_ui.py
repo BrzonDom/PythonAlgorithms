@@ -190,5 +190,3 @@ while(move != "q"):
         print("", end="\n")
     print()
 
-    print("Move: ", end="")
-    move = input()
