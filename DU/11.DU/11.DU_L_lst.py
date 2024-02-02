@@ -48,6 +48,7 @@ Lehká varianta: Babylonská věž (zjednodušená)
 
 """
 import copy
+from queue import Queue
 
 class State:
     def __init__(self, state, action = None, parent = None):
@@ -115,6 +116,50 @@ def down(orgTower):
     return tower
 
 
+def solved(curTow):
+
+    row = len(curTow)
+    col = len(curTow[0])
+
+    for c in range(col):
+        sameChk = True
+        for r in range(row):
+            if curTow[r][c] == 0:
+                continue
+
+            if sameChk:
+                same = curTow[r][c]
+                sameChk = False
+
+            elif same != curTow[r][c]:
+                return False
+
+    return True
+
+
+def BFS(strSta):
+
+    queue = Queue()
+    queue.put(strSta)
+
+    visited = {}
+    visited[str(strSta.state)] = True
+
+    while not queue.empty():
+
+        curSta = queue.get()
+
+        if solved(curSta.state):
+            print("SOLVED")
+
+            return curSta.state
+
+        for next in State.nextState(curSta):
+            if not str(next.state) in visited:
+
+                visited[str(next.state)] = True
+                queue.put(next)
+
 
 org_tower = [[1, 2, 3],
          [1, 2, 0],
@@ -171,4 +216,6 @@ for row in tower.state:
         print(col, end=" ")
     print("", end="\n\t")
 print()
+print()
 
+slv_tower = BFS(orgState)
