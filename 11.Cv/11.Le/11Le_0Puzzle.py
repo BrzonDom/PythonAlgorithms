@@ -1,7 +1,11 @@
 import copy
 from queue import Queue
 
-"""⏪⏫⏩⏬"""
+"""
+Symbols:
+    ⏪⏫⏩⏬
+    ◀ ▶ ▲ ▼
+"""
 
 neighb_dict = {}
 
@@ -14,21 +18,21 @@ class State:
     def nextState(self):
         nextBoards = []
 
-        next = right(self.state)
-        if self.state != next:
-            nextBoards.append(State(next, "⏩", self.state))
+        valid, next = right(self.state)
+        if valid:
+            nextBoards.append(State(next, "▶", self))
 
-        next = left(self.state)
-        if self.state != next:
-            nextBoards.append(State(next, "⏪", self.state))
+        valid, next = left(self.state)
+        if valid:
+            nextBoards.append(State(next, "◀", self))
 
-        next = up(self.state)
-        if self.state != next:
-            nextBoards.append(State(next, "⏫", self.state))
+        valid, next = up(self.state)
+        if valid:
+            nextBoards.append(State(next, "▲", self))
 
-        next = down(self.state)
-        if self.state != next:
-            nextBoards.append(State(next, "⏬", self.state))
+        valid, next = down(self.state)
+        if valid:
+            nextBoards.append(State(next, "▼", self))
 
         return nextBoards
 
@@ -39,27 +43,38 @@ class State:
     #             if self.state[r][c] == 0:
 
 
-def BFS(org_board, slv_board):
+def BFS(orgSta, slvSta):
 
     queue = Queue()
-    queue.put(org_board)
+    queue.put(orgSta)
 
     visited = {}
-    visited[str(org_board)] = True
+    visited[str(orgSta.state)] = True
 
     while not queue.empty():
 
-        curBoard = queue.get()
+        curSta = queue.get()
 
-        if curBoard == slv_board:
+        if curSta.state == slvSta.state:
+            path_moves = [curSta.action]
+            path_boards = [curSta.state]
+            #
+            # # curSta = curSta.parent
+            # # path_moves.append(curSta.action)
+            # # path_boards.append(curSta.state)
+            #
+            while curSta.action != None:
+                path_moves.append(curSta.parent.action)
+                path_boards.append(curSta.parent.state)
+                curSta = curSta.parent
+
             print("SOLVED")
-            return
+            return path_boards[::-1], path_moves[::-1]
 
-        curState = State(curBoard)
-        for next in State.nextState(curState):
+        for next in State.nextState(curSta):
             if not str(next.state) in visited:
                 visited[str(next.state)] = True
-                queue.put(next.state)
+                queue.put(next)
 
     print("NOT SOLVED")
     return
@@ -91,9 +106,9 @@ def right(orgBoard):
         for c in range(len(board[r])-1):
             if board[r][c] == 0:
                 board[r][c], board[r][c+1] = board[r][c+1], board[r][c]
-                return board
+                return True, board
 
-    return board
+    return False, board
 
 def left(orgBoard):
     board = copy.deepcopy(orgBoard)
@@ -102,9 +117,9 @@ def left(orgBoard):
         for c in range(1, len(board[r])):
             if board[r][c] == 0:
                 board[r][c], board[r][c-1] = board[r][c-1], board[r][c]
-                return board
+                return True, board
 
-    return board
+    return False, board
 
 def up(orgBoard):
     board = copy.deepcopy(orgBoard)
@@ -113,9 +128,9 @@ def up(orgBoard):
         for c in range(len(board[r])):
             if board[r][c] == 0:
                 board[r][c], board[r-1][c] = board[r-1][c], board[r][c]
-                return board
+                return True, board
 
-    return board
+    return False, board
 
 def down(orgBoard):
     board = copy.deepcopy(orgBoard)
@@ -124,9 +139,9 @@ def down(orgBoard):
         for c in range(len(board[r])):
             if board[r][c] == 0:
                 board[r][c], board[r+1][c] = board[r+1][c], board[r][c]
-                return board
+                return True, board
 
-    return board
+    return False, board
 
 org_board = [[8, 5, 6], [4, 0, 3], [1, 2, 7]]
 board = copy.deepcopy(org_board)
@@ -159,48 +174,48 @@ for r in range(row):
     print("", end="\n\t")
 print()
 
-print("\tMoves\n")
-print("Right:", end="\n\t")
-board = right(board)
-
-for row in board:
-    for col in row:
-        print(col, end=" ")
-    print("", end="\n\t")
-print()
-
-board = copy.deepcopy(org_board)
-
-print("Left:", end="\n\t")
-board = left(board)
-
-for row in board:
-    for col in row:
-        print(col, end=" ")
-    print("", end="\n\t")
-print()
-
-board = copy.deepcopy(org_board)
-
-print("Up:", end="\n\t")
-board = up(board)
-
-for row in board:
-    for col in row:
-        print(col, end=" ")
-    print("", end="\n\t")
-print()
-
-board = copy.deepcopy(org_board)
-
-print("Down:", end="\n\t")
-board = down(board)
-
-for row in board:
-    for col in row:
-        print(col, end=" ")
-    print("", end="\n\t")
-print()
+# print("\tMoves\n")
+# print("Right:", end="\n\t")
+# board = right(board)[1]
+#
+# for row in board:
+#     for col in row:
+#         print(col, end=" ")
+#     print("", end="\n\t")
+# print()
+#
+# board = copy.deepcopy(org_board)
+#
+# print("Left:", end="\n\t")
+# board = left(board)[1]
+#
+# for row in board:
+#     for col in row:
+#         print(col, end=" ")
+#     print("", end="\n\t")
+# print()
+#
+# board = copy.deepcopy(org_board)
+#
+# print("Up:", end="\n\t")
+# board = up(board)[1]
+#
+# for row in board:
+#     for col in row:
+#         print(col, end=" ")
+#     print("", end="\n\t")
+# print()
+#
+# board = copy.deepcopy(org_board)
+#
+# print("Down:", end="\n\t")
+# board = down(board)[1]
+#
+# for row in board:
+#     for col in row:
+#         print(col, end=" ")
+#     print("", end="\n\t")
+# print()
 
 board = copy.deepcopy(org_board)
 
@@ -210,11 +225,33 @@ print()
 # print(board)
 # print(other_board)
 
+# print(orgState.state)
+#
+# for next in State.nextState(orgState):
+#     print("\t", next.action, next.state)
+# print()
+
+# finState = BFS(orgState, slvtState)
+
+# for _ in range(3):
+#     print(finState.action, end="\n\t")
+#     for row in finState.state:
+#         for col in row:
+#             print(col, end=" ")
+#         print("\n", end="\t")
+#     print()
+#     finState = finState.parent
+
 orgState = State(org_board)
-print(orgState.state)
+slvState = State(slv_board)
 
-for next in State.nextState(orgState):
-    print("\t", next.action, next.state)
+path_board, path_move = BFS(orgState, slvState)
 print()
-
-BFS(org_board, slv_board)
+#
+for p, path in enumerate(path_board):
+    print(path_move[p], end="\n\t")
+    for row in path:
+        for col in row:
+            print(col, end=" ")
+        print("\n", end="\t")
+    print()
