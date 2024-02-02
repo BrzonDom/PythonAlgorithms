@@ -135,16 +135,16 @@ for line in file:
     inBoard.append(list(map(int, line.split())))
 file.close()
 
-# for row in inBoard:
-#     print(f"\t{row}")
-# print()
-
-print("", end="\t")
 for row in inBoard:
-    for col in row:
-        print(col, end=" ")
-    print("", end="\n\t")
+    print(f"\t{row}")
 print()
+
+# print("", end="\t")
+# for row in inBoard:
+#     for col in row:
+#         print(col, end=" ")
+#     print("", end="\n\t")
+# print()
 
 
 moves_list = []
