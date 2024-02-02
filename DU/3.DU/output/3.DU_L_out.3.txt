@@ -1,0 +1,10 @@
+Number input: [3099, 6376, 8005, 4116505, 9980, 10000]
+
+	Base number:             3099
+	Number of numbers:       6
+	Number of test numbers:  5
+
+Number decomposition:
+	3099 = 3 * 1033
+	6376 = 2 * 2 * 2 * 797
+	8005 = 5 * 1601

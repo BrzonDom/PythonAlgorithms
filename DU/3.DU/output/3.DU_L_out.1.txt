@@ -1,0 +1,26 @@
+Number input: [21, 9, 8, 7, 6]
+
+	Base number:             21
+	Number of numbers:       5
+	Number of test numbers:  4
+
+Number decomposition:
+	21 = 3 * 7
+	9 = 3 * 3
+	8 = 2 * 2 * 2
+	7 = 7
+	6 = 2 * 3
+
+Greatest common divisor:
+	GCD (21, 9) = 3
+		3 : 9
+	GCD (21, 8) = 1
+		1 : 8
+	GCD (21, 7) = 7
+		7 : 7
+	GCD (21, 6) = 3
+		3 : 6
+
+For base number: 21
+	Max GCD:        7
+	Num of max GCD: 7
