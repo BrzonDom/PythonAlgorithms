@@ -73,7 +73,7 @@ def processStr(numStrLst):
     return wordLst
 
 
-def toInt(numStrLst):
+def toIntTemp(numStrLst):
 
     wordLst = processStr(numStrLst)
 
@@ -143,6 +143,62 @@ def toInt(numStrLst):
 
     return sum
 
+
+def toIntAdd(numStrLst):
+
+    wordLst = processStr(numStrLst)
+
+    hund = False
+    thou = False
+    hundThou = False
+
+    sum = 0
+
+    for wrd in wordLst[::-1]:
+        # print(wrd)
+
+        if wrd in one_num_words:
+            if hund:
+                if thou:
+                    if hundThou:
+                        sum += 100000 * num_dict[wrd]
+                    else:
+                        sum += 1000 * num_dict[wrd]
+                else:
+                    sum += 100 * num_dict[wrd]
+            else:
+                sum += num_dict[wrd]
+
+
+        elif wrd in teen_num_words:
+            if hund:
+                if thou:
+                    sum += 1000 * num_dict[wrd]
+                else:
+                    sum += 100 * num_dict[wrd]
+            else:
+                sum += num_dict[wrd]
+
+
+        elif wrd in ty_num_words:
+            if hund:
+                if thou:
+                    sum += 1000 * num_dict[wrd]
+                else:
+                    sum += 100 * num_dict[wrd]
+            else:
+                sum += num_dict[wrd]
+
+
+        elif wrd == "hundred":
+            hund = True
+            if thou:
+                hundThou = True
+
+        elif wrd == "thousand":
+            thou = True
+
+    return sum
 
 
 num_dict = {
@@ -350,6 +406,11 @@ if tabTemp[10]:
 sum = sum_1 + sum_2
 
 print("\nSum:", sum)
+print()
 
-print("\ntoInt function:")
-print("\tSum:", toInt(str_num))
+print("toIntTemp function:")
+print("\tSum:", toIntTemp(str_num))
+print()
+
+print("toIntAdd function:")
+print("\tSum:", toIntAdd(str_num))
