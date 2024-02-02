@@ -117,7 +117,9 @@ def coRN(num):
 
 file_list = ["setup_L_01", "setup_L_02", "setup_L_03"]
 
-file_name = file_list[2]
+inOp = 2
+
+file_name = file_list[inOp]
 # file_name = "setup_L_01"
 file_path = "data\\" + file_name + ".txt"
 
@@ -144,73 +146,6 @@ for row in inBoard:
     print("", end="\n\t")
 print()
 
-# input_board = [[0, 0, 0, 0, 0, 0, 0, 0],
-#                [0, 0, 0, 0, 0, 0, 0, 0],
-#                [0, 0, 0, 0, 0, 0, 0, 0],
-#                [0, 0, 0, 0, 0, 0, 0, 0],
-#                [0, 0, 0, 0, 0, 0, 0, 0],
-#                [0, 0, 0, 0, 0, 0, 0, 0],
-#                [0, 3, 0, 0, 0, 0, 0, 0],
-#                [1, 0, 0, 0, 0, 0, 0, 0]]
-
-# print()
-#
-# for i in range(9):
-#     for j in range(9):
-#         if (i == 0 or j == 0):
-#             continue
-#         print(board[i][j], end=" ")
-#     print()
-#
-# print("\n")
-#
-#
-# for i in range(8):
-#     for j in range(8):
-#         board[i + 1][j + 1] = input_board[i][j]
-#         print(board[i + 1][j + 1], end=" ")
-#     print()
-#
-# moves = []
-# coord_list = []
-# boarder = [0, 1, 2, 3, 4, 5, 6, 7]
-# move_Cnt = 0
-#
-# for r in range(8):
-#     for c in range(8):
-#         if inBoard[r][c] == 1:
-#             coord_list.append(coCL(c) + coRN(r))
-#             moves.append([r, c])
-#
-#             while (True):
-#                 if (moves[move_Cnt][0] - 1) in boarder and (moves[move_Cnt][1] - 1) in boarder:
-#                     if inBoard[moves[move_Cnt][0] - 1][moves[move_Cnt][1] - 1] == 0:
-#                         moves.append([moves[move_Cnt][0] - 1, moves[move_Cnt][1] - 1])
-#                         coord_list.append(coCL(moves[move_Cnt][1] - 1) + coRN(moves[move_Cnt][0] - 1))
-#                         move_Cnt += 1
-#                         continue
-#
-#                 if (moves[move_Cnt][0] - 1) in boarder and (moves[move_Cnt][1] + 1) in boarder:
-#                     if inBoard[moves[move_Cnt][0] - 1][moves[move_Cnt][1] + 1] == 0:
-#                         moves.append([moves[move_Cnt][0] - 1, moves[move_Cnt][1] + 1])
-#                         coord_list.append(coCL(moves[move_Cnt][1] + 1) + coRN(moves[move_Cnt][0] - 1))
-#                         move_Cnt += 1
-#                         continue
-#
-#                 if (moves[move_Cnt][0] - 2) in boarder and (moves[move_Cnt][1] - 2) in boarder:
-#                     if inBoard[moves[move_Cnt][0] - 2][moves[move_Cnt][1] - 2] == 0:
-#                         moves.append([moves[move_Cnt][0] - 2, moves[move_Cnt][1] - 2])
-#                         coord_list.append(coCL(moves[move_Cnt][1] - 2) + coRN(moves[move_Cnt][0] - 2))
-#                         move_Cnt += 1
-#                         continue
-#
-#                 if (moves[move_Cnt][0] - 2) in boarder and (moves[move_Cnt][1] + 2) in boarder:
-#                     if inBoard[moves[move_Cnt][0] - 2][moves[move_Cnt][1] + 2] == 0:
-#                         moves.append([moves[move_Cnt][0] - 2, moves[move_Cnt][1] + 2])
-#                         coord_list.append(coCL(moves[move_Cnt][1] + 2) + coRN(moves[move_Cnt][0] - 2))
-#                         move_Cnt += 1
-#                         continue
-#                 break
 
 moves_list = []
 move_stack = []
@@ -288,20 +223,15 @@ for mov in moves_res:
     print(f"{mov}", end=" ")
 print("\n")
 
-# coords = []
-# for m, move in enumerate(moves):
-#     coords.append(coCL(move[1]) + coRN(move[0]))
-#     # print(f"{move} : {coords[m]}", end="")
-#
-#     if (m+1) % 3 == 0:
-#         print(f"{m+1:3}. {move} : {coords[m]}")
-#     else:
-#         print(f"{m+1:3}. {move} : {coords[m]}", end="    |    ")
-#
-# print("\n")
-#
 
+
+print("", end="   ")
+for i in range(8):
+    print(coCL(i), end=" ")
+
+print()
 for r in range(8):
+    print(8 - r, end=" ")
     for c in range(8):
         # print(f"{r}{c}", end=" ")
         if inBoard[r][c] == 1:
@@ -315,5 +245,13 @@ for r in range(8):
         else:
             print("⬜", end="")
     print()
+print()
+
+print("Explanatory note:")
+print("\t⬜ = empty tile")
+print("\t🟥 = your pieces")
+print("\t⬛ = opponent's pieces")
+print("\t🟩 = possible moves")
+print("\t🟨 = longest possible move")
 
 # print(moves)
