@@ -47,71 +47,96 @@ Lehká varianta: Babylonská věž (zjednodušená)
                 Pozor: lze aplikovat pouze pokud prázdné místo není v horní řadě
 
 """
+import copy
+
+class State:
+    def __init__(self, state, action = None, parent = None):
+        self.state = copy.deepcopy(state)
+        self.parent = parent
+        self.action = action
+
+    def nextState(self):
+        nextTower_lst = []
+
+        rowTow = len(self.state)
+        for row in range(rowTow):
+
+            next = right(self, row)
+            nextTower_lst.append(next)
+
+            next = left(self, row)
+            nextTower_lst.append(next)
+
+        next = up(self)
+        nextTower_lst.append(next)
+
+        next = down(self)
+        nextTower_lst.append(next)
+
+        return nextTower_lst
 
 
-def right(tower, row):
-    tower[row] = tower[row][-1:] + tower[row][:-1]
+def right(orgTower, row):
+    tower = copy.deepcopy(orgTower)
+
+    tower.state[row] = tower.state[row][-1:] + tower.state[row][:-1]
     return tower
 
 
-def left(tower, row):
-    tower[row] = tower[row][1:] + tower[row][:1]
+def left(orgTower, row):
+    tower = copy.deepcopy(orgTower)
+
+    tower.state[row] = tower.state[row][1:] + tower.state[row][:1]
     return tower
 
 
-def up(tower):
+def up(orgTower):
+    tower = copy.deepcopy(orgTower)
     # for row in tower[:-1]:
     #     for col in row:
     #         if col == 0:
 
-    for r in range(len(tower)-1):
-        for c in range(len(tower[0])):
-            if tower[r][c] == 0:
-                tower[r][c], tower[r+1][c] = tower[r+1][c], tower[r][c]
+    for r in range(len(tower.state)-1):
+        for c in range(len(tower.state[0])):
+            if tower.state[r][c] == 0:
+                tower.state[r][c], tower.state[r+1][c] = tower.state[r+1][c], tower.state[r][c]
                 return tower
     return tower
 
 
-def down(tower):
-    for r in range(1, len(tower)):
-        for c in range(len(tower[0])):
-            if tower[r][c] == 0:
-                tower[r][c], tower[r-1][c] = tower[r-1][c], tower[r][c]
+def down(orgTower):
+    tower = copy.deepcopy(orgTower)
+
+    for r in range(1, len(tower.state)):
+        for c in range(len(tower.state[0])):
+            if tower.state[r][c] == 0:
+                tower.state[r][c], tower.state[r-1][c] = tower.state[r-1][c], tower.state[r][c]
                 return tower
     return tower
 
 
 
-tower = [[1, 2, 3],
+org_tower = [[1, 2, 3],
          [1, 2, 0],
          [2, 1, 3]]
 
 print("Original tower:")
 print()
 
-for row in tower:
+for row in org_tower:
     for col in row:
         print(col, end=" ")
     print()
 print()
 
+orgState = State(org_tower)
 
-test_list = [1, 4, 5, 6, 7, 8, 9, 12]
-
-# print(test_list)
-# print(test_list[1:])
-# print(test_list[:1])
-# print()
-#
-# print(test_list)
-# print(test_list[:-1])
-# print(test_list[-1:])
 
 print("Right:", end="\n\t")
 
-tower = right(tower, 1)
+tower = right(orgState, 1)
 
-for row in tower:
+for row in tower.state:
     for col in row:
         print(col, end=" ")
     print("", end="\n\t")
@@ -119,9 +144,9 @@ print()
 
 print("Left:", end="\n\t")
 
-tower = left(tower, 1)
+tower = left(orgState, 1)
 
-for row in tower:
+for row in tower.state:
     for col in row:
         print(col, end=" ")
     print("", end="\n\t")
@@ -129,9 +154,9 @@ print()
 
 print("Up:", end="\n\t")
 
-tower = up(tower)
+tower = up(orgState)
 
-for row in tower:
+for row in tower.state:
     for col in row:
         print(col, end=" ")
     print("", end="\n\t")
@@ -139,9 +164,9 @@ print()
 
 print("Down:", end="\n\t")
 
-tower = down(tower)
+tower = down(orgState)
 
-for row in tower:
+for row in tower.state:
     for col in row:
         print(col, end=" ")
     print("", end="\n\t")
