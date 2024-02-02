@@ -52,7 +52,9 @@ str_seq_list = [["1 2 3 3 3 3 3 3 3 3 5 6", "3 3 3 1 3 3 3 3 3 3 3 3"],
                 ["10", "1 2 3 10 3 2 1"],
                 ["1 2 3 4", "1 2 3 4"]]
 
-str_seq = str_seq_list[0]
+inOp = 1
+
+str_seq = str_seq_list[inOp]
 str_seq1 = str_seq[0]
 str_seq2 = str_seq[1]
 
@@ -63,34 +65,34 @@ seq = [seq1, seq2]
 len_seq1 = len(seq1)
 len_seq2 = len(seq2)
 
-print("Sequenses:")
+print("Sequences:")
 print(f"\tLen: {len_seq1} Seq: {seq1}")
 print(f"\tLen: {len_seq2} Seq: {seq2}")
 print()
 
-LCS_Mat = [[0 for i in range(len_seq1 + 1)] for j in range(len_seq2 + 1)]
+LCS_Mat = [[0 for c in range(len_seq2 + 1)] for r in range(len_seq1 + 1)]
 
 # print()
 # for row in LCS_Mat:
 #     print(row)
 #
-# # print(LCS_Mat)
+print(LCS_Mat)
 
 result = 0
 res_index = []
-#
-#
-for i in range(len_seq1 + 1):
-    for j in range(len_seq2 + 1):
-        if (i == 0 or j == 0):
-            LCS_Mat[i][j] = 0
-        elif (seq1[i - 1] == seq2[j - 1]):
-            LCS_Mat[i][j] = LCS_Mat[i-1][j-1] + 1
-            if LCS_Mat[i][j] > result:
-                res_index = [i, j]
-            result = max(result, LCS_Mat[i][j])
+
+
+for r in range(len_seq1 + 1):
+    for c in range(len_seq2 + 1):
+        if (r == 0 or c == 0):
+            LCS_Mat[r][c] = 0
+        elif (seq1[r - 1] == seq2[c - 1]):
+            LCS_Mat[r][c] = LCS_Mat[r - 1][c - 1] + 1
+            if LCS_Mat[r][c] > result:
+                res_index = [r, c]
+            result = max(result, LCS_Mat[r][c])
         else:
-            LCS_Mat[i][j] = 0
+            LCS_Mat[r][c] = 0
 #
 # print()
 #
