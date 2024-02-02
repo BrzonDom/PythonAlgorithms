@@ -1,25 +1,61 @@
 import copy
 from queue import Queue
 
+"""⏪⏫⏩⏬"""
+
 neighb_dict = {}
 
-def moves(orgBoard):
+class State:
+    def __init__(self, state, action = None, parent = None):
+        self.state = copy.deepcopy(state)
+        self.parent = parent
+        self.action = action
 
-    neghbBoard = []
+    def nextState(self):
+        nextBoards = []
 
-    if orgBoard != right(orgBoard):
-        neghbBoard.append(right(orgBoard))
+        next = right(self.state)
+        if self.state != next:
+            nextBoards.append(State(next, "⏩", self.state))
 
-    if orgBoard != left(orgBoard):
-        neghbBoard.append(left(orgBoard))
+        next = left(self.state)
+        if self.state != next:
+            nextBoards.append(State(next, "⏪", self.state))
 
-    if orgBoard != up(orgBoard):
-        neghbBoard.append(up(orgBoard))
+        next = up(self.state)
+        if self.state != next:
+            nextBoards.append(State(next, "⏫", self.state))
 
-    if orgBoard != down(orgBoard):
-        neghbBoard.append(down(orgBoard))
+        next = down(self.state)
+        if self.state != next:
+            nextBoards.append(State(next, "⏬", self.state))
 
-    return neghbBoard
+        return nextBoards
+
+    # def goodMove(self):
+    #
+    #     for r in range(len(self.state)):
+    #         for c in range(len(self.state[0])):
+    #             if self.state[r][c] == 0:
+
+
+# def moves(orgBoard):
+#
+#     neghbBoard = []
+#
+#     if orgBoard != right(orgBoard):
+#         neghbBoard.append(right(orgBoard))
+#
+#     if orgBoard != left(orgBoard):
+#         neghbBoard.append(left(orgBoard))
+#
+#     if orgBoard != up(orgBoard):
+#         neghbBoard.append(up(orgBoard))
+#
+#     if orgBoard != down(orgBoard):
+#         neghbBoard.append(down(orgBoard))
+#
+#     return neghbBoard
 
 
 def right(orgBoard):
@@ -144,6 +180,12 @@ board = copy.deepcopy(org_board)
 
 print()
 
-other_board = left(board)
-print(board)
-print(other_board)
+# other_board = left(board)
+# print(board)
+# print(other_board)
+
+orgState = State(org_board)
+print(orgState.state)
+
+for next in State.nextState(orgState):
+    print("\t", next.action, next.state)
