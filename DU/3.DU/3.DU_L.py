@@ -69,7 +69,8 @@ inNum_list = [[21, 9, 8, 7, 6],
               [192779, 253, 263, 273, 283, 683, 693, 703, 713, 723, 733, 743],
               [3099, 6376, 8005, 4116505, 9980, 10000]]
 
-inNum = inNum_list[1]
+inOp = 2
+inNum = inNum_list[inOp]
 
 print(f"Number input: {inNum}")
 
