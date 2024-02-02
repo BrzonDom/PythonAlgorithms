@@ -50,6 +50,11 @@ Lehká varianta: Babylonská věž (zjednodušená)
 import copy
 from queue import Queue
 
+"""
+Symbols:
+    ◀ ▶ ▲ ▼
+"""
+
 class State:
     def __init__(self, state, action = None, parent = None):
         self.state = copy.deepcopy(state)
@@ -62,56 +67,56 @@ class State:
         rowTow = len(self.state)
         for row in range(rowTow):
 
-            next = right(self, row)
-            nextTower_lst.append(next)
+            next = right(self.state, row)
+            nextTower_lst.append(State(next, f"▶ {row+1}", self))
 
-            next = left(self, row)
-            nextTower_lst.append(next)
+            next = left(self.state, row)
+            nextTower_lst.append(State(next, f"◀ {row+1}", self))
 
-        next = up(self)
-        nextTower_lst.append(next)
+        next = up(self.state)
+        nextTower_lst.append(State(next, "▲", self))
 
-        next = down(self)
-        nextTower_lst.append(next)
+        next = down(self.state)
+        nextTower_lst.append(State(next, "▼", self))
 
         return nextTower_lst
 
 
-def right(orgTower, row):
-    tower = copy.deepcopy(orgTower)
+def right(orgTow, row):
+    tower = copy.deepcopy(orgTow)
 
-    tower.state[row] = tower.state[row][-1:] + tower.state[row][:-1]
+    tower[row] = tower[row][-1:] + tower[row][:-1]
     return tower
 
 
-def left(orgTower, row):
-    tower = copy.deepcopy(orgTower)
+def left(orgTow, row):
+    tower = copy.deepcopy(orgTow)
 
-    tower.state[row] = tower.state[row][1:] + tower.state[row][:1]
+    tower[row] = tower[row][1:] + tower[row][:1]
     return tower
 
 
-def up(orgTower):
-    tower = copy.deepcopy(orgTower)
+def up(orgTow):
+    tower = copy.deepcopy(orgTow)
     # for row in tower[:-1]:
     #     for col in row:
     #         if col == 0:
 
-    for r in range(len(tower.state)-1):
-        for c in range(len(tower.state[0])):
-            if tower.state[r][c] == 0:
-                tower.state[r][c], tower.state[r+1][c] = tower.state[r+1][c], tower.state[r][c]
+    for r in range(len(tower)-1):
+        for c in range(len(tower[0])):
+            if tower[r][c] == 0:
+                tower[r][c], tower[r+1][c] = tower[r+1][c], tower[r][c]
                 return tower
     return tower
 
 
-def down(orgTower):
-    tower = copy.deepcopy(orgTower)
+def down(orgTow):
+    tower = copy.deepcopy(orgTow)
 
-    for r in range(1, len(tower.state)):
-        for c in range(len(tower.state[0])):
-            if tower.state[r][c] == 0:
-                tower.state[r][c], tower.state[r-1][c] = tower.state[r-1][c], tower.state[r][c]
+    for r in range(1, len(tower)):
+        for c in range(len(tower[0])):
+            if tower[r][c] == 0:
+                tower[r][c], tower[r-1][c] = tower[r-1][c], tower[r][c]
                 return tower
     return tower
 
@@ -179,39 +184,46 @@ orgState = State(org_tower)
 
 print("Right:", end="\n\t")
 
-tower = right(orgState, 1)
+# tower = right(orgState, 1)
+tower = right(orgState.state, 1)
 
-for row in tower.state:
+for row in tower:
     for col in row:
         print(col, end=" ")
     print("", end="\n\t")
 print()
+
 
 print("Left:", end="\n\t")
 
-tower = left(orgState, 1)
+# tower = left(orgState, 1)
+tower = left(orgState.state, 1)
 
-for row in tower.state:
+for row in tower:
     for col in row:
         print(col, end=" ")
     print("", end="\n\t")
 print()
+
 
 print("Up:", end="\n\t")
 
-tower = up(orgState)
+# tower = up(orgState)
+tower = up(orgState.state)
 
-for row in tower.state:
+for row in tower:
     for col in row:
         print(col, end=" ")
     print("", end="\n\t")
 print()
 
+
 print("Down:", end="\n\t")
 
-tower = down(orgState)
+# tower = down(orgState)
+tower = down(orgState.state)
 
-for row in tower.state:
+for row in tower:
     for col in row:
         print(col, end=" ")
     print("", end="\n\t")
