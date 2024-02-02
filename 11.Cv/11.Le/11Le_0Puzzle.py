@@ -39,6 +39,32 @@ class State:
     #             if self.state[r][c] == 0:
 
 
+def BFS(org_board, slv_board):
+
+    queue = Queue()
+    queue.put(org_board)
+
+    visited = {}
+    visited[str(org_board)] = True
+
+    while not queue.empty():
+
+        curBoard = queue.get()
+
+        if curBoard == slv_board:
+            print("SOLVED")
+            return
+
+        curState = State(curBoard)
+        for next in State.nextState(curState):
+            if not str(next.state) in visited:
+                visited[str(next.state)] = True
+                queue.put(next.state)
+
+    print("NOT SOLVED")
+    return
+
+
 # def moves(orgBoard):
 #
 #     neghbBoard = []
@@ -189,3 +215,6 @@ print(orgState.state)
 
 for next in State.nextState(orgState):
     print("\t", next.action, next.state)
+print()
+
+BFS(org_board, slv_board)
