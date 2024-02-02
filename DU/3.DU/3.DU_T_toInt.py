@@ -27,7 +27,7 @@ Těžká varianta
 import copy
 
 
-def toInt(numStrLst):
+def processStr(numStrLst):
 
     rawDataLst = []
 
@@ -69,6 +69,13 @@ def toInt(numStrLst):
     wordLst = []
     for numWrd in ediDataLst:
         wordLst.append(numWrd[0])
+
+    return wordLst
+
+
+def toInt(numStrLst):
+
+    wordLst = processStr(numStrLst)
 
     """     Boolean template for found words on certain positions   """
     tabTemp = [False for state in range(11)]
