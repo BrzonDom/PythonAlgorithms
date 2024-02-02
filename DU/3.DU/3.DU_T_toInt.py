@@ -27,6 +27,117 @@ Těžká varianta
 import copy
 
 
+def toInt(numStrLst):
+
+    rawDataLst = []
+
+    """     Collect words from input and index them     """
+    for numWrd in num_words:
+        if numWrd in numStrLst:
+
+            startPos = 0
+            if numStrLst.count(numWrd) > 1:
+
+                """     index() method finds the first occurrence of the specified value.
+                            string.index(value, start, end) """
+                index = numStrLst.index(numWrd, startPos)
+
+                rawDataLst.append([numWrd, index])
+                startPos = index + len(numWrd)
+
+            else:
+                rawDataLst.append([numWrd, numStrLst.index(numWrd)])
+
+    ediDataLst = copy.deepcopy(rawDataLst)
+
+    for i in range(len(rawDataLst)):
+        for j in range(i+1, len(rawDataLst)):
+
+            if rawDataLst[i][1] == rawDataLst[j][1]:
+                """     For words found on the same position    
+                            Remove the smaller one      """
+
+                if len(rawDataLst[i][0]) < len(rawDataLst[j][0]):
+                    ediDataLst.remove(rawDataLst[i])
+                else:
+                    ediDataLst.remove(rawDataLst[j])
+
+    """     Sort by position, first to last    """
+    ediDataLst.sort(key=lambda x: x[1])
+
+    """     Strip of indexes    """
+    wordLst = []
+    for numWrd in ediDataLst:
+        wordLst.append(numWrd[0])
+
+    """     Boolean template for found words on certain positions   """
+    tabTemp = [False for state in range(11)]
+
+    """     List template for possible words on certain positions  """
+    valTemp = [one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words, ["thousand"], one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words]
+
+    wrdCnt = tempCnt = 1
+
+    while(wrdCnt <= len(wordLst)):
+
+        if wordLst[-wrdCnt] in valTemp[-tempCnt]:
+            tabTemp[-tempCnt] = True
+
+            wrdCnt += 1
+        tempCnt += 1
+
+    sum_1 = sum_2 = 0
+    wrdCnt = 0
+
+    if tabTemp[0]:
+        sum_2 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[1]:
+        sum_2 *= num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[2]:
+        sum_2 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[3]:
+        sum_2 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[4]:
+        sum_2 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[5]:
+        sum_2 *= num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[6]:
+        sum_1 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[7]:
+        sum_1 *= num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[8]:
+        sum_1 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[9]:
+        sum_1 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[10]:
+        sum_1 += num_dict[wordLst[wrdCnt]]
+
+    sum = sum_2 + sum_1
+
+    return sum
+
+
+
 num_dict = {
     "one" : 1,
     "two" : 2,
@@ -130,15 +241,15 @@ sor_data_list.sort(key = lambda x: x[1])
 print("\nSorted data: ", sor_data_list)
 
 """     Strip of indexes    """
-sor_list = []
+wordLst = []
 for numWrd in sor_data_list:
-    sor_list.append(numWrd[0])
+    wordLst.append(numWrd[0])
 
-print("Sorted list: ", sor_list)
+print("Sorted list: ", wordLst)
 
 
 """     Boolean-like table for found words on certain positions   """
-template_table = [      0,           0,            0,              0,             0,             0,            0,            0,          0,               0,              0]
+tabTemp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 """     List table for possible words on certain positions  """
 template_values = [one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words, ["thousand"], one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words]
@@ -167,13 +278,13 @@ temp_Cnt = 1
 numWrd_Cnt = 1
 hunderd = ten = 1
 
-while(numWrd_Cnt <= len(sor_list)):
+while(numWrd_Cnt <= len(wordLst)):
     # print(sor_data_list[-numWrd_Cnt][0])
     # numWrd_Cnt += 1
 
 
-    if sor_list[-numWrd_Cnt] in template_values[-temp_Cnt]:
-        template_table[-temp_Cnt] = 1
+    if wordLst[-numWrd_Cnt] in template_values[-temp_Cnt]:
+        tabTemp[-temp_Cnt] = 1
 
         numWrd_Cnt += 1
     temp_Cnt += 1
@@ -186,49 +297,52 @@ sum_1 = sum_2 = 0
 numWrd_Cnt = 0
 
 
-if template_table[0]:
-    sum_1 += num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[0]:
+    sum_1 += num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[1]:
-    sum_1 *= num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[1]:
+    sum_1 *= num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[2]:
-    sum_1 += num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[2]:
+    sum_1 += num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[3]:
-    sum_1 += num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[3]:
+    sum_1 += num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[4]:
-    sum_1 += num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[4]:
+    sum_1 += num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[5]:
-    sum_1 *= num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[5]:
+    sum_1 *= num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[6]:
-    sum_2 += num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[6]:
+    sum_2 += num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[7]:
-    sum_2 *= num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[7]:
+    sum_2 *= num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[8]:
-    sum_2 += num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[8]:
+    sum_2 += num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[9]:
-    sum_2 += num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[9]:
+    sum_2 += num_dict[wordLst[numWrd_Cnt]]
     numWrd_Cnt += 1
 
-if template_table[10]:
-    sum_2 += num_dict[sor_list[numWrd_Cnt]]
+if tabTemp[10]:
+    sum_2 += num_dict[wordLst[numWrd_Cnt]]
 
 sum = sum_1 + sum_2
 
 print("\nSum:", sum)
+
+print("\ntoInt function:")
+print("\tSum:", toInt(str_num))
