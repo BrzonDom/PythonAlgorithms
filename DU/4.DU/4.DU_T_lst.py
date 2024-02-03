@@ -61,13 +61,47 @@ Příklady:
         
 """
 
+def LCS_1Vis(seq, Mat):
+    len_seq = len(seq)
+
+    # LCS_Mat = [[0 for i in range(lenSeq + 1)] for j in range(lenSeq + 1)]
+
+    print("\n\n\t   |", end="")
+    for b in range(lenSeq):
+        print(f" {seq[b]:2} |", end="")
+    print("\n\t", end="")
+
+    for r in range(1, lenSeq + 2):
+        print(" --", end="")
+        for b in range(1, lenSeq + 1):
+            print("+----", end="")
+        print("+\n\t", end="")
+        # print()
+
+        if r == lenSeq + 1:
+            break
+        print(f"{seq[r - 1]:2} ", end="")
+
+        for c in range(1, lenSeq + 1):
+
+            # print(f"| {Mat[r][c]:2} ", end="")
+
+            if LCS_Mat[r][c]:
+                print(f"| {Mat[r][c]:2} ", end="")
+            else:
+                print(f"|    ", end="")
+
+        print("|\n\t", end="")
+
+
 # str_seq1 = "3 3 3 3 3 3 3 3 3"
 # str_seq2 = "1 1 1 6 2 2 2 6 1 1 1"
 # str_seq3 = "1 2 5 -6 8 -3 2 1 1 2 2 5 -6 8 -3 2 3"
 str_seq_list = ["3 3 3 3 3 3 3 3 3",
                 "1 1 1 6 2 2 2 6 1 1 1",
                 "1 2 5 -6 8 -3 2 1 1 2 2 5 -6 8 -3 2 3",
-                "1 2 3 4 4 4 4 4 3 2 1"]
+                "1 2 3 4 4 4 4 4 3 2 1",
+                "1 2 5 -6 8 -3 2 5 -6 8 -3 2 3"]
 
 # seq1 = [int(num) for num in list(str_seq1.split(" "))]
 # seq2 = [int(num) for num in list(str_seq2.split(" "))]
@@ -151,11 +185,11 @@ ad = 0
 #             if LCS_Mat[col][col+ad] > result:
 #                 res_index = [col, col+ad]
 #             result = max(result, LCS_Mat[col][col+ad])
-
-"""Diagonal coordinates print"""
-    #     print(f"({col}, {col + ad}) ", end=" ")
-    #     LCS_Mat[col][col+ad] = 1
-    # print()
+#
+#         """Diagonal coordinates print"""
+#         print(f"({col}, {col + ad}) ", end=" ")
+#         LCS_Mat[col][col+ad] = 1
+#     print()
 
 
 """Whole LCS_Mat print"""
@@ -166,76 +200,55 @@ ad = 0
 
 
 """Line LCS_Mat analysis"""
-# for r in range(lenSeq + 1):
-#     for c in range(r, lenSeq + 1):
-#         if (r == 0 or c == 0 or (r == c)):
-#             LCS_Mat[r][c] = 0
-#
-#         elif (seq[r-1] == seq[c-1]):
-#             LCS_Mat[r][c] = LCS_Mat[r-1][c-1] + 1
-#             # maxSeq[mSCnt].append(seq[r-1])
-#             # mSCon = True
-#
-#             if LCS_Mat[r][c] > result:
-#                 res_index = [r, c]
-#             result = max(result, LCS_Mat[r][c])
-#
-#         else:
-#             # if mSCon:
-#             #     maxSeq.append([])
-#             #     mSCnt += 1
-#             #     mSCon = False
-#
-#             LCS_Mat[r][c] = 0
+for r in range(lenSeq + 1):
+    for c in range(r, lenSeq + 1):
+        if (r == 0 or c == 0 or (r == c)):
+            LCS_Mat[r][c] = 0
+
+        elif (seq[r-1] == seq[c-1]):
+            LCS_Mat[r][c] = LCS_Mat[r-1][c-1] + 1
+            # maxSeq[mSCnt].append(seq[r-1])
+            # mSCon = True
+
+            if LCS_Mat[r][c] > result:
+                res_index = [r, c]
+            result = max(result, LCS_Mat[r][c])
+
+        else:
+            # if mSCon:
+            #     maxSeq.append([])
+            #     mSCnt += 1
+            #     mSCon = False
+
+            LCS_Mat[r][c] = 0
 
 
 """Whole line LCS_Mat analysis"""
-for i in range(lenSeq+1):
-    for j in range(lenSeq+1):
-        if (i == 0 or j == 0):
-            LCS_Mat[i][j] = 0
-        elif (seq[i-1] == seq[j-1]):
-            LCS_Mat[i][j] = LCS_Mat[i-1][j-1] + 1
-            if LCS_Mat[i][j] > result:
-                res_index = [i, j]
-            result = max(result, LCS_Mat[i][j])
-        else:
-            LCS_Mat[i][j] = 0
+# for i in range(lenSeq+1):
+#     for j in range(lenSeq+1):
+#         if (i == 0 or j == 0):
+#             LCS_Mat[i][j] = 0
+#
+#         elif (i == j):
+#             LCS_Mat[i][j] = 0
+#
+#         elif (seq[i-1] == seq[j-1]):
+#             LCS_Mat[i][j] = LCS_Mat[i-1][j-1] + 1
+#
+#             if LCS_Mat[i][j] > result:
+#                 res_index = [i, j]
+#             result = max(result, LCS_Mat[i][j])
+#
+#         else:
+#             LCS_Mat[i][j] = 0
+
+res_index = [res_index[0]-result, res_index[1]-result]
+res_seq = seq[res_index[0]:res_index[0]+result]
 
 
-
-def LCS_1Vis(seq, Mat):
-    len_seq = len(seq)
-
-    # LCS_Mat = [[0 for i in range(lenSeq + 1)] for j in range(lenSeq + 1)]
-
-    print("\n\n\t   |", end="")
-    for b in range(lenSeq):
-        print(f" {seq[b]:2} |", end="")
-    print("\n\t", end="")
-
-    for r in range(1, lenSeq + 2):
-        print(" --", end="")
-        for b in range(1, lenSeq + 1):
-            print("+----", end="")
-        print("+\n\t", end="")
-        # print()
-
-        if r == lenSeq + 1:
-            break
-        print(f"{seq[r - 1]:2} ", end="")
-
-        for c in range(1, lenSeq + 1):
-
-            # print(f"| {Mat[r][c]:2} ", end="")
-
-            if LCS_Mat[r][c]:
-                print(f"| {Mat[r][c]:2} ", end="")
-            else:
-                print(f"|    ", end="")
-
-        print("|\n\t", end="")
-
+print("Result seq len:", result)
+print("\tResult seq.:", res_seq)
+print(f"\tResult seq. coords: <{res_index[0]}, {res_index[0] + result -1}> <{res_index[1]}, {res_index[1] + result -1}>")
 
 
 LCS_1Vis(seq, LCS_Mat)
