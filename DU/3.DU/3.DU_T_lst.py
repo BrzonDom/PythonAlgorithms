@@ -265,32 +265,35 @@ input_str_list = ["twohundredfiftyseventhousandthreehundredseventyfive",
                   "tentwenty", "seventytwothreehundred", "12v34"]
 
 # str_num = "twohundredfiftyseventhousandthreehundredseventyfive"
-input_str = input_str_list[1]
 
-# print(str_num.index("two"))
-raw_data_list = []
+for i in range(len(input_str_list)):
+    input_str = input_str_list[i]
 
-intToStr = True
-strToInt = True
+    print(f"{i}. Input: {input_str}")
 
-for char in input_str:
-    if not ('a' <= char <= 'z') and strToInt:
-        # print("NOT NUM STR")
-        strToInt = False
+    intToStr = True
+    strToInt = True
 
-    if not ('0' <= char <= '9') and intToStr:
-        # print("NOT STR NUM")
-        intToStr = False
+    for char in input_str:
+        if not ('a' <= char <= 'z') and strToInt:
+            # print("NOT NUM STR")
+            strToInt = False
+
+        if not ('0' <= char <= '9') and intToStr:
+            # print("NOT STR NUM")
+            intToStr = False
 
 
-if strToInt:
-    print(toIntAdd(input_str))
+    if strToInt:
+        print("\t", toIntAdd(input_str))
 
-elif intToStr:
-    print(toStr(int(input_str)))
+    elif intToStr:
+        print("\t", toStr(int(input_str)))
 
-else:
-    print("ERROR")
+    else:
+        print("\tERROR")
+
+    print()
 
 
 
