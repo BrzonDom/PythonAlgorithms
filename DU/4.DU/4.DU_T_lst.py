@@ -60,6 +60,8 @@ Příklady:
         Přestože nejdelší stejné podposloupnosti jsou 2 5 -6 8 -3 2, větší součet má její část 2 5 -6 8 o délce 4. 
         
 """
+import copy
+
 
 def LCS_1Vis(seq, Mat):
     len_seq = len(seq)
@@ -92,6 +94,82 @@ def LCS_1Vis(seq, Mat):
                 print(f"|    ", end="")
 
         print("|\n\t", end="")
+
+
+def seqMax(seq):
+
+    seqCnt = len(seq)
+
+    """     Prints the original sequence    """
+    # print(f"Sequence: {seq}")
+    # print(f"\tLen of sequence: {seqCnt}")
+
+    maxSeq = curSeq = [0]
+
+    """     Count of the sequence   """
+    maxCnt = curCnt = 0
+    """     Sum of the sequence     """
+    maxTot = curTot = 0
+    i = 2
+
+    for num in range(seqCnt):
+
+        """     1. instance - initial values
+                    Skips 1. loop   """
+        if num == 0:
+            maxSeq = curSeq = [seq[0]]
+            maxTot = curTot = seq[0]
+            maxCnt = curCnt = 1
+            continue
+
+        """     Prints the sequence that has been analysed  """
+        # print("\nSeq: ", end="")
+        # for _ in range(i):
+        #     print(seq[_], end=" ")
+        # print()
+        # i += 1
+
+        """     Updates current sequence    """
+        curSeq.append(seq[num])
+        curTot += seq[num]
+        curCnt += 1
+
+        """     If current total is less than added num
+                    Resets current values   """
+        if curTot < seq[num]:
+            curSeq = [seq[num]]
+            curTot = seq[num]
+            curCnt = 1
+
+        """     Prints current sequence, total & count  """
+        # print("\tCurSeq: ", end="")
+        # for _ in range(curCnt):
+        #     print(curSeq[_], end=" ")
+        # print(f"\n\t\tTot: {curTot}  |  Cnt: {curCnt}")
+
+        """     If max total is less than current total
+                    Updates max values  """
+        if maxTot < curTot:
+            maxSeq = copy.deepcopy(curSeq)
+            maxTot = curTot
+            maxCnt = curCnt
+            # print(maxSeq)
+
+            # print("\t! MaxSeq !")
+            # for _ in range(maxCnt):
+            #     print(maxSeq[_], end=" ")
+            # print(f"\n\t\tTot: {maxTot}  |  Cnt: {maxCnt}")
+
+    return maxSeq
+
+def sumArr(Arr):
+
+    sum = 0
+
+    for num in Arr:
+        sum = sum + num
+
+    return(sum)
 
 
 # str_seq1 = "3 3 3 3 3 3 3 3 3"
@@ -244,9 +322,9 @@ fnd_index = [fnd_index[0] - fnd_res, fnd_index[1] - fnd_res]
 fnd_seq = seq[fnd_index[0]:fnd_index[0] + fnd_res]
 
 
-print("Result seq len:", fnd_res)
-print("\tResult seq.:", fnd_seq)
-print(f"\tResult seq. coords: <{fnd_index[0]}, {fnd_index[0] + fnd_res - 1}> <{fnd_index[1]}, {fnd_index[1] + fnd_res - 1}>")
+print("Raw Result seq len:", fnd_res)
+print("\tRaw Result seq.:", fnd_seq)
+print(f"\tRaw Result seq. coords: <{fnd_index[0]}, {fnd_index[0] + fnd_res - 1}> <{fnd_index[1]}, {fnd_index[1] + fnd_res - 1}>")
 
 print()
 if (fnd_index[1] - (fnd_index[0] + fnd_res)) < 0:
@@ -257,9 +335,18 @@ if (fnd_index[1] - (fnd_index[0] + fnd_res)) < 0:
     fnd_res += overlap
     fnd_seq = seq[fnd_index[0]:fnd_index[0] + fnd_res]
 
-    print("Result seq len:", fnd_res)
-    print("\tResult seq.:", fnd_seq)
-    print(f"\tResult seq. coords: <{fnd_index[0]}, {fnd_index[0] + fnd_res - 1}> <{fnd_index[1]}, {fnd_index[1] + fnd_res - 1}>")
+    print("Cor. Result seq len:", fnd_res)
+    print("\tCor. Result seq.:", fnd_seq)
+    print(f"\tCor. Result seq. coords: <{fnd_index[0]}, {fnd_index[0] + fnd_res - 1}> <{fnd_index[1]}, {fnd_index[1] + fnd_res - 1}>")
+
+result_seq = seqMax(fnd_seq)
+result = len(result_seq)
+result_sum = sumArr(result_seq)
+
+print()
+print("Result length:", result)
+print("\tResult sum:", result_sum)
+print("\tResult seq.:", result_seq)
 
 LCS_1Vis(seq, LCS_Mat)
 
