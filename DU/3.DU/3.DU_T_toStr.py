@@ -125,7 +125,9 @@ teen_num_words = ["eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixtee
 ty_num_words = ["ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 dec_num_words = ["hundred", "thousand"]
 
-numb = 143
+numbOrg = 143
+
+numb = numbOrg
 
 numStr = str(numb)
 
@@ -174,4 +176,7 @@ if exp < numb:
         base = (numb - rest)
 
         print(f"{wrd_dict[base]}{wrd_dict[rest]}", end="")
+
+print("\n\ntoStr function:")
+print("\n\tStr: ", toStr(numbOrg))
 
