@@ -27,26 +27,26 @@ Těžká varianta
 import copy
 
 
-def processStr(numStrLst):
+def processStr(numStr):
 
     rawDataLst = []
 
     """     Collect words from input and index them     """
     for numWrd in num_words:
-        if numWrd in numStrLst:
+        if numWrd in numStr:
 
             startPos = 0
-            if numStrLst.count(numWrd) > 1:
+            if numStr.count(numWrd) > 1:
 
                 """     index() method finds the first occurrence of the specified value.
                             string.index(value, start, end) """
-                index = numStrLst.index(numWrd, startPos)
+                index = numStr.index(numWrd, startPos)
 
                 rawDataLst.append([numWrd, index])
                 startPos = index + len(numWrd)
 
             else:
-                rawDataLst.append([numWrd, numStrLst.index(numWrd)])
+                rawDataLst.append([numWrd, numStr.index(numWrd)])
 
     ediDataLst = copy.deepcopy(rawDataLst)
 
@@ -73,9 +73,9 @@ def processStr(numStrLst):
     return wordLst
 
 
-def toIntTemp(numStrLst):
+def toIntTemp(numStr):
 
-    wordLst = processStr(numStrLst)
+    wordLst = processStr(numStr)
 
     """     Boolean template for found words on certain positions   """
     tabTemp = [False for state in range(11)]
@@ -144,9 +144,9 @@ def toIntTemp(numStrLst):
     return sum
 
 
-def toIntAdd(numStrLst):
+def toIntAdd(numStr):
 
-    wordLst = processStr(numStrLst)
+    wordLst = processStr(numStr)
 
     hund = False
     thou = False
@@ -243,34 +243,36 @@ teen_num_words = ["eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixtee
 ty_num_words = ["ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 dec_num_words = ["hundred", "thousand"]
 
+input_str_list = ["twohundredfiftyseventhousandthreehundredseventyfive",
+                  "threehundredsixtyfive", "tentwenty", "seventytwothreehundred"]
 
 # str_num = "twohundredfiftyseventhousandthreehundredseventyfive"
-str_num = "threehundredsixtyfive"
+input_str = input_str_list[3]
 
 # print(str_num.index("two"))
 raw_data_list = []
 
-print("String: ", str_num)
+print("Input string: ", input_str)
 # print(str_num1.count("two"))
 
 """     Collect words from input and index them     """
 for numWrd in num_words:
-    if numWrd in str_num:
-        if str_num.count(numWrd) > 1:
+    if numWrd in input_str:
+        if input_str.count(numWrd) > 1:
             """     For multiple occurances of a word   """
 
             pos = 0
-            for next in range(str_num.count(numWrd)):
+            for next in range(input_str.count(numWrd)):
 
                 """     index() method finds the first occurrence of the specified value.
                             string.index(value, start, end) """
-                index = str_num.index(numWrd, pos)
+                index = input_str.index(numWrd, pos)
 
                 raw_data_list.append([numWrd, index])
                 pos = index + len(numWrd)
 
         else:
-            raw_data_list.append([numWrd, str_num.index(numWrd)])
+            raw_data_list.append([numWrd, input_str.index(numWrd)])
 
 
 print("\nRaw data: ", raw_data_list)
@@ -315,7 +317,13 @@ print("Sorted list: ", wordLst)
 tabTemp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 """     List table for possible words on certain positions  """
-template_values = [one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words, ["thousand"], one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words]
+valTemp = [one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words, ["thousand"], one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words]
+
+"""     Description of certain positions      """
+desTemp = ["(1, 2,...) * 100 000", "100 * 1000", "(10, 20,...) * 1000", "(11, 12,...) * 1000", "(1, 2,...) * 1000",
+           "(1, 2,...) * 100", "10, 20,...", "11, 12,...", "1, 2,..."]
+
+
 
 # 1.Part
 #   Sum:
@@ -346,16 +354,18 @@ while(numWrd_Cnt <= len(wordLst)):
     # numWrd_Cnt += 1
 
 
-    if wordLst[-numWrd_Cnt] in template_values[-temp_Cnt]:
+    if wordLst[-numWrd_Cnt] in valTemp[-temp_Cnt]:
         tabTemp[-temp_Cnt] = 1
 
         numWrd_Cnt += 1
     temp_Cnt += 1
 
-#
-# print()
-# print(template_table)
-#
+print()
+print("Template table: ", tabTemp)
+for t in range(len(tabTemp)):
+    if tabTemp[t]:
+        print(f"\t{desTemp[t]}")
+
 sum_1 = sum_2 = 0
 numWrd_Cnt = 0
 
@@ -409,8 +419,8 @@ print("\nSum:", sum)
 print()
 
 print("toIntTemp function:")
-print("\tSum:", toIntTemp(str_num))
+print("\tSum:", toIntTemp(input_str))
 print()
 
 print("toIntAdd function:")
-print("\tSum:", toIntAdd(str_num))
+print("\tSum:", toIntAdd(input_str))
