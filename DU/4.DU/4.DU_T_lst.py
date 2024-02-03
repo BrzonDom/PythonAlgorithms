@@ -101,13 +101,14 @@ str_seq_list = ["3 3 3 3 3 3 3 3 3",
                 "1 1 1 6 2 2 2 6 1 1 1",
                 "1 2 5 -6 8 -3 2 1 1 2 2 5 -6 8 -3 2 3",
                 "1 2 3 4 4 4 4 4 3 2 1",
-                "1 2 5 -6 8 -3 2 5 -6 8 -3 2 3"]
+                "1 2 5 -6 8 -3 2 5 -6 8 -3 2 3",
+                "1 2 3 5 -6 8 -3 2 3 5 -6 8 -3 2 3"]
 
 # seq1 = [int(num) for num in list(str_seq1.split(" "))]
 # seq2 = [int(num) for num in list(str_seq2.split(" "))]
 # seq3 = [int(num) for num in list(str_seq3.split(" "))]
 
-str_seq = str_seq_list[2]
+str_seq = str_seq_list[5]
 
 seq = [int(num) for num in list(str_seq.split(" "))]
 
@@ -163,8 +164,8 @@ Tri_Mat = [["o" for c in range(5)] for r in range(5)]
 #     print()
 
 
-result = 0
-res_index = []
+fnd_res = 0
+fnd_index = []
 maxSeq = [[]]
 mSCon = False
 mSCnt = 0
@@ -182,9 +183,9 @@ ad = 0
 #         if (seq[col-1] == seq[col+ad-1]):
 #             LCS_Mat[col][col+ad] = LCS_Mat[col-1][col+ad-1] + 1
 #
-#             if LCS_Mat[col][col+ad] > result:
-#                 res_index = [col, col+ad]
-#             result = max(result, LCS_Mat[col][col+ad])
+#             if LCS_Mat[col][col+ad] > fnd_res:
+#                 fnd_index = [col, col+ad]
+#             fnd_res = max(fnd_res, LCS_Mat[col][col+ad])
 #
 #         """Diagonal coordinates print"""
 #         print(f"({col}, {col + ad}) ", end=" ")
@@ -200,56 +201,65 @@ ad = 0
 
 
 """Line LCS_Mat analysis"""
-for r in range(lenSeq + 1):
-    for c in range(r, lenSeq + 1):
-        if (r == 0 or c == 0 or (r == c)):
-            LCS_Mat[r][c] = 0
-
-        elif (seq[r-1] == seq[c-1]):
-            LCS_Mat[r][c] = LCS_Mat[r-1][c-1] + 1
-            # maxSeq[mSCnt].append(seq[r-1])
-            # mSCon = True
-
-            if LCS_Mat[r][c] > result:
-                res_index = [r, c]
-            result = max(result, LCS_Mat[r][c])
-
-        else:
-            # if mSCon:
-            #     maxSeq.append([])
-            #     mSCnt += 1
-            #     mSCon = False
-
-            LCS_Mat[r][c] = 0
+# for r in range(lenSeq + 1):
+#     for c in range(r, lenSeq + 1):
+#         if (r == 0 or c == 0 or (r == c)):
+#             LCS_Mat[r][c] = 0
+#
+#         elif (seq[r-1] == seq[c-1]):
+#             LCS_Mat[r][c] = LCS_Mat[r-1][c-1] + 1
+#             # maxSeq[mSCnt].append(seq[r-1])
+#             # mSCon = True
+#
+#             if LCS_Mat[r][c] > fnd_res:
+#                 fnd_index = [r, c]
+#             fnd_res = max(fnd_res, LCS_Mat[r][c])
+#
+#         else:
+#             # if mSCon:
+#             #     maxSeq.append([])
+#             #     mSCnt += 1
+#             #     mSCon = False
+#
+#             LCS_Mat[r][c] = 0
 
 
 """Whole line LCS_Mat analysis"""
-# for i in range(lenSeq+1):
-#     for j in range(lenSeq+1):
-#         if (i == 0 or j == 0):
-#             LCS_Mat[i][j] = 0
-#
-#         elif (i == j):
-#             LCS_Mat[i][j] = 0
-#
-#         elif (seq[i-1] == seq[j-1]):
-#             LCS_Mat[i][j] = LCS_Mat[i-1][j-1] + 1
-#
-#             if LCS_Mat[i][j] > result:
-#                 res_index = [i, j]
-#             result = max(result, LCS_Mat[i][j])
-#
-#         else:
-#             LCS_Mat[i][j] = 0
+for i in range(lenSeq+1):
+    for j in range(lenSeq+1):
+        if (i == 0 or j == 0 or (i == j)):
+            LCS_Mat[i][j] = 0
 
-res_index = [res_index[0]-result, res_index[1]-result]
-res_seq = seq[res_index[0]:res_index[0]+result]
+        elif (seq[i-1] == seq[j-1]):
+            LCS_Mat[i][j] = LCS_Mat[i-1][j-1] + 1
+
+            if LCS_Mat[i][j] > fnd_res:
+                fnd_index = [i, j]
+            fnd_res = max(fnd_res, LCS_Mat[i][j])
+
+        else:
+            LCS_Mat[i][j] = 0
+
+fnd_index = [fnd_index[0] - fnd_res, fnd_index[1] - fnd_res]
+fnd_seq = seq[fnd_index[0]:fnd_index[0] + fnd_res]
 
 
-print("Result seq len:", result)
-print("\tResult seq.:", res_seq)
-print(f"\tResult seq. coords: <{res_index[0]}, {res_index[0] + result -1}> <{res_index[1]}, {res_index[1] + result -1}>")
+print("Result seq len:", fnd_res)
+print("\tResult seq.:", fnd_seq)
+print(f"\tResult seq. coords: <{fnd_index[0]}, {fnd_index[0] + fnd_res - 1}> <{fnd_index[1]}, {fnd_index[1] + fnd_res - 1}>")
 
+print()
+if (fnd_index[1] - (fnd_index[0] + fnd_res)) < 0:
+    print("\n! Sequences overlap !\n")
+    overlap = fnd_index[1] - (fnd_index[0] + fnd_res)
+    # print(overlap)
+
+    fnd_res += overlap
+    fnd_seq = seq[fnd_index[0]:fnd_index[0] + fnd_res]
+
+    print("Result seq len:", fnd_res)
+    print("\tResult seq.:", fnd_seq)
+    print(f"\tResult seq. coords: <{fnd_index[0]}, {fnd_index[0] + fnd_res - 1}> <{fnd_index[1]}, {fnd_index[1] + fnd_res - 1}>")
 
 LCS_1Vis(seq, LCS_Mat)
 
