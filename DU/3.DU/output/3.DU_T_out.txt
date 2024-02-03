@@ -1,0 +1,27 @@
+0. Input: twohundredfiftyseventhousandthreehundredseventyfive
+	Add Num: 257375
+	Temp Num: 257375
+
+1. Input: 543210
+	Str:  fivehunderedfortythreethousandtwohunderedten
+
+2. Input: threehundredsixtyfive
+	Add Num: 365
+	Temp Num: 365
+
+3. Input: 341308
+	Str:  threehunderedfortyonethousandthreehunderedeight
+
+4. Input: 213
+	Str:  twohunderedthirteen
+
+5. Input: tentwenty
+	ERROR - Failed template check
+	ERROR - Failed template check
+
+6. Input: seventytwothreehundred
+	ERROR - Failed template check
+	ERROR - Failed template check
+
+7. Input: 12v34
+	ERROR - Letter in number input
