@@ -100,15 +100,17 @@ def processStr(numStr):
     for numWrd in num_words:
         if numWrd in numStr:
 
-            startPos = 0
             if numStr.count(numWrd) > 1:
 
-                """     index() method finds the first occurrence of the specified value.
-                            string.index(value, start, end) """
-                index = numStr.index(numWrd, startPos)
+                startPos = 0
+                for next in range(numStr.count(numWrd)):
 
-                rawDataLst.append([numWrd, index])
-                startPos = index + len(numWrd)
+                    """     index() method finds the first occurrence of the specified value.
+                                string.index(value, start, end) """
+                    index = numStr.index(numWrd, startPos)
+
+                    rawDataLst.append([numWrd, index])
+                    startPos = index + len(numWrd)
 
             else:
                 rawDataLst.append([numWrd, numStr.index(numWrd)])
@@ -135,12 +137,180 @@ def processStr(numStr):
     for numWrd in ediDataLst:
         wordLst.append(numWrd[0])
 
+    if not tempCheck(wordLst):
+        return False
+
     return wordLst
+
+
+def tempCheck(wordLst):
+
+    """     Boolean-like table for found words on certain positions   """
+    tabTemp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    """     List table for possible words on certain positions  """
+    valTemp = [one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words, ["thousand"], one_num_words,
+               ["hundred"], ty_num_words, teen_num_words, one_num_words]
+
+    tempCnt = 1
+    numWrdCnt = 1
+
+    while (numWrdCnt <= len(wordLst)):
+        # print(sor_data_list[-numWrdCnt][0])
+        # numWrdCnt += 1
+
+        if wordLst[-numWrdCnt] in valTemp[-tempCnt]:
+            tabTemp[-tempCnt] = 1
+
+            numWrdCnt += 1
+        tempCnt += 1
+
+    """
+    Template table descriptions:
+
+        0. tabTemp[0] ~ (1, 2,...) * 100 * 1000
+        1. tabTemp[1] ~ 100 * 1000
+        2. tabTemp[2] ~ (10, 20,...) * 1000
+        3. tabTemp[3] ~ (11, 12,...) * 1000
+        4. tabTemp[4] ~ (1, 2,...) * 1000
+        5. tabTemp[5] ~ 1000
+        6. tabTemp[6] ~ (1, 2,...) * 100
+        7. tabTemp[7] ~ 100
+        8. tabTemp[8] ~ 10, 20,...
+        9. tabTemp[9] ~ 11, 12,...
+        10. tabTemp[10] ~ 1, 2,...
+    """
+
+    if tabTemp[0]:
+        if not (tabTemp[1] and tabTemp[5]):
+            return False
+
+    if tabTemp[1]:
+        if not (tabTemp[0] and tabTemp[5]):
+            return False
+
+    if tabTemp[2]:
+        if not (tabTemp[5] and not tabTemp[3]):
+            return False
+
+    if tabTemp[3]:
+        if not (tabTemp[5] and not (tabTemp[3] or tabTemp[2])):
+            return False
+
+    if tabTemp[4]:
+        if not (tabTemp[5] and not tabTemp[3]):
+            return False
+
+    if tabTemp[5]:
+        if not tabTemp[4]:
+            return False
+
+    if tabTemp[6]:
+        if not tabTemp[7]:
+            return False
+
+    if tabTemp[7]:
+        if not tabTemp[6]:
+            return False
+
+    if tabTemp[8]:
+        if tabTemp[9]:
+            return False
+
+    if tabTemp[9]:
+        if tabTemp[8] or tabTemp[10]:
+            return False
+
+    if tabTemp[10]:
+        if tabTemp[9]:
+            return False
+
+    return True
+
+
+def toIntTemp(numStr):
+
+    wordLst = processStr(numStr)
+
+    if wordLst == False:
+        print("ERROR - Failed template check")
+        return
+
+    """     Boolean template for found words on certain positions   """
+    tabTemp = [False for state in range(11)]
+
+    """     List template for possible words on certain positions  """
+    valTemp = [one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words, ["thousand"], one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words]
+
+    wrdCnt = tempCnt = 1
+
+    while(wrdCnt <= len(wordLst)):
+
+        if wordLst[-wrdCnt] in valTemp[-tempCnt]:
+            tabTemp[-tempCnt] = True
+
+            wrdCnt += 1
+        tempCnt += 1
+
+    sum_1 = sum_2 = 0
+    wrdCnt = 0
+
+    if tabTemp[0]:
+        sum_2 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[1]:
+        sum_2 *= num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[2]:
+        sum_2 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[3]:
+        sum_2 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[4]:
+        sum_2 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[5]:
+        sum_2 *= num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[6]:
+        sum_1 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[7]:
+        sum_1 *= num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[8]:
+        sum_1 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[9]:
+        sum_1 += num_dict[wordLst[wrdCnt]]
+        wrdCnt += 1
+
+    if tabTemp[10]:
+        sum_1 += num_dict[wordLst[wrdCnt]]
+
+    sum = sum_2 + sum_1
+
+    print("Temp Num:", sum)
+    return sum
 
 
 def toIntAdd(numStr):
 
     wordLst = processStr(numStr)
+
+    if wordLst == False:
+        print("ERROR - Failed template check")
+        return
 
     hund = False
     thou = False
@@ -192,7 +362,9 @@ def toIntAdd(numStr):
         elif wrd == "thousand":
             thou = True
 
+    print("Add Num:", sum)
     return sum
+
 
 def toStr(numb):
 
@@ -247,6 +419,7 @@ def toStr(numb):
             # print(f"{wrd_dict[base]}{wrd_dict[rest]}")
             numStr += f"{wrd_dict[base]}{wrd_dict[rest]}"
 
+    print("Str: ", numStr)
     return numStr
 
 
@@ -285,13 +458,17 @@ for i in range(len(input_str_list)):
 
 
     if strToInt:
-        print("\t", toIntAdd(input_str))
+        print("\t", end="")
+        toIntAdd(input_str)
+        print("\t", end="")
+        toIntTemp(input_str)
 
     elif intToStr:
-        print("\t", toStr(int(input_str)))
+        print("\t", end="")
+        toStr(int(input_str))
 
     else:
-        print("\tERROR")
+        print("\tERROR - Letter in number input")
 
     print()
 
