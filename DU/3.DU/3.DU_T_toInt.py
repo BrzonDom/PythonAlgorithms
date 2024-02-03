@@ -73,6 +73,116 @@ def processStr(numStr):
     return wordLst
 
 
+def tempCheck(sorDataLst):
+
+    """     Boolean-like table for found words on certain positions   """
+    tabTemp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    """     List table for possible words on certain positions  """
+    valTemp = [one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words, ["thousand"], one_num_words,
+               ["hundred"], ty_num_words, teen_num_words, one_num_words]
+
+    """     Description of certain positions      """
+    desTemp = ["(1, 2,...) * 100 000", "100 * 1000", "(10, 20,...) * 1000", "(11, 12,...) * 1000", "(1, 2,...) * 1000",
+               "(1, 2,...) * 100", "10, 20,...", "11, 12,...", "1, 2,..."]
+
+    temp_Cnt = 1
+    numWrd_Cnt = 1
+    hunderd = ten = 1
+
+    while (numWrd_Cnt <= len(wordLst)):
+        # print(sor_data_list[-numWrd_Cnt][0])
+        # numWrd_Cnt += 1
+
+        if wordLst[-numWrd_Cnt] in valTemp[-temp_Cnt]:
+            tabTemp[-temp_Cnt] = 1
+
+            numWrd_Cnt += 1
+        temp_Cnt += 1
+
+
+    # print("Template table function: ", tabTemp)
+    # for t in range(len(tabTemp)):
+    #     if tabTemp[t]:
+    #         print(f"\t{desTemp[t]}")
+    # print()
+
+    corOrder = True
+
+    """
+    Template table descriptions:
+
+        0. tabTemp[0] ~ (1, 2,...) * 100 * 1000
+        1. tabTemp[1] ~ 100 * 1000
+        2. tabTemp[2] ~ (10, 20,...) * 1000
+        3. tabTemp[3] ~ (11, 12,...) * 1000
+        4. tabTemp[4] ~ (1, 2,...) * 1000
+        5. tabTemp[5] ~ 1000
+        6. tabTemp[6] ~ (1, 2,...) * 100
+        7. tabTemp[7] ~ 100
+        8. tabTemp[8] ~ 10, 20,...
+        9. tabTemp[9] ~ 11, 12,...
+        10. tabTemp[10] ~ 1, 2,...
+    """
+
+    if tabTemp[0]:
+        if not (tabTemp[1] and tabTemp[5]):
+            corOrder = False
+            return False
+
+    if tabTemp[1]:
+        if not (tabTemp[0] and tabTemp[5]):
+            corOrder = False
+            return False
+
+    if tabTemp[2]:
+        if not (tabTemp[5] and not tabTemp[3]):
+            corOrder = False
+            return False
+
+    if tabTemp[3]:
+        if not (tabTemp[5] and not (tabTemp[3] or tabTemp[2])):
+            corOrder = False
+            return False
+
+    if tabTemp[4]:
+        if not (tabTemp[5] and not tabTemp[3]):
+            corOrder = False
+            return False
+
+    if tabTemp[5]:
+        if not tabTemp[4]:
+            corOrder = False
+            return False
+
+    if tabTemp[6]:
+        if not tabTemp[7]:
+            corOrder = False
+            return False
+
+    if tabTemp[7]:
+        if not tabTemp[6]:
+            corOrder = False
+            return False
+
+    if tabTemp[8]:
+        if tabTemp[9]:
+            corOrder = False
+            return False
+
+    if tabTemp[9]:
+        if tabTemp[8] or tabTemp[10]:
+            corOrder = False
+            return False
+
+    if tabTemp[10]:
+        if tabTemp[9]:
+            corOrder = False
+            return False
+
+    return True
+
+
 def toIntTemp(numStr):
 
     wordLst = processStr(numStr)
@@ -244,10 +354,11 @@ ty_num_words = ["ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
 dec_num_words = ["hundred", "thousand"]
 
 input_str_list = ["twohundredfiftyseventhousandthreehundredseventyfive",
-                  "threehundredsixtyfive", "tentwenty", "seventytwothreehundred"]
+                  "threehundredsixtyfive", "tentwenty", "seventytwothreehundred",
+                  "tenonehundredtwenty", "elevenonehundredtwenty"]
 
 # str_num = "twohundredfiftyseventhousandthreehundredseventyfive"
-input_str = input_str_list[3]
+input_str = input_str_list[5]
 
 # print(str_num.index("two"))
 raw_data_list = []
@@ -320,9 +431,24 @@ tabTemp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 valTemp = [one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words, ["thousand"], one_num_words, ["hundred"], ty_num_words, teen_num_words, one_num_words]
 
 """     Description of certain positions      """
-desTemp = ["(1, 2,...) * 100 000", "100 * 1000", "(10, 20,...) * 1000", "(11, 12,...) * 1000", "(1, 2,...) * 1000",
-           "(1, 2,...) * 100", "10, 20,...", "11, 12,...", "1, 2,..."]
+desTemp = ["(1, 2,...) * 100 * 1000", "100 * 1000", "(10, 20,...) * 1000", "(11, 12,...) * 1000", "(1, 2,...) * 1000", "1000",
+           "(1, 2,...) * 100", "100", "10, 20,...", "11, 12,...", "1, 2,..."]
 
+"""
+Template table descriptions:
+
+    0. tabTemp[0] ~ (1, 2,...) * 100 * 1000
+    1. tabTemp[1] ~ 100 * 1000
+    2. tabTemp[2] ~ (10, 20,...) * 1000
+    3. tabTemp[3] ~ (11, 12,...) * 1000
+    4. tabTemp[4] ~ (1, 2,...) * 1000
+    5. tabTemp[5] ~ 1000
+    6. tabTemp[6] ~ (1, 2,...) * 100
+    7. tabTemp[7] ~ 100
+    8. tabTemp[8] ~ 10, 20,...
+    9. tabTemp[9] ~ 11, 12,...
+    10. tabTemp[10] ~ 1, 2,...
+"""
 
 
 # 1.Part
@@ -365,6 +491,16 @@ print("Template table: ", tabTemp)
 for t in range(len(tabTemp)):
     if tabTemp[t]:
         print(f"\t{desTemp[t]}")
+print()
+
+# print("Template table descriptions")
+# for d, des in enumerate(desTemp):
+#     print(f"\t{d}. tabTemp[{d}] ~ {des}")
+# print()
+
+print("Template check: ", tempCheck(sor_data_list))
+# tempCheck(sor_data_list)
+
 
 sum_1 = sum_2 = 0
 numWrd_Cnt = 0
