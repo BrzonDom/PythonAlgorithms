@@ -65,6 +65,9 @@ def processStr(numStr):
     """     Sort by position, first to last    """
     ediDataLst.sort(key=lambda x: x[1])
 
+    if not tempCheck(ediDataLst):
+        return False
+
     """     Strip of indexes    """
     wordLst = []
     for numWrd in ediDataLst:
@@ -187,6 +190,10 @@ def toIntTemp(numStr):
 
     wordLst = processStr(numStr)
 
+    if wordLst == False:
+        print("ERROR - Failed template check")
+        return
+
     """     Boolean template for found words on certain positions   """
     tabTemp = [False for state in range(11)]
 
@@ -251,12 +258,17 @@ def toIntTemp(numStr):
 
     sum = sum_2 + sum_1
 
+    print("Sum:", sum)
     return sum
 
 
 def toIntAdd(numStr):
 
     wordLst = processStr(numStr)
+
+    if wordLst == False:
+        print("ERROR - Failed template check")
+        return
 
     hund = False
     thou = False
@@ -308,6 +320,7 @@ def toIntAdd(numStr):
         elif wrd == "thousand":
             thou = True
 
+    print("Sum:", sum)
     return sum
 
 
@@ -498,65 +511,72 @@ print()
 #     print(f"\t{d}. tabTemp[{d}] ~ {des}")
 # print()
 
-print("Template check: ", tempCheck(sor_data_list))
+chckTemp = tempCheck(sor_data_list)
+print("Template check: ", chckTemp)
 # tempCheck(sor_data_list)
 
+if chckTemp:
+    sum_1 = sum_2 = 0
+    numWrd_Cnt = 0
 
-sum_1 = sum_2 = 0
-numWrd_Cnt = 0
 
+    if tabTemp[0]:
+        sum_1 += num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[0]:
-    sum_1 += num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[1]:
+        sum_1 *= num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[1]:
-    sum_1 *= num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[2]:
+        sum_1 += num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[2]:
-    sum_1 += num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[3]:
+        sum_1 += num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[3]:
-    sum_1 += num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[4]:
+        sum_1 += num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[4]:
-    sum_1 += num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[5]:
+        sum_1 *= num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[5]:
-    sum_1 *= num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[6]:
+        sum_2 += num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[6]:
-    sum_2 += num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[7]:
+        sum_2 *= num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[7]:
-    sum_2 *= num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[8]:
+        sum_2 += num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[8]:
-    sum_2 += num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[9]:
+        sum_2 += num_dict[wordLst[numWrd_Cnt]]
+        numWrd_Cnt += 1
 
-if tabTemp[9]:
-    sum_2 += num_dict[wordLst[numWrd_Cnt]]
-    numWrd_Cnt += 1
+    if tabTemp[10]:
+        sum_2 += num_dict[wordLst[numWrd_Cnt]]
 
-if tabTemp[10]:
-    sum_2 += num_dict[wordLst[numWrd_Cnt]]
+    sum = sum_1 + sum_2
 
-sum = sum_1 + sum_2
-
-print("\nSum:", sum)
-print()
+    print("\nSum:", sum)
+    print()
+else:
+    print("\n\tERROR - Failed template check\n")
 
 print("toIntTemp function:")
-print("\tSum:", toIntTemp(input_str))
+print("\t", end="")
+toIntTemp(input_str)
+# print("\tSum:", toIntTemp(input_str))
 print()
 
 print("toIntAdd function:")
-print("\tSum:", toIntAdd(input_str))
+print("\t", end="")
+toIntAdd(input_str)
+# print("\tSum:", toIntAdd(input_str))
