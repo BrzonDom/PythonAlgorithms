@@ -27,6 +27,62 @@ Těžká varianta
 import copy
 
 
+def toStr(numb):
+
+    numStr = ""
+
+    exp = 100000
+    if exp < numb:
+        rest = numb % exp
+        base = (numb - rest) // exp
+
+        numb = copy.deepcopy(rest)
+
+        print(f"{wrd_dict[base]}hundered", end="")
+        numStr += f"{wrd_dict[base]}hundered"
+
+    exp = 1000
+    if exp < numb:
+        rest = numb % exp
+        base = (numb - rest) // exp
+
+        numb = copy.deepcopy(rest)
+
+        if base in wrd_dict:
+            print(f"{wrd_dict[base]}thousand")
+            numStr += f"{wrd_dict[base]}thousand"
+
+        else:
+            rest = base % 10
+            baseTh = (base - rest)
+
+            print(f"{wrd_dict[baseTh]}{wrd_dict[rest]}thousand", end="")
+            numStr += f"{wrd_dict[baseTh]}{wrd_dict[rest]}thousand"
+
+    exp = 100
+    if exp < numb:
+        rest = numb % exp
+        base = (numb - rest) // exp
+
+        numb = copy.deepcopy(rest)
+
+        print(f"{wrd_dict[base]}hundered", end="")
+        numStr += f"{wrd_dict[base]}hundered"
+
+        if rest in wrd_dict:
+            print(f"{wrd_dict[rest]}")
+            numStr += f"{wrd_dict[rest]}"
+
+        else:
+            rest = numb % 10
+            base = (numb - rest)
+
+            print(f"{wrd_dict[base]}{wrd_dict[rest]}")
+            numStr += f"{wrd_dict[base]}{wrd_dict[rest]}"
+
+    return numStr
+
+
 wrd_dict = {
     1 : "one",
     2 : "two",
@@ -69,14 +125,12 @@ teen_num_words = ["eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixtee
 ty_num_words = ["ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 dec_num_words = ["hundred", "thousand"]
 
-num_str = 143
+numb = 143
 
-strNum = str(num_str)
+numStr = str(numb)
 
 
 wrd_lst = []
-
-numb = num_str
 
 print(f"Number: {numb}")
 print()
