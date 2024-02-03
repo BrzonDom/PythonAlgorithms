@@ -65,18 +65,18 @@ def processStr(numStr):
     """     Sort by position, first to last    """
     ediDataLst.sort(key=lambda x: x[1])
 
-    if not tempCheck(ediDataLst):
-        return False
-
     """     Strip of indexes    """
     wordLst = []
     for numWrd in ediDataLst:
         wordLst.append(numWrd[0])
 
+    if not tempCheck(wordLst):
+        return False
+
     return wordLst
 
 
-def tempCheck(sorDataLst):
+def tempCheck(wordLst):
 
     """     Boolean-like table for found words on certain positions   """
     tabTemp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -89,19 +89,18 @@ def tempCheck(sorDataLst):
     desTemp = ["(1, 2,...) * 100 000", "100 * 1000", "(10, 20,...) * 1000", "(11, 12,...) * 1000", "(1, 2,...) * 1000",
                "(1, 2,...) * 100", "10, 20,...", "11, 12,...", "1, 2,..."]
 
-    temp_Cnt = 1
-    numWrd_Cnt = 1
-    hunderd = ten = 1
+    tempCnt = 1
+    numWrdCnt = 1
 
-    while (numWrd_Cnt <= len(wordLst)):
-        # print(sor_data_list[-numWrd_Cnt][0])
-        # numWrd_Cnt += 1
+    while (numWrdCnt <= len(wordLst)):
+        # print(sor_data_list[-numWrdCnt][0])
+        # numWrdCnt += 1
 
-        if wordLst[-numWrd_Cnt] in valTemp[-temp_Cnt]:
-            tabTemp[-temp_Cnt] = 1
+        if wordLst[-numWrdCnt] in valTemp[-tempCnt]:
+            tabTemp[-tempCnt] = 1
 
-            numWrd_Cnt += 1
-        temp_Cnt += 1
+            numWrdCnt += 1
+        tempCnt += 1
 
 
     # print("Template table function: ", tabTemp)
@@ -371,7 +370,7 @@ input_str_list = ["twohundredfiftyseventhousandthreehundredseventyfive",
                   "tenonehundredtwenty", "elevenonehundredtwenty"]
 
 # str_num = "twohundredfiftyseventhousandthreehundredseventyfive"
-input_str = input_str_list[5]
+input_str = input_str_list[1]
 
 # print(str_num.index("two"))
 raw_data_list = []
@@ -383,7 +382,7 @@ print("Input string: ", input_str)
 for numWrd in num_words:
     if numWrd in input_str:
         if input_str.count(numWrd) > 1:
-            """     For multiple occurances of a word   """
+            """     For multiple occurrences of a word   """
 
             pos = 0
             for next in range(input_str.count(numWrd)):
@@ -409,7 +408,7 @@ for i in range(len(raw_data_list)):
         # print(f"{num_data_list[i]} : {num_data_list[j]}")
 
         if raw_data_list[i][1] == raw_data_list[j][1]:
-            """     For words found on the same position    
+            """     For words found on the same position
                         Remove the smaller one      """
 
             if len(raw_data_list[i][0]) < len(raw_data_list[j][0]):
@@ -430,11 +429,11 @@ sor_data_list.sort(key = lambda x: x[1])
 print("\nSorted data: ", sor_data_list)
 
 """     Strip of indexes    """
-wordLst = []
+word_list = []
 for numWrd in sor_data_list:
-    wordLst.append(numWrd[0])
+    word_list.append(numWrd[0])
 
-print("Sorted list: ", wordLst)
+print("Sorted list: ", word_list)
 
 
 """     Boolean-like table for found words on certain positions   """
@@ -488,12 +487,12 @@ temp_Cnt = 1
 numWrd_Cnt = 1
 hunderd = ten = 1
 
-while(numWrd_Cnt <= len(wordLst)):
+while(numWrd_Cnt <= len(word_list)):
     # print(sor_data_list[-numWrd_Cnt][0])
     # numWrd_Cnt += 1
 
 
-    if wordLst[-numWrd_Cnt] in valTemp[-temp_Cnt]:
+    if word_list[-numWrd_Cnt] in valTemp[-temp_Cnt]:
         tabTemp[-temp_Cnt] = 1
 
         numWrd_Cnt += 1
@@ -511,7 +510,7 @@ print()
 #     print(f"\t{d}. tabTemp[{d}] ~ {des}")
 # print()
 
-chckTemp = tempCheck(sor_data_list)
+chckTemp = tempCheck(word_list)
 print("Template check: ", chckTemp)
 # tempCheck(sor_data_list)
 
@@ -521,47 +520,47 @@ if chckTemp:
 
 
     if tabTemp[0]:
-        sum_1 += num_dict[wordLst[numWrd_Cnt]]
+        sum_1 += num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[1]:
-        sum_1 *= num_dict[wordLst[numWrd_Cnt]]
+        sum_1 *= num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[2]:
-        sum_1 += num_dict[wordLst[numWrd_Cnt]]
+        sum_1 += num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[3]:
-        sum_1 += num_dict[wordLst[numWrd_Cnt]]
+        sum_1 += num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[4]:
-        sum_1 += num_dict[wordLst[numWrd_Cnt]]
+        sum_1 += num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[5]:
-        sum_1 *= num_dict[wordLst[numWrd_Cnt]]
+        sum_1 *= num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[6]:
-        sum_2 += num_dict[wordLst[numWrd_Cnt]]
+        sum_2 += num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[7]:
-        sum_2 *= num_dict[wordLst[numWrd_Cnt]]
+        sum_2 *= num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[8]:
-        sum_2 += num_dict[wordLst[numWrd_Cnt]]
+        sum_2 += num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[9]:
-        sum_2 += num_dict[wordLst[numWrd_Cnt]]
+        sum_2 += num_dict[word_list[numWrd_Cnt]]
         numWrd_Cnt += 1
 
     if tabTemp[10]:
-        sum_2 += num_dict[wordLst[numWrd_Cnt]]
+        sum_2 += num_dict[word_list[numWrd_Cnt]]
 
     sum = sum_1 + sum_2
 
