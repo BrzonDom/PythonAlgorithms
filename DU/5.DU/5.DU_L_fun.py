@@ -129,7 +129,7 @@ def nextMoves(tile, noJump, prevTiles):
             # move_que.append([tile[0] - 2, tile[1] + 2])
 
             newTiles = copy.deepcopy(prevTiles)
-            newTiles.append([tile[0] - 2, tile[1] - 2])
+            newTiles.append([tile[0] - 2, tile[1] + 2])
 
             nextMoves([tile[0] - 2, tile[1] - 2], False, newTiles)
 
@@ -140,6 +140,7 @@ def nextMoves(tile, noJump, prevTiles):
 def coCon(coord):
 
     return coCL[coord[1]] + coRN[coord[0]]
+
 
 
 """     dictionary for coordinates
@@ -234,6 +235,8 @@ for r in range(8):
 
 moves_res = []
 moves_all = []
+moves_strt = []
+tileStrt = []
 tileCnt = 0
 
 print("Paths found:")
@@ -246,17 +249,36 @@ for moves_pth in moves_lst:
     for m, moves in enumerate(moves_pth):
 
         if not m:
-            print(f"\n\t{coCon(moves)}: {moves} = ", end="")
-        else:
+            if tileStrt != moves:
+                tileStrt = copy.deepcopy(moves)
+                moves_strt.append(tileStrt)
+                print(f"\n\tFor tile: {coCon(moves)} {moves}")
+            print("\t\t", end="\t\t\t")
+        elif moves:
 
             """
                 {m+1} = Num. of found white piece
                 {coCL[moves[0][1]]}{coRN[moves[0][0]]} = Starting expBoard coordinates
                 {moves[0]} = Starting matrix coordinates
             """
-            print(f"{moves}", end=", ")
+            print(f"{coCon(moves)} {moves}", end="  ")
 
         if moves not in moves_all:
             moves_all.append(moves)
 
+    print()
 # print(moves_res)
+
+print("Result:")
+resMovPrt = ""
+
+print(f"\tStart tile: {coCL[moves_res[0][0]]}{coRN[moves_res[0][1]]} {moves_res[0]}")
+print(f"\t\t\t{len(moves_res)-1} Moves: ", end="")
+for moves in moves_res[1:]:
+    # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
+
+    resMovPrt += f"{coCon(moves)} {moves} ,  "
+
+if resMovPrt:
+    print(resMovPrt[:-2])
+print("\n")
