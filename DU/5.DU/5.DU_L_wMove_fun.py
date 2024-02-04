@@ -246,8 +246,6 @@ for moves_pth in moves_lst:
     if len(moves_res) < len(moves_pth):
         moves_res = copy.deepcopy(moves_pth)
 
-    elif len(moves_res) == len(moves_pth):
-
     for m, moves in enumerate(moves_pth):
 
         if not m:
