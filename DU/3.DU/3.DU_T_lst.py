@@ -443,6 +443,7 @@ for i in range(len(input_str_list)):
     input_str = input_str_list[i]
 
     print(f"{i}. Input: {input_str}")
+    print()
 
     intToStr = True
     strToInt = True
