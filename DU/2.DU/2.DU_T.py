@@ -134,6 +134,45 @@ def binNumExp(BinNum):
         return [BinNum[0], BinNum[1], BinNum[2]]
 
 
+def inputChck(inBinNum):
+
+    allowChar = "-.e01"
+
+    if not len(inBinNum):
+        return False
+
+    for char in inBinNum:
+        if not char in allowChar:
+            return False
+
+    if inBinNum.count("-") > 2:
+        return False
+
+    if inBinNum.count(".") > 1:
+        return False
+
+    if inBinNum.count("e") > 1:
+        return False
+
+    if inBinNum[0] == "-":
+        if not inBinNum[1] == "1":
+            return False
+        if not inBinNum[2] == ".":
+            return False
+
+    elif not inBinNum[0] == "1":
+        if not (inBinNum[0] == "0" and (len(inBinNum) == 1)):
+            return False
+        if not inBinNum[1] == ".":
+            return False
+
+    if "e" in inBinNum:
+        if not (len(inBinNum) > (inBinNum.index("e")+1)):
+            return False
+
+    return True
+
+
 """
 Examples:
     1.001e-101₂ = 0.00001001₂ = 0.03515625₀
@@ -156,18 +195,24 @@ in_binNum_lst = [["1.01e11", "1.01e11"],
                  ["1.01e11", "1.1101"],
                  ["1.0111010010101e110", "1.01110101001101e110"]]
 
-inOp = 7
+inOp = 5
 
 in_binNum = in_binNum_lst[inOp]
 
 inBinNum1 = in_binNum[0]
 inBinNum2 = in_binNum[1]
 
-
 print("Input:")
 print(f"\t1.Num: {inBinNum1}")
 print(f"\t2.Num: {inBinNum2}")
 print()
+
+errChk1 = inputChck(inBinNum1)
+errChk2 = inputChck(inBinNum2)
+
+if not (errChk1 and errChk2):
+    print("! ERROR !")
+    exit()
 
 strNum1 = binNumSort(inBinNum1)
 strNum2 = binNumSort(inBinNum2)
