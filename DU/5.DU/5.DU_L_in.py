@@ -242,7 +242,7 @@ print(f"\t\t\t{len(moves_res)-1} Moves: ", end="")
 for mov in moves_res[1:]:
     # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
 
-    resMovPrt += f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]} , "
+    resMovPrt += f"{coCL[mov[1]]}{coRN[mov[0]]} {mov} , "
 
 if resMovPrt:
     print(resMovPrt[:-2])

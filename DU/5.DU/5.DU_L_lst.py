@@ -138,7 +138,7 @@ coRN = {
 #     #    a   b   c   d   e   f   g   h
 
 
-"""     Expanded board      """
+"""     Expanded expBoard      """
 expBoard = [[0 for i in range(8 + 2)] for j in range(8 + 2)]
 
 # for i in range(10):
@@ -175,7 +175,7 @@ board = input_board_lst[2]
 # print()
 
 
-print("Input board:", end="\n\t")
+print("Input expBoard:", end="\n\t")
 for i in range(8):
     for j in range(8):
         expBoard[i + 1][j + 1] = board[i][j]
@@ -271,7 +271,7 @@ print(f"\t\t\t{len(moves_res)-1} Moves: ", end="")
 for mov in moves_res[1:]:
     # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
 
-    resMovPrt += f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]} , "
+    resMovPrt += f"{coCL[mov[1]]}{coRN[mov[0]]} {mov} , "
 
 if resMovPrt:
     print(resMovPrt[:-2])
