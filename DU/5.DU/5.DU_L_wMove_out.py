@@ -89,6 +89,77 @@ def inBoard(coord):
     return 0 <= coord <= 7
 
 
+def nextMoves(tile, noJump, prevTiles):
+
+    if noJump:
+        if inBoard(tile[0] - 1) and inBoard(tile[1] - 1):
+            if board[tile[0] - 1][tile[1] - 1] == 0:
+                # moves.append([tile[0] - 1, tile[1] - 1])
+                # move_que.append([tile[0] - 1, tile[1] - 1])
+
+                newTiles = copy.deepcopy(prevTiles)
+                newTiles.append([tile[0] - 1, tile[1] - 1])
+
+                nextMoves([tile[0] - 1, tile[1] - 1], False, newTiles)
+
+        if inBoard(tile[0] - 1) and inBoard(tile[1] + 1):
+            if board[tile[0] - 1][tile[1] + 1] == 0:
+                # moves.append([tile[0] - 1, tile[1] + 1])
+                # move_que.append([tile[0] - 1, tile[1] + 1])
+                newTiles = copy.deepcopy(prevTiles)
+                newTiles.append([tile[0] - 1, tile[1] + 1])
+
+                nextMoves([tile[0] - 1, tile[1] + 1], False, newTiles)
+    noJump = False
+
+    if inBoard(tile[0] - 2) and inBoard(tile[1] - 2):
+        if board[tile[0] - 2][tile[1] - 2] == 0 and board[tile[0] - 1][tile[1] - 1] not in [0, 1, 2]:
+            # moves.append([tile[0] - 2, tile[1] - 2])
+            # move_que.append([tile[0] - 2, tile[1] - 2])
+
+            newTiles = copy.deepcopy(prevTiles)
+            newTiles.append([tile[0] - 2, tile[1] - 2])
+
+            nextMoves([tile[0] - 2, tile[1] - 2], False, newTiles)
+
+    if inBoard(tile[0] - 2) and inBoard(tile[1] + 2):
+        if board[tile[0] - 2][tile[1] + 2] == 0 and board[tile[0] - 1][tile[1] + 1] not in [0, 1, 2]:
+            # moves.append([tile[0] - 2, tile[1] + 2])
+            # move_que.append([tile[0] - 2, tile[1] + 2])
+
+            newTiles = copy.deepcopy(prevTiles)
+            newTiles.append([tile[0] - 2, tile[1] + 2])
+
+            nextMoves([tile[0] - 2, tile[1] - 2], False, newTiles)
+
+    moves_lst.append(prevTiles)
+
+
+def prtRes(resLst, addRes):
+    resMovPrt = ""
+
+    print(f"\tStart tile: {coCon(resLst[0])} {resLst[0]}")
+    print(f"\t\t\t{len(resLst) - 1} Moves: ", end="")
+
+    for moves in resLst[1:]:
+        # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
+
+        resMovPrt += f"{coCon(moves)} {moves} ,  "
+
+        if addRes:
+            if moves not in moves_res:
+                moves_res.append(moves)
+
+    if resMovPrt:
+        print(resMovPrt[:-3])
+    print("\n")
+
+
+def coCon(coord):
+
+    return coCL[coord[1]] + coRN[coord[0]]
+
+
 """     dictionary for coordinates
     column to letter    """
 coCL = {
@@ -117,9 +188,9 @@ coRN = {
 
 
 file_list = ["setup_L_01", "setup_L_02", "setup_L_03",
-             "setup_myL_04", "setup_myL_05"]
+             "setup_myL_04", "setup_myL_05", "setup_myL_06"]
 
-inOp = 4
+inOp = 5
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
@@ -132,7 +203,7 @@ file = open(file_path, "r")
 import sys
 org_stdout = sys.stdout
 
-file_namePrt = "5.DU_L_out"
+file_namePrt = "5.DU_L_wMove_out"
 file_specPrt = f".{inOp+1}"
 file_pathPrt = "output\\" + file_namePrt + file_specPrt + ".txt"
 
@@ -153,18 +224,21 @@ file.close()
 #     print(f"\t{row}")
 # print()
 
-print("\nInput expBoard:", end="\n\t")
-for i in range(8):
-    for j in range(8):
-        expBoard[i + 1][j + 1] = board[i][j]
-        print(expBoard[i + 1][j + 1], end=" ")
-    print("\n", end="\t")
-print("\n")
+print("! Checkers with BOTH single move and jumping allowed !\n")
+
+print("\tInput board:\n")
+
+print("", end="\t\t")
+for row in board:
+    for col in row:
+        print(col, end=" ")
+    print("", end="\n\t\t")
+print()
 
 
 moves_lst = []
-move_que = []
-moveCnt = 0
+# move_que = []
+# moveCnt = 0
 
 for r in range(8):
     for c in range(8):
@@ -173,88 +247,65 @@ for r in range(8):
 
             """     Bool-val to ensure 
                 not repeating a sliding move     """
-            notJump = True
+            # notJump = True
+            # moves_tile.append([[r, c]])
+            tile = [r, c]
 
-            """     Linked list 
-                for easier orientation   """
-            moves_lst.append([])
-            moves = moves_lst[len(moves_lst) - 1]
-            moves.append([r, c])
+            # def nextMoves(tile, noJump, prevTiles):
+            nextMoves(tile, True, [tile])
 
-            move_que.append([r, c])
-
-            while len(move_que) > 0:
-
-                move = [move_que[0][0], move_que[0][1]]
-                move_que.pop(0)
-
-                # print(f"{moveCnt}. {move[0]} , {move[1]}")
-                if notJump:
-                    if inBoard(move[0] - 1) and inBoard(move[1] - 1):
-                        if board[move[0] - 1][move[1] - 1] == 0:
-                            moves.append([move[0] - 1, move[1] - 1])
-                            move_que.append([move[0] - 1, move[1] - 1])
-
-
-                    if inBoard(move[0] - 1) and inBoard(move[1] + 1):
-                        if board[move[0] - 1][move[1] + 1] == 0:
-                            moves.append([move[0] - 1, move[1] + 1])
-                            move_que.append([move[0] - 1, move[1] + 1])
-                notJump = False
-
-
-                if inBoard(move[0] - 2) and inBoard(move[1] - 2):
-                    if board[move[0] - 2][move[1] - 2] == 0 and board[move[0] - 1][move[1] - 1] not in [0, 1, 2]:
-                        moves.append([move[0] - 2, move[1] - 2])
-                        move_que.append([move[0] - 2, move[1] - 2])
-
-
-                if inBoard(move[0] - 2) and inBoard(move[1] + 2):
-                    if board[move[0] - 2][move[1] + 2] == 0 and board[move[0] - 1][move[1] + 1] not in [0, 1, 2]:
-                        moves.append([move[0] - 2, move[1] + 2])
-                        move_que.append([move[0] - 2, move[1] + 2])
-
-
-moves_all = []
 moves_res = []
+moves_otRes = []
+moves_all = []
 
-for m, moves in enumerate(moves_lst):
+tileStrt = []
+tileCnt = 0
+resCnt = 1
 
-    if len(moves_res) < len(moves):
-        moves_res = copy.deepcopy(moves)
+print("Paths found:")
 
-    """
-        {m+1} = Num. of found white piece   
-        {coCL[moves[0][1]]}{coRN[moves[0][0]]} = Starting expBoard coordinates
-        {moves[0]} = Starting matrix coordinates
-    """
-    print(f"{m + 1}. {coCL[moves[0][1]]}{coRN[moves[0][0]]}: {moves[0]}\n\t{len(moves) - 1} Moves:", end="\t")
-    moves_all.append(moves)
+for moves_pth in moves_lst:
 
-    for mov in moves[1:]:
-        """
-            {coCL[mov[1]]}{coRN[mov[0]]} = Board coordinates of possible next moves
-            {mov} = Matrix coordinates of possible next moves
-        """
+    if len(moves_res) < len(moves_pth):
+        moves_res = copy.deepcopy(moves_pth)
+        moves_otRes = []
+        resCnt = 1
 
-        moves_all.append(mov)
-        print(f"{coCL[mov[1]]}{coRN[mov[0]]}: {mov}", end=" ")
-    print("\n")
-print()
+    elif len(moves_res) == len(moves_pth):
+        resCnt += 1
+        moves_otRes.append(copy.deepcopy(moves_pth))
 
-print("Result:")
-resMovPrt = ""
+    for m, moves in enumerate(moves_pth):
 
-print(f"\tStart tile: {coCL[moves_res[0][0]]}{coRN[moves_res[0][1]]} {moves_res[0]}")
-print(f"\t\t\t{len(moves_res)-1} Moves: ", end="")
-for mov in moves_res[1:]:
-    # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
+        if not m:
+            if tileStrt != moves:
+                tileStrt = copy.deepcopy(moves)
 
-    resMovPrt += f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]} , "
+                print(f"\n\tFor tile: {coCon(moves)} {moves}")
+            print("\t\t", end="\t\t\t")
+        elif moves:
 
-if resMovPrt:
-    print(resMovPrt[:-2])
+            """
+                {m+1} = Num. of found white piece
+                {coCL[moves[0][1]]}{coRN[moves[0][0]]} = Starting expBoard coordinates
+                {moves[0]} = Starting matrix coordinates
+            """
+            print(f"{coCon(moves)} {moves}", end="  ")
+
+        if moves not in moves_all:
+            moves_all.append(moves)
+
+    print()
 print("\n")
+
+print("Result:\n")
+
+prtRes(moves_res, False)
+
+if moves_otRes:
+    print(f"{resCnt-1} other results:\n")
+    for otRes in moves_otRes:
+        prtRes(otRes, True)
 
 
 print("", end="   ")
@@ -283,8 +334,8 @@ print("Explanatory note:")
 print("\t⬜ = empty tile")
 print("\t🟥 = your pieces")
 print("\t⬛ = opponent's pieces")
-print("\t🟩 = possible moves_lst")
-print("\t🟨 = longest possible move")
+print("\t🟩 = possible moves")
+print("\t🟨 = path of longest possible move")
 
 """     !!   Redirecting sys.stdout back org_stdout   !! """
 

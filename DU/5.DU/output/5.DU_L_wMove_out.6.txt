@@ -1,0 +1,57 @@
+File: setup_myL_06.txt
+
+! Checkers with BOTH single move and jumping allowed !
+
+	Input board:
+
+		0 0 0 0 0 0 0 0 
+		0 0 0 0 0 0 0 0 
+		0 0 0 0 0 0 0 0 
+		0 0 0 3 0 3 0 0 
+		0 0 0 0 0 0 0 0 
+		0 0 0 0 0 3 0 0 
+		0 3 0 0 0 0 1 0 
+		1 0 0 0 0 0 0 0 
+		
+Paths found:
+
+	For tile: g2 [6, 6]
+					h3 [5, 7]  
+					e5 [4, 4]  c6 [2, 2]  
+					e5 [4, 4]  g6 [2, 6]  
+					e5 [4, 4]  
+					
+
+	For tile: a1 [7, 0]
+					c3 [5, 2]  
+					
+
+
+Result:
+
+	Start tile: g2 [6, 6]
+			2 Moves: e5 [4, 4] ,  c6 [2, 2] 
+
+
+1 other results:
+
+	Start tile: g2 [6, 6]
+			2 Moves: e5 [4, 4] ,  g6 [2, 6] 
+
+
+   a b c d e f g h 
+8 ⬜⬜⬜⬜⬜⬜⬜⬜
+7 ⬜⬜⬜⬜⬜⬜⬜⬜
+6 ⬜⬜🟨⬜⬜⬜🟨⬜
+5 ⬜⬜⬜⬛⬜⬛⬜⬜
+4 ⬜⬜⬜⬜🟨⬜⬜⬜
+3 ⬜⬜🟩⬜⬜⬛⬜🟩
+2 ⬜⬛⬜⬜⬜⬜🟥⬜
+1 🟥⬜⬜⬜⬜⬜⬜⬜
+
+Explanatory note:
+	⬜ = empty tile
+	🟥 = your pieces
+	⬛ = opponent's pieces
+	🟩 = possible moves
+	🟨 = path of longest possible move

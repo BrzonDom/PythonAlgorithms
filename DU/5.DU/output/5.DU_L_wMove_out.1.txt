@@ -1,0 +1,44 @@
+File: setup_L_01.txt
+
+! Checkers with BOTH single move and jumping allowed !
+
+	Input board:
+
+		0 0 0 0 0 0 0 0 
+		0 0 0 0 0 0 0 0 
+		0 0 0 0 0 0 0 0 
+		0 0 0 0 0 0 0 0 
+		0 0 0 0 0 0 0 0 
+		0 0 0 0 0 0 0 0 
+		0 3 0 0 0 0 0 0 
+		1 0 0 0 0 0 0 0 
+		
+Paths found:
+
+	For tile: a1 [7, 0]
+					c3 [5, 2]  
+					
+
+
+Result:
+
+	Start tile: a1 [7, 0]
+			1 Moves: c3 [5, 2] 
+
+
+   a b c d e f g h 
+8 ⬜⬜⬜⬜⬜⬜⬜⬜
+7 ⬜⬜⬜⬜⬜⬜⬜⬜
+6 ⬜⬜⬜⬜⬜⬜⬜⬜
+5 ⬜⬜⬜⬜⬜⬜⬜⬜
+4 ⬜⬜⬜⬜⬜⬜⬜⬜
+3 ⬜⬜🟨⬜⬜⬜⬜⬜
+2 ⬜⬛⬜⬜⬜⬜⬜⬜
+1 🟥⬜⬜⬜⬜⬜⬜⬜
+
+Explanatory note:
+	⬜ = empty tile
+	🟥 = your pieces
+	⬛ = opponent's pieces
+	🟩 = possible moves
+	🟨 = path of longest possible move
