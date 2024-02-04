@@ -83,7 +83,12 @@ Příklady:
 """
 
 import copy
+import os
 
+path = os.path.realpath(__file__)
+dir = os.path.dirname(path)
+dir = dir.replace('progress', 'data')
+print(dir)
 
 def inBoard(coord):
 
@@ -120,11 +125,13 @@ coRN = {
 file_list = ["setup_L_01", "setup_L_02", "setup_L_03",
              "setup_myL_04", "setup_myL_05"]
 
-inOp = 4
+inOp = 1
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
-file_path = "data\\" + file_name + ".txt"
+# file_path = "data\\" + file_name + ".txt"
+
+file_path = file_name + ".txt"
 
 file = open(file_path, "r")
 print(f"File: {file_name}.txt\n")
