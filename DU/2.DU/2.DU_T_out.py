@@ -133,6 +133,45 @@ def binNumExp(BinNum):
         return [BinNum[0], BinNum[1], BinNum[2]]
 
 
+def inputChck(inBinNum):
+
+    allowChar = "-.e01"
+
+    if not len(inBinNum):
+        return False
+
+    for char in inBinNum:
+        if not char in allowChar:
+            return False
+
+    if inBinNum.count("-") > 2:
+        return False
+
+    if inBinNum.count(".") > 1:
+        return False
+
+    if inBinNum.count("e") > 1:
+        return False
+
+    if inBinNum[0] == "-":
+        if not inBinNum[1] == "1":
+            return False
+        if not inBinNum[2] == ".":
+            return False
+
+    elif not inBinNum[0] == "1":
+        if not (inBinNum[0] == "0" and (len(inBinNum) == 1)):
+            return False
+        if not inBinNum[1] == ".":
+            return False
+
+    if "e" in inBinNum:
+        if not (len(inBinNum) > (inBinNum.index("e")+1)):
+            return False
+
+    return True
+
+
 """
 Examples:
     1.001e-101₂ = 0.00001001₂ = 0.03515625₀
@@ -161,7 +200,7 @@ in_binNum_lst = [["1.01e11", "1.01e11", "0"],
                  ["1.01e11", "1.1101"],
                  ["1.0111010010101e-110", "1.01110101001101e110"]]
 
-inOp = 3
+inOp = 5
 
 file_namePrt = "2.DU_T_out"
 file_specPrt = f".{inOp + 1}"
@@ -186,6 +225,18 @@ if len(in_binNum) > 2:
     print(f"Expected output: {expeRes}")
     print()
 
+errChk1 = inputChck(inBinNum1)
+errChk2 = inputChck(inBinNum2)
+
+if not (errChk1 and errChk2):
+    print("! ERROR !")
+
+    """     !!   Redirecting sys.stdout back org_stdout   !! """
+
+    sys.stdout = org_stdout
+    file_prt.close()
+
+    exit()
 
 strNum1 = binNumSort(inBinNum1)
 strNum2 = binNumSort(inBinNum2)
@@ -196,7 +247,6 @@ print(f"\tFrac: {strNum1[2]}")
 if len(strNum1) > 3:
     print(f"\tExpo: {strNum1[3]}")
 
-#TODO: Edge case for wrong input
 
 print()
 print(f"inBinNum2: {inBinNum2}")

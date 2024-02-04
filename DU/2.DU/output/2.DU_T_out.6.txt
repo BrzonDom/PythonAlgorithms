@@ -1,0 +1,7 @@
+Input:
+	1.Num: 1.11011e
+	2.Num: 1.001e-101
+
+Expected output: ERROR
+
+! ERROR !
