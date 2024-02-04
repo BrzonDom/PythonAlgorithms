@@ -46,7 +46,7 @@ Příklady:
 """
 
 
-def shiftToFrac(inBinNum, shift):
+def shiftToWhole(inBinNum, shift):
 
     for _ in range(shift):
 
@@ -55,6 +55,18 @@ def shiftToFrac(inBinNum, shift):
 
         if len(inBinNum[2]) == 0:
             inBinNum[2] = "0"
+
+    return inBinNum
+
+def shiftToFrac(inBinNum, shift):
+
+    for _ in range(shift):
+
+        if len(inBinNum[1]) == 0:
+            inBinNum[1] = "0"
+
+        inBinNum[2] = inBinNum[1][-1] + inBinNum[2]
+        inBinNum[1] = inBinNum[1][:-1]
 
     return inBinNum
 
@@ -158,8 +170,8 @@ print(f"Expo. shift: {expShift}")
 
 difShift = len(strNum1[2]) - len(strNum2[2])
 
-strNum1 = shiftToFrac(strNum1, expShift)
-strNum2 = shiftToFrac(strNum2, expShift)
+strNum1 = shiftToWhole(strNum1, expShift)
+strNum2 = shiftToWhole(strNum2, expShift)
 
 print(f"\t\t{strNum1[0]}{strNum1[1]}.{strNum1[2]}")
 print(f"\t\t{strNum2[0]}{strNum2[1]}.{strNum2[2]}")
@@ -176,7 +188,7 @@ if strNum2[0]:
 operNum = bin(operNum1 - operNum2)
 # print(type(operNum))
 
-finStrNum = ["",""]
+finStrNum = ["","",""]
 
 if operNum[0] == "-":
     finStrNum[0] = "-"
@@ -187,3 +199,18 @@ else:
 # print(operNum)
 print("Post oper. num.:")
 print(f"\t{finStrNum[0]}{finStrNum[1]}")
+print()
+
+print("Post expo. shift num.:")
+finStrNum = shiftToFrac(finStrNum, expShift)
+print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}")
+print()
+
+
+if finStrNum[2]:
+    while finStrNum[2][-1] == "0":
+        finStrNum[2] = finStrNum[2][:-1]
+
+print("Post 0 remov. num.:")
+print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}")
+print()
