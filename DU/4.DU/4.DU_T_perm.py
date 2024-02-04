@@ -171,6 +171,7 @@ def subseqComb(seq):
     mLenS = lenS // 2
 
     dupSeqLst = []
+    dupSeqInd = []
 
     for strt in range(lenS):
 
@@ -182,10 +183,11 @@ def subseqComb(seq):
                 strSeq = (str(seq[strt: end+1])[1:-1])
                 if strSeq in (str(seq[:strt])[1:-1]) or strSeq in (str(seq[end+1:])[1:-1]):
 
-                    dupSeqLst.append([strt, copy.deepcopy(seq[strt: end+1])])
+                    dupSeqLst.append(copy.deepcopy(seq[strt: end+1]))
+                    dupSeqInd.append(strt)
                     # print(strt, seq[strt: end+1])
 
-    return dupSeqLst
+    return dupSeqLst, dupSeqInd
 
 
 str_seq_list = ["3 3 3 3 3 3 3 3 3",
@@ -196,7 +198,7 @@ str_seq_list = ["3 3 3 3 3 3 3 3 3",
                 "1 2 3 5 -6 8 -3 2 3 5 -6 8 -3 2 3",
                 "2 1 3 3 3 4 5 9 2 9 3 3 3 2 1"]
 
-str_seq = str_seq_list[3]
+str_seq = str_seq_list[0]
 
 seq = [int(num) for num in list(str_seq.split(" "))]
 
@@ -211,32 +213,40 @@ print(f"\tMax Len Seq:  {lenSeq // 2}\n")
 
 LCS_Mat = [[0 for i in range(lenSeq + 1)] for j in range(lenSeq + 1)]
 
-dupSeq_lst = subseqComb(seq)
+dupSeq_lst, dupSeq_ind = subseqComb(seq)
 
 print("Start:\tSequence:")
 
-maxTot = sum(dupSeq_lst[0][1])
-maxLen = len(dupSeq_lst[0][1])
+maxTot = sum(dupSeq_lst[0])
+maxLen = len(dupSeq_lst[0])
+maxInd = [dupSeq_ind[0], dupSeq_ind[0]]
 maxSeq = dupSeq_lst[0]
 
-for dup in dupSeq_lst:
+for i, dup in enumerate(dupSeq_lst):
 
-    if sum(dup[1]) > maxTot:
-        maxTot = sum(dup[1])
-        maxLen = len(dup[1])
+    if sum(dup) > maxTot:
+        maxTot = sum(dup)
+        maxLen = len(dup)
+        maxInd[0] = i
         maxSeq = dup
 
-    elif sum(dup[1]) == maxTot:
-        if len(dup[1]) > maxLen:
-            maxTot = sum(dup[1])
-            maxLen = len(dup[1])
+    elif sum(dup) == maxTot:
+
+        if dup == maxSeq:
+            maxInd[1] = dupSeq_ind[i]
+
+        elif len(dup) > maxLen:
+            maxTot = sum(dup)
+            maxLen = len(dup)
+            maxInd[0] = i
             maxSeq = dup
 
-    print(f"\t{dup[0]:2}. {dup[1]}")
+    print(f"\t{dupSeq_ind[i]:2}. {dup}")
 print()
 
-print(f"Max sequence: {maxSeq[1]}")
-print(f"\tMax seq. strt. coord: {maxSeq[0]}")
+print(f"Max sequence: {maxSeq}")
+print(f"\tMax seq. strt. ind: ({maxInd[0]}, {maxInd[1]})")
+print()
 print(f"\tMax len: {maxLen}")
 print(f"\tMax tot: {maxTot}")
 
