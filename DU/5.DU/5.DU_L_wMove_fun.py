@@ -135,6 +135,24 @@ def nextMoves(tile, noJump, prevTiles):
 
     moves_lst.append(prevTiles)
 
+def prtRes(resLst, addRes):
+    resMovPrt = ""
+
+    print(f"\tStart tile: {coCon(resLst[0])} {resLst[0]}")
+    print(f"\t\t\t{len(resLst) - 1} Moves: ", end="")
+
+    for moves in resLst[1:]:
+        # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
+
+        resMovPrt += f"{coCon(moves)} {moves} ,  "
+
+        if addRes:
+            if moves not in moves_res:
+                moves_res.append(moves)
+
+    if resMovPrt:
+        print(resMovPrt[:-3])
+    print("\n")
 
 
 def coCon(coord):
@@ -174,7 +192,7 @@ coRN = {
 file_list = ["setup_L_01", "setup_L_02", "setup_L_03",
              "setup_myL_04", "setup_myL_05", "setup_myL_06"]
 
-inOp = 5
+inOp = 3
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
@@ -234,10 +252,12 @@ for r in range(8):
 
 
 moves_res = []
+moves_otRes = []
 moves_all = []
 moves_strt = []
 tileStrt = []
 tileCnt = 0
+resCnt = 1
 
 print("Paths found:")
 
@@ -245,6 +265,11 @@ for moves_pth in moves_lst:
 
     if len(moves_res) < len(moves_pth):
         moves_res = copy.deepcopy(moves_pth)
+        moves_otRes = []
+
+    elif len(moves_res) == len(moves_pth):
+        resCnt += 1
+        moves_otRes.append(copy.deepcopy(moves_pth))
 
     for m, moves in enumerate(moves_pth):
 
@@ -269,19 +294,27 @@ for moves_pth in moves_lst:
     print()
 # print(moves_res)
 
-print("Result:")
-resMovPrt = ""
+print("Result:\n")
 
-print(f"\tStart tile: {coCL[moves_res[0][0]]}{coRN[moves_res[0][1]]} {moves_res[0]}")
-print(f"\t\t\t{len(moves_res)-1} Moves: ", end="")
-for moves in moves_res[1:]:
-    # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
+prtRes(moves_res, False)
+# resMovPrt = ""
+#
+# print(f"\tStart tile: {coCL[moves_res[0][0]]}{coRN[moves_res[0][1]]} {moves_res[0]}")
+# print(f"\t\t\t{len(moves_res)-1} Moves: ", end="")
+# for moves in moves_res[1:]:
+#     # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
+#
+#     resMovPrt += f"{coCon(moves)} {moves} ,  "
+#
+# if resMovPrt:
+#     print(resMovPrt[:-2])
+# print("\n")
 
-    resMovPrt += f"{coCon(moves)} {moves} ,  "
+if moves_otRes:
+    print(f"{resCnt-1} other results:\n")
+    for otRes in moves_otRes:
+        prtRes(otRes, True)
 
-if resMovPrt:
-    print(resMovPrt[:-2])
-print("\n")
 
 print("", end="   ")
 for i in range(8):
