@@ -282,3 +282,33 @@ for moves in moves_res[1:]:
 if resMovPrt:
     print(resMovPrt[:-2])
 print("\n")
+
+print("", end="   ")
+for i in range(8):
+    print(coCL[i], end=" ")
+print()
+
+for r in range(8):
+    print(8 - r, end=" ")
+    for c in range(8):
+        # print(f"{r}{c}", end=" ")
+        if board[r][c] == 1:
+            print("🟥", end="")
+        elif [r, c] in moves_res:
+            print("🟨", end="")
+        elif [r, c] in moves_all:
+            print("🟩", end="")
+        elif board[r][c] in (3, 4):
+            print("⬛", end="")
+        else:
+            print("⬜", end="")
+    print()
+print()
+
+print("Explanatory note:")
+print("\t⬜ = empty tile")
+print("\t🟥 = your pieces")
+print("\t⬛ = opponent's pieces")
+print("\t🟩 = possible moves_lst")
+print("\t🟨 = longest possible move")
+
