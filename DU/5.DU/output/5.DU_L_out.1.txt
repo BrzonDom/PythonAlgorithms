@@ -1,20 +1,25 @@
 File: setup_L_01.txt
 
-	[0, 0, 0, 0, 0, 0, 0, 0]
-	[0, 0, 0, 0, 0, 0, 0, 0]
-	[0, 0, 0, 0, 0, 0, 0, 0]
-	[0, 0, 0, 0, 0, 0, 0, 0]
-	[0, 0, 0, 0, 0, 0, 0, 0]
-	[0, 0, 0, 0, 0, 0, 0, 0]
-	[0, 3, 0, 0, 0, 0, 0, 0]
-	[1, 0, 0, 0, 0, 0, 0, 0]
+
+Input expBoard:
+	0 0 0 0 0 0 0 0 
+	0 0 0 0 0 0 0 0 
+	0 0 0 0 0 0 0 0 
+	0 0 0 0 0 0 0 0 
+	0 0 0 0 0 0 0 0 
+	0 0 0 0 0 0 0 0 
+	0 3 0 0 0 0 0 0 
+	1 0 0 0 0 0 0 0 
+	
+
+1. a1: [7, 0]
+	1 Moves:	c3: [5, 2] 
 
 
-1. a1:[7, 0] c3:[5, 2] 
+Result:
+	Start tile: h8 [7, 0]
+			1 Moves: c3 [7, 0] 
 
-Result moves:
-	 a1     c3    
-	[7, 0] [5, 2] 
 
    a b c d e f g h 
 8 ⬜⬜⬜⬜⬜⬜⬜⬜
@@ -30,5 +35,5 @@ Explanatory note:
 	⬜ = empty tile
 	🟥 = your pieces
 	⬛ = opponent's pieces
-	🟩 = possible moves
+	🟩 = possible moves_lst
 	🟨 = longest possible move

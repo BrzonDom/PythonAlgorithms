@@ -85,40 +85,41 @@ Příklady:
 import copy
 
 
-def coCL(num):
-    coordLet_dict = {
-        0: "a",
-        1: "b",
-        2: "c",
-        3: "d",
-        4: "e",
-        5: "f",
-        6: "g",
-        7: "h"
-    }
-    coord = coordLet_dict[num]
-    return coord
+def inBoard(coord):
+    return 0 <= coord <= 7
 
 
-def coRN(num):
-    coordNum_dict = {
-        7: "1",
-        6: "2",
-        5: "3",
-        4: "5",
-        3: "4",
-        2: "6",
-        1: "7",
-        0: "8"
-    }
+"""     dictionary for coordinates
+    column to letter    """
+coCL = {
+    0: "a",
+    1: "b",
+    2: "c",
+    3: "d",
+    4: "e",
+    5: "f",
+    6: "g",
+    7: "h"
+}
 
-    coord = coordNum_dict[num]
-    return coord
+"""     dictionary for coordinates
+    row to number   """
+coRN = {
+    7: "1",
+    6: "2",
+    5: "3",
+    4: "5",
+    3: "4",
+    2: "6",
+    1: "7",
+    0: "8"
+}
 
 
-file_list = ["setup_L_01", "setup_L_02", "setup_L_03"]
+file_list = ["setup_L_01", "setup_L_02", "setup_L_03",
+             "setup_myL_04", "setup_myL_05"]
 
-inOp = 2
+inOp = 4
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
@@ -140,120 +141,138 @@ sys.stdout = filePrt
 
 print(f"File: {file_name}.txt\n")
 
-board = [[0 for i in range(8 + 2)] for j in range(8 + 2)]
+expBoard = [[0 for i in range(8 + 2)] for j in range(8 + 2)]
 
-inBoard = []
+board = []
 
 for line in file:
-    inBoard.append(list(map(int, line.split())))
+    board.append(list(map(int, line.split())))
 file.close()
 
-for row in inBoard:
-    print(f"\t{row}")
-print()
-
-# print("", end="\t")
-# for row in inBoard:
-#     for col in row:
-#         print(col, end=" ")
-#     print("", end="\n\t")
+# for row in board:
+#     print(f"\t{row}")
 # print()
 
+print("\nInput expBoard:", end="\n\t")
+for i in range(8):
+    for j in range(8):
+        expBoard[i + 1][j + 1] = board[i][j]
+        print(expBoard[i + 1][j + 1], end=" ")
+    print("\n", end="\t")
+print("\n")
 
-moves_list = []
-move_stack = []
+
+moves_lst = []
+move_que = []
 moveCnt = 0
-
-boarder = [0, 1, 2, 3, 4, 5, 6, 7]
-
 
 for r in range(8):
     for c in range(8):
-        if inBoard[r][c] == 1:
+        if board[r][c] == 1:
+            """     Found white piece   """
 
+            """     Bool-val to ensure 
+                not repeating a sliding move     """
             notJump = True
 
-            moves_list.append([])
-            moves = moves_list[len(moves_list) - 1]
-
-            move_stack.append([r, c])
+            """     Linked list 
+                for easier orientation   """
+            moves_lst.append([])
+            moves = moves_lst[len(moves_lst) - 1]
             moves.append([r, c])
 
-            while(len(move_stack) > 0):
-                move = [move_stack[0][0], move_stack[0][1]]
-                move_stack.pop(0)
+            move_que.append([r, c])
 
-                # print(f"{move_Cnt}. {move[0]} , {move[1]}")
+            while len(move_que) > 0:
+
+                move = [move_que[0][0], move_que[0][1]]
+                move_que.pop(0)
+
+                # print(f"{moveCnt}. {move[0]} , {move[1]}")
                 if notJump:
-                    if (move[0] - 1) in boarder and (move[1] - 1) in boarder:
-                        if inBoard[move[0] - 1][move[1] - 1] == 0:
+                    if inBoard(move[0] - 1) and inBoard(move[1] - 1):
+                        if board[move[0] - 1][move[1] - 1] == 0:
                             moves.append([move[0] - 1, move[1] - 1])
-                            move_stack.append([move[0] - 1, move[1] - 1])
+                            move_que.append([move[0] - 1, move[1] - 1])
 
 
-                    if (move[0] - 1) in boarder and (move[1] + 1) in boarder:
-                        if inBoard[move[0] - 1][move[1] + 1] == 0:
+                    if inBoard(move[0] - 1) and inBoard(move[1] + 1):
+                        if board[move[0] - 1][move[1] + 1] == 0:
                             moves.append([move[0] - 1, move[1] + 1])
-                            move_stack.append([move[0] - 1, move[1] + 1])
+                            move_que.append([move[0] - 1, move[1] + 1])
                 notJump = False
 
 
-                if (move[0] - 2) in boarder and (move[1] - 2) in boarder:
-                    if inBoard[move[0] - 2][move[1] - 2] == 0 and inBoard[move[0] - 1][move[1] - 1] not in [0, 1, 2]:
+                if inBoard(move[0] - 2) and inBoard(move[1] - 2):
+                    if board[move[0] - 2][move[1] - 2] == 0 and board[move[0] - 1][move[1] - 1] not in [0, 1, 2]:
                         moves.append([move[0] - 2, move[1] - 2])
-                        move_stack.append([move[0] - 2, move[1] - 2])
+                        move_que.append([move[0] - 2, move[1] - 2])
 
 
-                if (move[0] - 2) in boarder and (move[1] + 2) in boarder:
-                    if inBoard[move[0] - 2][move[1] + 2] == 0 and inBoard[move[0] - 1][move[1] + 1] not in [0, 1, 2]:
+                if inBoard(move[0] - 2) and inBoard(move[1] + 2):
+                    if board[move[0] - 2][move[1] + 2] == 0 and board[move[0] - 1][move[1] + 1] not in [0, 1, 2]:
                         moves.append([move[0] - 2, move[1] + 2])
-                        move_stack.append([move[0] - 2, move[1] + 2])
+                        move_que.append([move[0] - 2, move[1] + 2])
 
-
-print()
 
 moves_all = []
 moves_res = []
-for m, moves in enumerate(moves_list):
+
+for m, moves in enumerate(moves_lst):
 
     if len(moves_res) < len(moves):
         moves_res = copy.deepcopy(moves)
 
-    print(f"{m+1}.", end=" ")
+    """
+        {m+1} = Num. of found white piece   
+        {coCL[moves[0][1]]}{coRN[moves[0][0]]} = Starting expBoard coordinates
+        {moves[0]} = Starting matrix coordinates
+    """
+    print(f"{m + 1}. {coCL[moves[0][1]]}{coRN[moves[0][0]]}: {moves[0]}\n\t{len(moves) - 1} Moves:", end="\t")
+    moves_all.append(moves)
 
-    for mov in moves:
+    for mov in moves[1:]:
+        """
+            {coCL[mov[1]]}{coRN[mov[0]]} = Board coordinates of possible next moves
+            {mov} = Matrix coordinates of possible next moves
+        """
+
         moves_all.append(mov)
-        print(f"{coCL(mov[1])}{coRN(mov[0])}:{mov}", end=" ")
-    print()
+        print(f"{coCL[mov[1]]}{coRN[mov[0]]}: {mov}", end=" ")
+    print("\n")
 print()
 
-print("Result moves:", end="\n\t")
-for mov in moves_res:
-    print(f" {coCL(mov[1])}{coRN(mov[0])}", end="    ")
-print("\n", end="\t")
+print("Result:")
+resMovPrt = ""
 
-for mov in moves_res:
-    print(f"{mov}", end=" ")
+print(f"\tStart tile: {coCL[moves_res[0][0]]}{coRN[moves_res[0][1]]} {moves_res[0]}")
+print(f"\t\t\t{len(moves_res)-1} Moves: ", end="")
+for mov in moves_res[1:]:
+    # print(f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]}", end="  ")
+
+    resMovPrt += f"{coCL[mov[1]]}{coRN[mov[0]]} {moves_res[0]} , "
+
+if resMovPrt:
+    print(resMovPrt[:-2])
 print("\n")
-
 
 
 print("", end="   ")
 for i in range(8):
-    print(coCL(i), end=" ")
-
+    print(coCL[i], end=" ")
 print()
+
 for r in range(8):
     print(8 - r, end=" ")
     for c in range(8):
         # print(f"{r}{c}", end=" ")
-        if inBoard[r][c] == 1:
+        if board[r][c] == 1:
             print("🟥", end="")
         elif [r, c] in moves_res:
             print("🟨", end="")
         elif [r, c] in moves_all:
             print("🟩", end="")
-        elif inBoard[r][c] in (3, 4):
+        elif board[r][c] in (3, 4):
             print("⬛", end="")
         else:
             print("⬜", end="")
@@ -264,7 +283,7 @@ print("Explanatory note:")
 print("\t⬜ = empty tile")
 print("\t🟥 = your pieces")
 print("\t⬛ = opponent's pieces")
-print("\t🟩 = possible moves")
+print("\t🟩 = possible moves_lst")
 print("\t🟨 = longest possible move")
 
 """     !!   Redirecting sys.stdout back org_stdout   !! """
