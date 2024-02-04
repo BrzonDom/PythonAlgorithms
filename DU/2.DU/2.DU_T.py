@@ -53,7 +53,8 @@ def shiftToWhole(inBinNum, shift):
         inBinNum[1] = inBinNum[1] + inBinNum[2][0]
         inBinNum[2] = inBinNum[2][1:]
 
-        if len(inBinNum[2]) == 0:
+        # if len(inBinNum[2]) == 0:
+        if not inBinNum[2]:
             inBinNum[2] = "0"
 
     return inBinNum
@@ -62,7 +63,8 @@ def shiftToFrac(inBinNum, shift):
 
     for _ in range(shift):
 
-        if len(inBinNum[1]) == 0:
+        # if len(inBinNum[1]) == 0:
+        if not inBinNum[1]:
             inBinNum[1] = "0"
 
         inBinNum[2] = inBinNum[1][-1] + inBinNum[2]
@@ -95,7 +97,9 @@ def binNumExp(BinNum):
 
         if exp > 0:
             for _ in range(exp):
-                if len(BinNum[2]) == 0:
+
+                # if len(BinNum[2]) == 0:
+                if not BinNum[2]:
                     BinNum[2] = "0"
 
                 BinNum[1] = BinNum[1] + BinNum[2][0]
@@ -109,7 +113,8 @@ def binNumExp(BinNum):
                 BinNum[2] = BinNum[1][-1] + BinNum[2]
                 BinNum[1] = BinNum[1][1:]
 
-                if len(BinNum[1]) < 1:
+                # if len(BinNum[1]) < 1:
+                if not BinNum[1]:
                     BinNum[1] = "0"
 
         return [BinNum[0], BinNum[1], BinNum[2]]
@@ -128,9 +133,14 @@ Examples:
 # inBinNum1 = input()
 # inBinNum2 = input()
 
-in_binNum_lst = [["1.01e11", "1.01e11"], ["1.1101e-1011", "1.1"], ["1.1101","1.101e-1"]]
+in_binNum_lst = [["1.01e11", "1.01e11"],
+                 ["1.1101e-1011", "1.1"],
+                 ["1.1101","1.101e-1"],
+                 ["-1.1101e11", "1.101e-1"],
+                 ["1.11011e1101", "1.001e-101"],
+                 ["1.11011e", "1.001e-101"]]
 
-in_binNum = in_binNum_lst[1]
+in_binNum = in_binNum_lst[3]
 
 inBinNum1 = in_binNum[0]
 inBinNum2 = in_binNum[1]
@@ -211,6 +221,30 @@ if finStrNum[2]:
     while finStrNum[2][-1] == "0":
         finStrNum[2] = finStrNum[2][:-1]
 
+        if not finStrNum[2]:
+            break
+
 print("Post 0 remov. num.:")
 print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}")
 print()
+
+print("Post to expo. form. num.: ")
+
+if len(finStrNum[1]) > 1:
+    expTo = len(finStrNum[1]) - 1
+
+    finStrNum = shiftToFrac(finStrNum, expTo)
+
+    finStrNum.append(str(bin(expTo))[2:])
+
+    print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}e{finStrNum[3]}")
+
+elif finStrNum[1] == "0":
+
+    expTo = finStrNum[2].index("0")
+
+    finStrNum = shiftToWhole(finStrNum, expTo)
+
+    finStrNum.append("-" + str(bin(expTo))[2:])
+
+    print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}e{finStrNum[3]}")
