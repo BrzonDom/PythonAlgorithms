@@ -170,6 +170,8 @@ def subseqComb(seq):
     lenS = len(seq)
     mLenS = lenS // 2
 
+    dupSeqLst = []
+
     for strt in range(lenS):
 
         for end in range(strt, lenS):
@@ -177,11 +179,13 @@ def subseqComb(seq):
             if end == mLenS-1:
                 break
             else:
-                # strSeq = (str(seq[strt: end+1])[1:-1])
-                # if strSeq in (str(seq[:strt])[1:-1]) or strSeq in (str(seq[end+1:])[1:-1]):
+                strSeq = (str(seq[strt: end+1])[1:-1])
+                if strSeq in (str(seq[:strt])[1:-1]) or strSeq in (str(seq[end+1:])[1:-1]):
 
-                print(strt, seq[strt: end+1])
+                    dupSeqLst.append([strt, copy.deepcopy(seq[strt: end+1])])
+                    # print(strt, seq[strt: end+1])
 
+    return dupSeqLst
 
 str_seq_list = ["3 3 3 3 3 3 3 3 3",
                 "1 1 1 6 2 2 2 6 1 1 1",
@@ -205,7 +209,22 @@ print(f"\tMax Len Seq:  {lenSeq // 2}\n")
 
 LCS_Mat = [[0 for i in range(lenSeq + 1)] for j in range(lenSeq + 1)]
 
-subseqComb(seq)
+dupSeq_lst = subseqComb(seq)
+
+print("Start:\tSequence:")
+for dup in dupSeq_lst:
+    print(f"\t{dup[0]:2}. {dup[1]}")
+
+# strSeq = "11162226111"
+# subseqComb(strSeq)
+
+# print(seq)
+# print(seq[1:5])
+
+# if "123" in "2331245":
+#     print(True)
+# else:
+#     print(False)
 
 
 """Line LCS_Mat analysis"""
