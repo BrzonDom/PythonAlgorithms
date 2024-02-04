@@ -136,6 +136,12 @@ def nextMoves(tile, noJump, prevTiles):
     moves_lst.append(prevTiles)
 
 
+
+def coCon(coord):
+
+    return coCL[coord[1]] + coRN[coord[0]]
+
+
 """     dictionary for coordinates
     column to letter    """
 coCL = {
@@ -161,6 +167,7 @@ coRN = {
     1: "7",
     0: "8"
 }
+
 
 
 file_list = ["setup_L_01", "setup_L_02", "setup_L_03",
@@ -198,6 +205,9 @@ print("\n")
 
 
 moves_lst = []
+# moves_tile = []
+# tileCnt = 0
+
 # move_que = []
 # moveCnt = 0
 
@@ -212,10 +222,41 @@ for r in range(8):
             """     Bool-val to ensure 
                 not repeating a sliding move     """
             # notJump = True
-
+            # moves_tile.append([[r, c]])
+            tile = [r, c]
 
             # def nextMoves(tile, noJump, prevTiles):
-            nextMoves([r, c], True, [[r, c]])
+            nextMoves(tile, True, [tile])
 
-for moves in moves_lst:
-    print(moves)
+# for moves in moves_lst:
+#     print(moves)
+
+
+moves_res = []
+moves_all = []
+tileCnt = 0
+
+print("Paths found:")
+
+for moves_pth in moves_lst:
+
+    if len(moves_res) < len(moves_pth):
+        moves_res = copy.deepcopy(moves_pth)
+
+    for m, moves in enumerate(moves_pth):
+
+        if not m:
+            print(f"\n\t{coCon(moves)}: {moves} = ", end="")
+        else:
+
+            """
+                {m+1} = Num. of found white piece
+                {coCL[moves[0][1]]}{coRN[moves[0][0]]} = Starting expBoard coordinates
+                {moves[0]} = Starting matrix coordinates
+            """
+            print(f"{moves}", end=", ")
+
+        if moves not in moves_all:
+            moves_all.append(moves)
+
+# print(moves_res)
