@@ -117,9 +117,10 @@ coRN = {
 }
 
 
-file_list = ["setup_L_01", "setup_L_02", "setup_L_03"]
+file_list = ["setup_L_01", "setup_L_02", "setup_L_03",
+             "setup_myL_04", "setup_myL_05"]
 
-inOp = 2
+inOp = 4
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
@@ -129,7 +130,7 @@ file = open(file_path, "r")
 print(f"File: {file_name}.txt\n")
 
 
-"""     Expanded board      """
+"""     Expanded expBoard      """
 # expBoard = [[0 for i in range(8 + 2)] for j in range(8 + 2)]
 
 board = []
