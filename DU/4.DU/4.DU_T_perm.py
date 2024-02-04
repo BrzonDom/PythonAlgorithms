@@ -194,7 +194,7 @@ str_seq_list = ["3 3 3 3 3 3 3 3 3",
                 "1 2 5 -6 8 -3 2 5 -6 8 -3 2 3",
                 "1 2 3 5 -6 8 -3 2 3 5 -6 8 -3 2 3"]
 
-str_seq = str_seq_list[1]
+str_seq = str_seq_list[2]
 
 seq = [int(num) for num in list(str_seq.split(" "))]
 
@@ -212,8 +212,34 @@ LCS_Mat = [[0 for i in range(lenSeq + 1)] for j in range(lenSeq + 1)]
 dupSeq_lst = subseqComb(seq)
 
 print("Start:\tSequence:")
+
+maxTot = sum(dupSeq_lst[0][1])
+maxLen = len(dupSeq_lst[0][1])
+maxSeq = dupSeq_lst[0]
+
 for dup in dupSeq_lst:
+
+    if sum(dup[1]) > maxTot:
+        maxTot = sum(dup[1])
+        maxLen = len(dup[1])
+        maxSeq = dup
+
+    elif sum(dup[1]) == maxTot:
+        if len(dup[1]) > maxLen:
+            maxTot = sum(dup[1])
+            maxLen = len(dup[1])
+            maxSeq = dup
+
     print(f"\t{dup[0]:2}. {dup[1]}")
+print()
+
+print(f"Max sequence: {maxSeq[1]}")
+print(f"\tMax seq. coord: {maxSeq[0]}")
+print(f"\tMax len: {maxLen}")
+print(f"\tMax tot: {maxTot}")
+
+
+
 
 # strSeq = "11162226111"
 # subseqComb(strSeq)
