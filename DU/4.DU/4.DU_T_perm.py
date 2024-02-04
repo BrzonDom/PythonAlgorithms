@@ -176,7 +176,7 @@ def subseqComb(seq):
 
         for end in range(strt, lenS):
 
-            if end == mLenS-1:
+            if end == strt + mLenS - 1:
                 break
             else:
                 strSeq = (str(seq[strt: end+1])[1:-1])
@@ -187,14 +187,16 @@ def subseqComb(seq):
 
     return dupSeqLst
 
+
 str_seq_list = ["3 3 3 3 3 3 3 3 3",
                 "1 1 1 6 2 2 2 6 1 1 1",
                 "1 2 5 -6 8 -3 2 1 1 2 2 5 -6 8 -3 2 3",
                 "1 2 3 4 4 4 4 4 3 2 1",
                 "1 2 5 -6 8 -3 2 5 -6 8 -3 2 3",
-                "1 2 3 5 -6 8 -3 2 3 5 -6 8 -3 2 3"]
+                "1 2 3 5 -6 8 -3 2 3 5 -6 8 -3 2 3",
+                "2 1 3 3 3 4 5 9 2 9 3 3 3 2 1"]
 
-str_seq = str_seq_list[2]
+str_seq = str_seq_list[3]
 
 seq = [int(num) for num in list(str_seq.split(" "))]
 
@@ -234,7 +236,7 @@ for dup in dupSeq_lst:
 print()
 
 print(f"Max sequence: {maxSeq[1]}")
-print(f"\tMax seq. coord: {maxSeq[0]}")
+print(f"\tMax seq. strt. coord: {maxSeq[0]}")
 print(f"\tMax len: {maxLen}")
 print(f"\tMax tot: {maxTot}")
 
