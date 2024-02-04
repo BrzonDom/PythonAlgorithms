@@ -45,6 +45,19 @@ Příklady:
         -1.1110101e11 
 """
 
+
+def shiftToFrac(inBinNum, shift):
+
+    for _ in range(shift):
+
+        inBinNum[1] = inBinNum[1] + inBinNum[2][0]
+        inBinNum[2] = inBinNum[2][1:]
+
+        if len(inBinNum[2]) == 0:
+            inBinNum[2] = "0"
+
+    return inBinNum
+
 def binNumSort(inBinNum):
     BinNum = ["","",""]
 
@@ -69,22 +82,32 @@ def binNumExp(BinNum):
         exp = int(BinNum[3], 2)
 
         if exp > 0:
-            for i in range(exp):
+            for _ in range(exp):
+                if len(BinNum[2]) == 0:
+                    BinNum[2] = "0"
+
                 BinNum[1] = BinNum[1] + BinNum[2][0]
                 BinNum[2] = BinNum[2][1:]
 
-                if len(BinNum[2]) < 1:
-                    BinNum[2] = "0"
+                # if len(BinNum[2]) < 1:
+                #     BinNum[2] = "0"
         else:
-            for i in range(abs(exp)):
+            for _ in range(abs(exp)):
+
                 BinNum[2] = BinNum[1][-1] + BinNum[2]
                 BinNum[1] = BinNum[1][1:]
 
                 if len(BinNum[1]) < 1:
                     BinNum[1] = "0"
 
-        return BinNum
+        return [BinNum[0], BinNum[1], BinNum[2]]
 
+
+"""
+Examples:
+    1.001e-101₂ = 0.00001001₂ = 0.03515625₀
+    1.1101e-1011₂ = 0.000000000011101₂ = 0.000885009765625₀
+"""
 
 # binNum = [0, 0]
     # binNum[0] = input();
@@ -93,33 +116,74 @@ def binNumExp(BinNum):
 # inBinNum1 = input()
 # inBinNum2 = input()
 
-inBinNum1 = "-1.1101e-11"
-inBinNum2 = "1.1101e11"
+in_binNum_lst = [["1.01e11", "1.01e11"], ["1.1101e-1011", "1.1"], ["1.1101","1.101e-1"]]
 
-BinNum1 = binNumSort(inBinNum1)
-BinNum2 = binNumSort(inBinNum2)
+in_binNum = in_binNum_lst[1]
+
+inBinNum1 = in_binNum[0]
+inBinNum2 = in_binNum[1]
+
+strNum1 = binNumSort(inBinNum1)
+strNum2 = binNumSort(inBinNum2)
 
 print(f"inBinNum1: {inBinNum1}")
-print(f"\tWhole: {BinNum1[0]}{BinNum1[1]}")
-print(f"\tFrac: {BinNum1[2]}")
-if len(BinNum1) > 3:
-    print(f"\tExpo: {BinNum1[3]}")
+print(f"\tWhole: {strNum1[0]}{strNum1[1]}")
+print(f"\tFrac: {strNum1[2]}")
+if len(strNum1) > 3:
+    print(f"\tExpo: {strNum1[3]}")
 
 
 print()
 print(f"inBinNum2: {inBinNum2}")
-print(f"\tWhole: {BinNum2[0]}{BinNum2[1]}")
-print(f"\tFrac: {BinNum2[2]}")
-if len(BinNum2) > 3:
-    print(f"\tExpo: {BinNum2[3]}")
-
-
+print(f"\tWhole: {strNum2[0]}{strNum2[1]}")
+print(f"\tFrac: {strNum2[2]}")
+if len(strNum2) > 3:
+    print(f"\tExpo: {strNum2[3]}")
 print()
 
-BinNum1 = binNumExp(BinNum1)
-print(f"{BinNum1[0]}{BinNum1[1]}.{BinNum1[2]}")
-BinNum2 = binNumExp(BinNum2)
-print(f"{BinNum2[0]}{BinNum2[1]}.{BinNum2[2]}")
+print("Frac. expo:")
+strNum1 = binNumExp(strNum1)
+print(f"\t\t{strNum1[0]}{strNum1[1]}.{strNum1[2]}")
+strNum2 = binNumExp(strNum2)
+print(f"\t\t{strNum2[0]}{strNum2[1]}.{strNum2[2]}")
+print()
 
 # print(f"{polNum1}{binNum1[0]}.{binNum1[1]}")
 # print(f"{polNum2}{binNum2[0]}.{binNum2[1]}")
+
+expShift = max(len(strNum1[2]), len(strNum2[2]))
+
+
+print(f"Expo. shift: {expShift}")
+
+difShift = len(strNum1[2]) - len(strNum2[2])
+
+strNum1 = shiftToFrac(strNum1, expShift)
+strNum2 = shiftToFrac(strNum2, expShift)
+
+print(f"\t\t{strNum1[0]}{strNum1[1]}.{strNum1[2]}")
+print(f"\t\t{strNum2[0]}{strNum2[1]}.{strNum2[2]}")
+print()
+
+operNum1 = int(strNum1[1], 2)
+if strNum1[0]:
+    operNum1 *= -1
+
+operNum2 = int(strNum2[1], 2)
+if strNum2[0]:
+    operNum2 *= -1
+
+operNum = bin(operNum1 - operNum2)
+# print(type(operNum))
+
+finStrNum = ["",""]
+
+if operNum[0] == "-":
+    finStrNum[0] = "-"
+    finStrNum[1] = operNum[3:]
+else:
+    finStrNum[1] = operNum[2:]
+
+# print(operNum)
+print("Post oper. num.:")
+print(f"\t{finStrNum[0]}{finStrNum[1]}")
