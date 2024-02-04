@@ -186,15 +186,14 @@ Examples:
 # inBinNum1 = input()
 # inBinNum2 = input()
 
-in_binNum_lst = [["1.01e11", "1.01e11"],
-                 ["1.1101e-1011", "1.1"],
-                 ["1.1101", "1.101e-1"],
-                 ["-1.1101e11", "1.101e-1"],
-                 ["1.11011e1101", "1.001e-101"],
-                 ["1.11011e", "1.001e-101"],
+in_binNum_lst = [["1.01e11", "1.01e11", "0"],
+                 ["1.1101e-1011", "1.1", "-1.011111111100011"],
+                 ["1.1101", "1.101e-1", "1."],
+                 ["-1.1101e11", "1.101e-1", "-1.1110101e11"],
+                 ["1.11011e1101", "1.001e-101", "1.110101111111111110111e1101"],
+                 ["1.11011e", "1.001e-101", "ERROR"],
                  ["1.01e11", "1.1101"],
-                 ["1.0111010010101e110", "1.01110101001101e110"]]
-
+                 ["1.0111010010101e-110", "1.01110101001101e110"]]
 inOp = 5
 
 in_binNum = in_binNum_lst[inOp]
@@ -206,6 +205,11 @@ print("Input:")
 print(f"\t1.Num: {inBinNum1}")
 print(f"\t2.Num: {inBinNum2}")
 print()
+
+if len(in_binNum) > 2:
+    expeRes = in_binNum[2]
+    print(f"Expected output: {expeRes}")
+    print()
 
 errChk1 = inputChck(inBinNum1)
 errChk2 = inputChck(inBinNum2)
@@ -222,8 +226,6 @@ print(f"\tWhole: {strNum1[0]}{strNum1[1]}")
 print(f"\tFrac: {strNum1[2]}")
 if len(strNum1) > 3:
     print(f"\tExpo: {strNum1[3]}")
-
-#TODO: Edge case for wrong input
 
 print()
 print(f"inBinNum2: {inBinNum2}")
