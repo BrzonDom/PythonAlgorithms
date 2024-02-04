@@ -1,0 +1,25 @@
+Input:
+	1.Num: 1.01e11
+	2.Num: 1.01e11
+
+Expected output: 0
+
+inBinNum1: 1.01e11
+	Whole: 1
+	Frac: 01
+	Expo: 11
+
+inBinNum2: 1.01e11
+	Whole: 1
+	Frac: 01
+	Expo: 11
+
+Frac. expo:
+		1010.
+		1010.
+
+Bin subtr.:
+	0
+
+
+Final output number: 0

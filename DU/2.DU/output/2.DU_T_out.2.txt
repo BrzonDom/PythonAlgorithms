@@ -1,0 +1,34 @@
+Input:
+	1.Num: 1.1101e-1011
+	2.Num: 1.1
+
+Expected output: -1.011111111100011
+
+inBinNum1: 1.1101e-1011
+	Whole: 1
+	Frac: 1101
+	Expo: -1011
+
+inBinNum2: 1.1
+	Whole: 1
+	Frac: 1
+
+Frac. expo:
+		0.000000000011101
+		1.1
+
+Expo. shift: 15
+		0000000000011101.
+		1100000000000000.
+
+Bin subtr.:
+	-1011111111100011
+
+Expo. shift:
+	-1.011111111100011
+
+Redund. 0 remov.:
+	-1.011111111100011
+
+
+Final output number: -1.011111111100011
