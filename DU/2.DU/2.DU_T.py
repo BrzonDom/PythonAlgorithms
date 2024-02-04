@@ -72,12 +72,12 @@ def shiftToFrac(inBinNum, shift):
 
     for _ in range(shift):
 
+        inBinNum[2] = inBinNum[1][-1] + inBinNum[2]
+        inBinNum[1] = inBinNum[1][:-1]
+
         # if len(inBinNum[1]) == 0:
         if not inBinNum[1]:
             inBinNum[1] = "0"
-
-        inBinNum[2] = inBinNum[1][-1] + inBinNum[2]
-        inBinNum[1] = inBinNum[1][:-1]
 
     return inBinNum
 
@@ -154,9 +154,9 @@ in_binNum_lst = [["1.01e11", "1.01e11"],
                  ["1.11011e1101", "1.001e-101"],
                  ["1.11011e", "1.001e-101"],
                  ["1.01e11", "1.1101"],
-                 ["1.0111010010101e-110", "1.01110101001101e110"]]
+                 ["1.0111010010101e110", "1.01110101001101e110"]]
 
-inOp = 0
+inOp = 7
 
 in_binNum = in_binNum_lst[inOp]
 
@@ -264,30 +264,36 @@ if len(finStrNum[1]) > 1:
     finStrNum.append(str(bin(expTo))[2:])
 
     print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}e{finStrNum[3]}")
+    print()
 
 elif finStrNum[1] == "0" and finStrNum[2]:
     print("Expo. form: ")
 
-    expTo = finStrNum[2].index("0")
+    expTo = finStrNum[2].index("1") + 1
 
     finStrNum = shiftToWhole(finStrNum, expTo)
 
     finStrNum.append("-" + str(bin(expTo))[2:])
+    finStrNum[1] = [1][-1]
 
     print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}e{finStrNum[3]}")
-
+    print()
 
 
 if finStrNum[1] == "0":
+    print()
     print(f"Final output number: 0")
 
 else:
+    print()
     print(f"Final output number: {finStrNum[0]}{finStrNum[1]}.", end="")
 
     if finStrNum[2]:
         print(f"{finStrNum[2]}", end="")
 
     if len(finStrNum) > 3:
-        print(f"e{finStrNum[3]}")
+        print(f"e{finStrNum[3]}", end="")
+
+    print()
 
 
