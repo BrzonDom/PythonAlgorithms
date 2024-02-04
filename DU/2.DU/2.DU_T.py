@@ -48,16 +48,25 @@ Příklady:
 
 def shiftToWhole(inBinNum, shift):
 
-    for _ in range(shift):
+    if not inBinNum[2]:
+        inBinNum[1] += "0" * shift
 
-        inBinNum[1] = inBinNum[1] + inBinNum[2][0]
-        inBinNum[2] = inBinNum[2][1:]
+    else:
+        for _ in range(shift):
 
-        # if len(inBinNum[2]) == 0:
-        if not inBinNum[2]:
-            inBinNum[2] = "0"
+            # if len(inBinNum[2]) == 0:
+            if not inBinNum[2]:
+                inBinNum[1] += "0"
+
+            else:
+                inBinNum[1] = inBinNum[1] + inBinNum[2][0]
+                inBinNum[2] = inBinNum[2][1:]
+
+            # if not inBinNum[2]:
+            #     inBinNum[2] = "0"
 
     return inBinNum
+
 
 def shiftToFrac(inBinNum, shift):
 
@@ -71,6 +80,7 @@ def shiftToFrac(inBinNum, shift):
         inBinNum[1] = inBinNum[1][:-1]
 
     return inBinNum
+
 
 def binNumSort(inBinNum):
     BinNum = ["","",""]
@@ -88,6 +98,7 @@ def binNumSort(inBinNum):
         BinNum[2] = BinNum[2].split("e")[0]
 
     return BinNum
+
 
 def binNumExp(BinNum):
     if len(BinNum) < 4:
@@ -135,12 +146,14 @@ Examples:
 
 in_binNum_lst = [["1.01e11", "1.01e11"],
                  ["1.1101e-1011", "1.1"],
-                 ["1.1101","1.101e-1"],
+                 ["1.1101", "1.101e-1"],
                  ["-1.1101e11", "1.101e-1"],
                  ["1.11011e1101", "1.001e-101"],
-                 ["1.11011e", "1.001e-101"]]
+                 ["1.11011e", "1.001e-101"],
+                 ["1.01e11", "1.1101"],
+                 ["1.0111010010101e-110", "1.01110101001101e110"]]
 
-in_binNum = in_binNum_lst[3]
+in_binNum = in_binNum_lst[4]
 
 inBinNum1 = in_binNum[0]
 inBinNum2 = in_binNum[1]
@@ -154,6 +167,7 @@ print(f"\tFrac: {strNum1[2]}")
 if len(strNum1) > 3:
     print(f"\tExpo: {strNum1[3]}")
 
+#TODO: Edge case for wrong input
 
 print()
 print(f"inBinNum2: {inBinNum2}")
@@ -239,7 +253,7 @@ if len(finStrNum[1]) > 1:
 
     print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}e{finStrNum[3]}")
 
-elif finStrNum[1] == "0":
+elif finStrNum[1] == "0" and finStrNum[2]:
 
     expTo = finStrNum[2].index("0")
 
