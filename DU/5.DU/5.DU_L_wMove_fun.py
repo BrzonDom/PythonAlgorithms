@@ -211,9 +211,16 @@ for line in file:
     board.append(list(map(int, line.split())))
 file.close()
 
+print("! Checkers with BOTH single move and jumping allowed !\n")
+
+print("\tInput board:\n")
+
+print("", end="\t\t")
 for row in board:
-    print(f"\t{row}")
-print("\n")
+    for col in row:
+        print(col, end=" ")
+    print("", end="\n\t\t")
+print()
 
 # print("", end="\t")
 # for row in expBoard:
@@ -231,7 +238,6 @@ moves_lst = []
 # moveCnt = 0
 
 # boarder = [0, 1, 2, 3, 4, 5, 6, 7]
-
 
 for r in range(8):
     for c in range(8):
@@ -254,7 +260,7 @@ for r in range(8):
 moves_res = []
 moves_otRes = []
 moves_all = []
-moves_strt = []
+
 tileStrt = []
 tileCnt = 0
 resCnt = 1
@@ -266,6 +272,7 @@ for moves_pth in moves_lst:
     if len(moves_res) < len(moves_pth):
         moves_res = copy.deepcopy(moves_pth)
         moves_otRes = []
+        resCnt = 1
 
     elif len(moves_res) == len(moves_pth):
         resCnt += 1
@@ -276,7 +283,7 @@ for moves_pth in moves_lst:
         if not m:
             if tileStrt != moves:
                 tileStrt = copy.deepcopy(moves)
-                moves_strt.append(tileStrt)
+
                 print(f"\n\tFor tile: {coCon(moves)} {moves}")
             print("\t\t", end="\t\t\t")
         elif moves:
@@ -292,7 +299,7 @@ for moves_pth in moves_lst:
             moves_all.append(moves)
 
     print()
-# print(moves_res)
+print("\n")
 
 print("Result:\n")
 
@@ -342,6 +349,6 @@ print("Explanatory note:")
 print("\t⬜ = empty tile")
 print("\t🟥 = your pieces")
 print("\t⬛ = opponent's pieces")
-print("\t🟩 = possible moves_lst")
-print("\t🟨 = longest possible move")
+print("\t🟩 = possible moves")
+print("\t🟨 = path of longest possible move")
 
