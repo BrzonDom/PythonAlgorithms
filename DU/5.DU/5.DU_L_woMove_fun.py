@@ -190,16 +190,16 @@ for line in file:
     board.append(list(map(int, line.split())))
 file.close()
 
-for row in board:
-    print(f"\t{row}")
-print("\n")
+print("! Checkers with ONLY jumping allowed !\n")
 
-# print("", end="\t")
-# for row in expBoard:
-#     for col in row:
-#         print(col, end=" ")
-#     print("", end="\n\t")
-# print()
+print("\tInput board:\n")
+
+print("", end="\t\t")
+for row in board:
+    for col in row:
+        print(col, end=" ")
+    print("", end="\n\t\t")
+print()
 
 
 moves_lst = []
@@ -272,7 +272,7 @@ for moves_pth in moves_lst:
             moves_all.append(moves)
 
     print()
-print()
+print("\n")
 
 
 print("Result:\n")
@@ -311,5 +311,5 @@ print("Explanatory note:")
 print("\t⬜ = empty tile")
 print("\t🟥 = your pieces")
 print("\t⬛ = opponent's pieces")
-print("\t🟩 = possible moves_lst")
-print("\t🟨 = longest possible move")
+print("\t🟩 = possible moves")
+print("\t🟨 = path of longest possible move")
