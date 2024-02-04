@@ -83,7 +83,8 @@ def shiftToFrac(inBinNum, shift):
 
 
 def binNumSort(inBinNum):
-    BinNum = ["","",""]
+
+    BinNum = ["", "", ""]
 
     if inBinNum[0] == "-":
         BinNum[0] = "-"
@@ -101,8 +102,10 @@ def binNumSort(inBinNum):
 
 
 def binNumExp(BinNum):
+
     if len(BinNum) < 4:
         return BinNum
+
     else:
         exp = int(BinNum[3], 2)
 
@@ -153,10 +156,18 @@ in_binNum_lst = [["1.01e11", "1.01e11"],
                  ["1.01e11", "1.1101"],
                  ["1.0111010010101e-110", "1.01110101001101e110"]]
 
-in_binNum = in_binNum_lst[4]
+inOp = 0
+
+in_binNum = in_binNum_lst[inOp]
 
 inBinNum1 = in_binNum[0]
 inBinNum2 = in_binNum[1]
+
+
+print("Input:")
+print(f"\t1.Num: {inBinNum1}")
+print(f"\t2.Num: {inBinNum2}")
+print()
 
 strNum1 = binNumSort(inBinNum1)
 strNum2 = binNumSort(inBinNum2)
@@ -189,17 +200,17 @@ print()
 
 expShift = max(len(strNum1[2]), len(strNum2[2]))
 
+if expShift:
+    print(f"Expo. shift: {expShift}")
 
-print(f"Expo. shift: {expShift}")
+    difShift = len(strNum1[2]) - len(strNum2[2])
 
-difShift = len(strNum1[2]) - len(strNum2[2])
+    strNum1 = shiftToWhole(strNum1, expShift)
+    strNum2 = shiftToWhole(strNum2, expShift)
 
-strNum1 = shiftToWhole(strNum1, expShift)
-strNum2 = shiftToWhole(strNum2, expShift)
-
-print(f"\t\t{strNum1[0]}{strNum1[1]}.{strNum1[2]}")
-print(f"\t\t{strNum2[0]}{strNum2[1]}.{strNum2[2]}")
-print()
+    print(f"\t\t{strNum1[0]}{strNum1[1]}.{strNum1[2]}")
+    print(f"\t\t{strNum2[0]}{strNum2[1]}.{strNum2[2]}")
+    print()
 
 operNum1 = int(strNum1[1], 2)
 if strNum1[0]:
@@ -212,7 +223,7 @@ if strNum2[0]:
 operNum = bin(operNum1 - operNum2)
 # print(type(operNum))
 
-finStrNum = ["","",""]
+finStrNum = ["", "", ""]
 
 if operNum[0] == "-":
     finStrNum[0] = "-"
@@ -221,14 +232,15 @@ else:
     finStrNum[1] = operNum[2:]
 
 # print(operNum)
-print("Post oper. num.:")
+print("Bin subtr.:")
 print(f"\t{finStrNum[0]}{finStrNum[1]}")
 print()
 
-print("Post expo. shift num.:")
-finStrNum = shiftToFrac(finStrNum, expShift)
-print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}")
-print()
+if expShift:
+    print("Expo. shift:")
+    finStrNum = shiftToFrac(finStrNum, expShift)
+    print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}")
+    print()
 
 
 if finStrNum[2]:
@@ -238,13 +250,13 @@ if finStrNum[2]:
         if not finStrNum[2]:
             break
 
-print("Post 0 remov. num.:")
-print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}")
-print()
+    print("Redund. 0 remov.:")
+    print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}")
+    print()
 
-print("Post to expo. form. num.: ")
 
 if len(finStrNum[1]) > 1:
+    print("Expo. form: ")
     expTo = len(finStrNum[1]) - 1
 
     finStrNum = shiftToFrac(finStrNum, expTo)
@@ -254,6 +266,7 @@ if len(finStrNum[1]) > 1:
     print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}e{finStrNum[3]}")
 
 elif finStrNum[1] == "0" and finStrNum[2]:
+    print("Expo. form: ")
 
     expTo = finStrNum[2].index("0")
 
@@ -262,3 +275,19 @@ elif finStrNum[1] == "0" and finStrNum[2]:
     finStrNum.append("-" + str(bin(expTo))[2:])
 
     print(f"\t{finStrNum[0]}{finStrNum[1]}.{finStrNum[2]}e{finStrNum[3]}")
+
+
+
+if finStrNum[1] == "0":
+    print(f"Final output number: 0")
+
+else:
+    print(f"Final output number: {finStrNum[0]}{finStrNum[1]}.", end="")
+
+    if finStrNum[2]:
+        print(f"{finStrNum[2]}", end="")
+
+    if len(finStrNum) > 3:
+        print(f"e{finStrNum[3]}")
+
+
