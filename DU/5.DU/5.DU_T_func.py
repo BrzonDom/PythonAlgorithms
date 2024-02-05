@@ -71,45 +71,91 @@ def nextMovesKing(tile, inDir, prevTiles):
 
     # direcOfMov = [[tile[0] - 1, tile[1] - 1], [tile[0] - 1, tile[1] + 1], [tile[0] + 1, tile[1] - 1], [tile[0] + 1, tile[1] + 1]]
 
-    if inBoard(tile[0] - 1) and inBoard(tile[1] - 1) and [-1, -1] in inDir:
+    if inBoard(tile[0] - 1) and inBoard(tile[1] - 1) and inDir[0]:
         if board[tile[0] - 1][tile[1] - 1] == 0:
             # moves.append([tile[0] - 2, tile[1] - 2])
             # move_que.append([tile[0] - 2, tile[1] - 2])
 
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 1, tile[1] - 1])
+            newDir = [True, False, False, False]
 
-            nextMovesKing([tile[0] - 1, tile[1] - 1], [[-1, -1]], newTiles)
+            nextMovesKing([tile[0] - 1, tile[1] - 1], newDir, newTiles)
 
-    if inBoard(tile[0] - 1) and inBoard(tile[1] + 1) and [-1, 1] in inDir:
+        elif board[tile[0] - 1][tile[1] - 1] == 3 or board[tile[0] - 1][tile[1] - 1] == 4:
+            if inBoard(tile[0] - 2) and inBoard(tile[1] - 2):
+                if board[tile[0] - 2][tile[1] - 2] == 0:
+                    newTiles = copy.deepcopy(prevTiles)
+                    newTiles.append([tile[0] - 2, tile[1] - 2])
+                    newDir = [True, True, True, True]
+
+                    nextMovesKing([tile[0] - 2, tile[1] - 2], newDir, newTiles)
+
+
+    if inBoard(tile[0] - 1) and inBoard(tile[1] + 1) and inDir[1]:
         if board[tile[0] - 1][tile[1] + 1] == 0:
             # moves.append([tile[0] - 2, tile[1] + 2])
             # move_que.append([tile[0] - 2, tile[1] + 2])
 
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 1, tile[1] + 1])
+            newDir = [False, True, False, False]
 
-            nextMovesKing([tile[0] - 1, tile[1] + 1], [[-1, 1]], newTiles)
+            nextMovesKing([tile[0] - 1, tile[1] + 1], newDir, newTiles)
 
-    if inBoard(tile[0] + 1) and inBoard(tile[1] - 1) and [1, -1] in inDir:
+        elif board[tile[0] - 1][tile[1] + 1] == 3 or board[tile[0] - 1][tile[1] + 1] == 4:
+            if inBoard(tile[0] - 2) and inBoard(tile[1] + 2):
+                if board[tile[0] - 2][tile[1] + 2] == 0:
+
+                    newTiles = copy.deepcopy(prevTiles)
+                    newTiles.append([tile[0] - 2, tile[1] + 2])
+                    newDir = [True, True, True, True]
+
+                    nextMovesKing([tile[0] - 2, tile[1] + 2], newDir, newTiles)
+
+
+    if inBoard(tile[0] + 1) and inBoard(tile[1] - 1) and inDir[2]:
+        """     Move +1 -1 ~ Up Right    """
         if board[tile[0] + 1][tile[1] - 1] == 0:
             # moves.append([tile[0] - 2, tile[1] + 2])
             # move_que.append([tile[0] - 2, tile[1] + 2])
 
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] + 1, tile[1] - 1])
+            newDir = [False, False, True, False]
 
-            nextMovesKing([tile[0] + 1, tile[1] - 1], [[1, -1]], newTiles)
+            nextMovesKing([tile[0] + 1, tile[1] - 1], newDir, newTiles)
 
-    if inBoard(tile[0] + 1) and inBoard(tile[1] + 1) and [1, 1] in inDir:
+        elif board[tile[0] + 1][tile[1] - 1] == 3 or board[tile[0] + 1][tile[1] - 1] == 4:
+            if inBoard(tile[0] + 2) and inBoard(tile[1] - 2):
+                if board[tile[0] + 2][tile[1] - 2] == 0:
+
+                    newTiles = copy.deepcopy(prevTiles)
+                    newTiles.append([tile[0] + 2, tile[1] - 2])
+                    newDir = [True, True, True, True]
+
+                nextMovesKing([tile[0] + 2, tile[1] - 2], newDir, newTiles)
+
+
+    if inBoard(tile[0] + 1) and inBoard(tile[1] + 1) and inDir[3]:
         if board[tile[0] + 1][tile[1] + 1] == 0:
             # moves.append([tile[0] - 2, tile[1] + 2])
             # move_que.append([tile[0] - 2, tile[1] + 2])
 
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] + 1, tile[1] + 1])
+            newDir = [False, False, False, True]
 
-            nextMovesKing([tile[0] + 1, tile[1] + 1], [[1, 1]], newTiles)
+            nextMovesKing([tile[0] + 1, tile[1] + 1], newDir, newTiles)
+
+        elif board[tile[0] + 1][tile[1] + 1] == 3 or board[tile[0] + 1][tile[1] + 1] == 4:
+            if inBoard(tile[0] + 2) and inBoard(tile[1] + 2):
+                if board[tile[0] + 2][tile[1] + 2] == 0:
+                    newTiles = copy.deepcopy(prevTiles)
+                    newTiles.append([tile[0] + 2, tile[1] + 2])
+                    newDir = [True, True, True, True]
+
+                nextMovesKing([tile[0] + 2, tile[1] + 2], newDir, newTiles)
 
     moves_lst.append(prevTiles)
 
@@ -231,7 +277,7 @@ for r in range(8):
             """     Found white king    """
 
             tile = [r, c]
-            direction = [[-1, -1], [-1, 1], [1, -1], [1, 1]]
+            direction = [True, True, True, True]
 
             nextMovesKing(tile, direction, [tile])
 # for moves in moves_lst:
