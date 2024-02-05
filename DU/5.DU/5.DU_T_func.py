@@ -42,7 +42,7 @@ def inBoard(coord):
     return 0 <= coord <= 7
 
 
-def nextMoves(tile, prevTiles):
+def nextMovesMan(tile, prevTiles):
 
     if inBoard(tile[0] - 2) and inBoard(tile[1] - 2):
         if board[tile[0] - 2][tile[1] - 2] == 0 and board[tile[0] - 1][tile[1] - 1] not in [0, 1, 2]:
@@ -52,7 +52,7 @@ def nextMoves(tile, prevTiles):
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 2, tile[1] - 2])
 
-            nextMoves([tile[0] - 2, tile[1] - 2], newTiles)
+            nextMovesMan([tile[0] - 2, tile[1] - 2], newTiles)
 
     if inBoard(tile[0] - 2) and inBoard(tile[1] + 2):
         if board[tile[0] - 2][tile[1] + 2] == 0 and board[tile[0] - 1][tile[1] + 1] not in [0, 1, 2]:
@@ -62,9 +62,58 @@ def nextMoves(tile, prevTiles):
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 2, tile[1] + 2])
 
-            nextMoves([tile[0] - 2, tile[1] + 2], newTiles)
+            nextMovesMan([tile[0] - 2, tile[1] + 2], newTiles)
 
     moves_lst.append(prevTiles)
+
+
+def nextMovesKing(tile, inDir, prevTiles):
+
+    # direcOfMov = [[tile[0] - 1, tile[1] - 1], [tile[0] - 1, tile[1] + 1], [tile[0] + 1, tile[1] - 1], [tile[0] + 1, tile[1] + 1]]
+
+    if inBoard(tile[0] - 1) and inBoard(tile[1] - 1) and [-1, -1] in inDir:
+        if board[tile[0] - 1][tile[1] - 1] == 0:
+            # moves.append([tile[0] - 2, tile[1] - 2])
+            # move_que.append([tile[0] - 2, tile[1] - 2])
+
+            newTiles = copy.deepcopy(prevTiles)
+            newTiles.append([tile[0] - 1, tile[1] - 1])
+
+            nextMovesKing([tile[0] - 1, tile[1] - 1], [[-1, -1]], newTiles)
+
+    if inBoard(tile[0] - 1) and inBoard(tile[1] + 1) and [-1, 1] in inDir:
+        if board[tile[0] - 1][tile[1] + 1] == 0:
+            # moves.append([tile[0] - 2, tile[1] + 2])
+            # move_que.append([tile[0] - 2, tile[1] + 2])
+
+            newTiles = copy.deepcopy(prevTiles)
+            newTiles.append([tile[0] - 1, tile[1] + 1])
+
+            nextMovesKing([tile[0] - 1, tile[1] + 1], [[-1, 1]], newTiles)
+
+    if inBoard(tile[0] + 1) and inBoard(tile[1] - 1) and [1, -1] in inDir:
+        if board[tile[0] + 1][tile[1] - 1] == 0:
+            # moves.append([tile[0] - 2, tile[1] + 2])
+            # move_que.append([tile[0] - 2, tile[1] + 2])
+
+            newTiles = copy.deepcopy(prevTiles)
+            newTiles.append([tile[0] + 1, tile[1] - 1])
+
+            nextMovesKing([tile[0] + 1, tile[1] - 1], [[1, -1]], newTiles)
+
+    if inBoard(tile[0] + 1) and inBoard(tile[1] + 1) and [1, 1] in inDir:
+        if board[tile[0] + 1][tile[1] + 1] == 0:
+            # moves.append([tile[0] - 2, tile[1] + 2])
+            # move_que.append([tile[0] - 2, tile[1] + 2])
+
+            newTiles = copy.deepcopy(prevTiles)
+            newTiles.append([tile[0] + 1, tile[1] + 1])
+
+            nextMovesKing([tile[0] + 1, tile[1] + 1], [[1, 1]], newTiles)
+
+    moves_lst.append(prevTiles)
+
+
 
 def prtRes(resLst, addRes):
     resMovPrt = ""
@@ -120,9 +169,10 @@ coRN = {
 
 
 
-file_list = ["setup_T_01", "setup_T_02", "setup_T_03"]
+file_list = ["setup_T_01", "setup_T_02", "setup_T_03",
+             "setup_myT_04"]
 
-inOp = 0
+inOp = 3
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
@@ -166,7 +216,7 @@ moves_lst = []
 for r in range(8):
     for c in range(8):
         if board[r][c] == 1:
-            """     Found white piece   """
+            """     Found white man   """
 
             """     Bool-val to ensure 
                 not repeating a sliding move     """
@@ -175,8 +225,15 @@ for r in range(8):
             tile = [r, c]
 
             # def nextMoves(tile, noJump, prevTiles):
-            nextMoves(tile, [tile])
+            nextMovesMan(tile, [tile])
 
+        elif board[r][c] == 2:
+            """     Found white king    """
+
+            tile = [r, c]
+            direction = [[-1, -1], [-1, 1], [1, -1], [1, 1]]
+
+            nextMovesKing(tile, direction, [tile])
 # for moves in moves_lst:
 #     print(moves)
 
@@ -245,7 +302,7 @@ for r in range(8):
     print(8 - r, end=" ")
     for c in range(8):
         # print(f"{r}{c}", end=" ")
-        if board[r][c] == 1:
+        if board[r][c] == 1 or board[r][c] == 2:
             print("🟥", end="")
         elif [r, c] in moves_res:
             print("🟨", end="")
