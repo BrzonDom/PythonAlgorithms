@@ -131,9 +131,10 @@ def nextMoves(tile, noJump, prevTiles):
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 2, tile[1] + 2])
 
-            nextMoves([tile[0] - 2, tile[1] - 2], False, newTiles)
+            nextMoves([tile[0] - 2, tile[1] + 2], False, newTiles)
 
     moves_lst.append(prevTiles)
+
 
 def prtRes(resLst, addRes):
     resMovPrt = ""
@@ -158,7 +159,6 @@ def prtRes(resLst, addRes):
 def coCon(coord):
 
     return coCL[coord[1]] + coRN[coord[0]]
-
 
 
 """     dictionary for coordinates

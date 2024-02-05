@@ -130,7 +130,7 @@ def nextMoves(tile, noJump, prevTiles):
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 2, tile[1] + 2])
 
-            nextMoves([tile[0] - 2, tile[1] - 2], False, newTiles)
+            nextMoves([tile[0] - 2, tile[1] + 2], False, newTiles)
 
     moves_lst.append(prevTiles)
 
@@ -336,6 +336,7 @@ print("\t🟥 = your pieces")
 print("\t⬛ = opponent's pieces")
 print("\t🟩 = possible moves")
 print("\t🟨 = path of longest possible move")
+
 
 """     !!   Redirecting sys.stdout back org_stdout   !! """
 
