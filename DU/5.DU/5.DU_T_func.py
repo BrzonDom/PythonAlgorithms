@@ -62,7 +62,7 @@ def nextMoves(tile, prevTiles):
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 2, tile[1] + 2])
 
-            nextMoves([tile[0] - 2, tile[1] - 2], newTiles)
+            nextMoves([tile[0] - 2, tile[1] + 2], newTiles)
 
     moves_lst.append(prevTiles)
 
