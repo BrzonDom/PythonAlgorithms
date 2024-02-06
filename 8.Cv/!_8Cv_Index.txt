@@ -1,0 +1,33 @@
+
+2Cv_0Uk.py      ( 1. )
+    Celočíselné operace - práce s časem
+
+2Cv_1Uk.py      ( 1. )
+    Dekódování zprávy
+
+2Cv_2Uk.py      ( 1. )
+    Flood fill
+
+2Cv_3Uk.py      ( 1. )
+    Fronta
+
+2Cv_4Uk.py      ( 1. )
+    Objekt komlexní číslo
+
+2Cv_5Uk.py      ( 1. )
+    Break cykl
+
+2Cv_6Uk.py      ( 1. )
+    Syntaktické chyby
+
+2Cv_7Uk.py      ( 1. )
+    Vypočtěte třetí odmocninu kladného čísla y
+
+2Cv_8Uk.py      ( 1. )
+    Výpočet třetí odmocniny přičítáním se zadanou přesností
+
+2Cv_9Uk.py      ( .0 )
+    Metoda půlení intervalu
+
+2Cv_10Uk.py     ( .0 )
+    Výpočet třetí odmocniny - porovnání
