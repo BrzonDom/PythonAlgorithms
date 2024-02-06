@@ -1,0 +1,21 @@
+
+1Cv_2Uk.py      ( 1. )
+   Python jako kalkulačka
+
+1Cv_3Uk.py      ( 1. )
+    Výstup
+
+1Cv_4Uk.py      ( 1. )
+    Vstup programu
+
+1Cv_5Uk.py      ( 1. )
+    Výpočty v Pythonu
+
+1Cv_6Uk.py      ( 1. )
+    Cykly
+
+1Cv_7Uk.py      ( 1. )
+    Součet třetích mocnin, test odevzdávacího systému
+
+1Cv_8Uk.py      ( 1. )
+    Větvení programu
