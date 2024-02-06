@@ -11,6 +11,7 @@ def primNum(num):
     # print(primNumLst)
     return primNumLst
 
+
 def primDec(num):
 
     primNumLst = primNum(num)
@@ -24,6 +25,7 @@ def primDec(num):
                 break
     # print(primDecLst)
     return primDecLst
+
 
 num_list = [26, 24, 25, 21, 18, 17, 16, 15, 12, 10, 9, 8, 6, 4]
 
