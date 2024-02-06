@@ -1,0 +1,19 @@
+
+5Cv_0Uk.py      ( .0 )
+    Dvojrozměrné pole
+
+5Cv_1Uk.py      ( 1. )
+    Výpis matice
+
+5Cv_2Uk.py      ( 1. )
+    Stopa matice
+
+5Cv_3Uk.py      ( 1. )
+    Násobení vektoru a matice
+
+5Cv_4Uk.py      ( 1. )
+    Načtení 2D pole ze souboru
+
+5Cv_5Uk.py      ( 1. )
+    Načtení zakódovaného obrázku ze souboru
+
