@@ -15,30 +15,34 @@ Narovnání
         if type(x) is list:
 
 """
+import copy
 
-def flatten(list_of_lists):
-    if len(list_of_lists) == 0:
-        return list_of_lists
 
-    if type(list_of_lists[0]) == list:
+def flatten(listList):
+    if len(listList) == 0:
+        return listList
+
+    if type(listList[0]) == list:
     # if isinstance(list_of_lists[0], list):
-        return flatten(list_of_lists[0]) + flatten(list_of_lists[1:])
 
-    return list_of_lists[:1] + flatten(list_of_lists[1:])
+        return flatten(listList[0]) + flatten(listList[1:])
+
+    return listList[:1] + flatten(listList[1:])
+
+
+# def flat(listList):
+
 
 
 a = [1, 2, [3, [4, 5], 6, [7]], [8, 9], 10]
 a_flat = []
 
-row = len(a)
-
-
+# row = len(a)
 # print(row)
 
-for itm in a:
-    print(itm, end=", ")
-print("\n")
-
+# for itm in a:
+#     print(itm, end=", ")
+# print("\n")
 
 
 print(f"Original list: {a}")
