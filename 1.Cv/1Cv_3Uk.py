@@ -13,4 +13,7 @@ Výstup
 
 print(1, 2, 3)
 print("1 + 2 je", 1 + 2)
-print("Hodnota promenne a je", a)
+
+avrg = (1 + 2 + 3) / 3
+
+print("Hodnota promenne a je", avrg)

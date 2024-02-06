@@ -1,60 +1,69 @@
 """
-Součet třetích mocnin, test odevzdávacího systému
+Větvení programu
 
-    Stáhněte si k sobě program soucet.py
+    Pokud potřebujeme vykonat část programu jen při splnění určitých podmínek, použijeme příkaz if. Jeho nejdednodušší tvar je:
 
-        a=int(input())
-        k=int(input())
+        if podmínka:
+           kód
 
-        sum=0
+    V tomto případě se nejdříve vyhodnotí podmínka a je-li splněna, je vykonán příslušný kód. Pokud podmínka splněna není, kód se nevykoná.
 
-        for i in range(1,a+1,1):
-            sum+=i**k
+    Příklad: vytiskni “sudé číslo” pokud proměnná a
+    obsahuje sudé číslo.
 
-        print(sum)
+        if (a % 2) == 0:
+           print("sude cislo")
 
-    Přejmenujte program na cubic_sum.py a upravte jej tak, aby počítal součet třetích mocnin
-        Sum from k=0 to n of k^3
+    Obecnější tvar větvení je
 
-    Dále upravte program tak, aby zkontroloval, zda se součet třetích mocnin rovná
-        Sum from k=0 to n of k^3 == (n(n+1)/2)^2
+        if podmínka1:
+           kód1
+        elif podmínka2:
+           kód1
+        else:
+           kód2
 
-    Program vytiskne na jednu řádku součet třetích mocnin, na další řádku vytiskne výsledek podle vzorečku
-    Vytištěné výsledky musí být celá čísla.
-    Program odevzdejte odevzdávacím systémem (úloha HW00).
+    V tomto případě lze použít vícero bloků elif.
+
+    Příklad: pokud je v proměnné a záporné číslo, vytiskni “zaporne”, jinak vypis jestli je číslo v proměnné a liché nebo sudé.
+
+        a = 4
+        if a < 0:
+            print("zaporne")
+        elif (a % 2) == 0:
+            print("sude")
+        else:
+            print("liche")
+
+    Bez elif bychom museli odsazovat tímto způsobem:
+
+        a = 4
+        if a < 0:
+            print("zaporne")
+        else:
+            if (a % 2) == 0:
+                print("sude")
+            else:
+                print("liche")
+
 """
 
-# a=int(input())
-# k=int(input())
-#
-# sum=0
-#
-# for i in range(1,a+1,1):
-#     sum+=i**k
-#
-# print(sum)
+a = 4
 
+if (a % 2) == 0:
+    print("sude cislo")
 
-# n = int(input())
-# add = 0
-#
-# for i in range(n+1):
-#     add += (i**3)
-#
-# print(add)
-# vzor = int(((n*(n+1))/2)**2)
-# print(vzor)
+if a < 0:
+    print("zaporne")
+elif (a % 2) == 0:
+    print("sude")
+else:
+    print("liche")
 
-
-import sys
-
-n = int(sys.argv[1])
-add = 0
-
-for i in range(n+1):
-    add += (i**3)
-
-vzor = int(((n*(n+1))/2)**2)
-
-if add == vzor: print("ANO")
-else: print("NE")
+if a < 0:
+    print("zaporne")
+else:
+    if (a % 2) == 0:
+        print("sude")
+    else:
+        print("liche")
