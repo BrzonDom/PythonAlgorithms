@@ -1,9 +1,11 @@
 """
-Napište program, který načte celé číslo udávající časový interval
-ve vteřinách a vypíše kolik je to dní, hodin, minut a vteřin.
+Celočíselné operace - práce s časem
 
-Tedy pokud bude vstup 100000 pak vypíše:
-    den 1 hodin 3 minut 46 vterin 40
+    Napište program, který načte celé číslo udávající časový interval
+    ve vteřinách a vypíše kolik je to dní, hodin, minut a vteřin.
+
+    Tedy pokud bude vstup 100000 pak vypíše:
+        den 1 hodin 3 minut 46 vterin 40
 """
 
 

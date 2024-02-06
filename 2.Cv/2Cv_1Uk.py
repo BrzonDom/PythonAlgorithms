@@ -1,5 +1,7 @@
 """
-Napište program, který vypočítá rozdíl dvou časů zadaných ve formátu: HH:MM:SS
+Rozdíl dvou časových údajů
+
+    Napište program, který vypočítá rozdíl dvou časů zadaných ve formátu: HH:MM:SS
 """
 
 # time1 = input()

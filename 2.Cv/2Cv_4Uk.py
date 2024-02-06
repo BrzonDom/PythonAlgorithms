@@ -1,8 +1,9 @@
 """
 While cykl
-Napište program, který udělá to samé co opakování for cyklů pomocí while cyklu:
-    - vytiskněte čísla 10 až 500 po deseti
-    - vytiskněte čísla -20 až -600 po dvaceti
+
+    Napište program, který udělá to samé co opakování for cyklů pomocí while cyklu:
+        - vytiskněte čísla 10 až 500 po deseti
+        - vytiskněte čísla -20 až -600 po dvaceti
 """
 
 num = 10

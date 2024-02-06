@@ -1,17 +1,17 @@
 """
 Zkopírujte si následující kód do souboru
 
-V programu odstraňte syntaktické chyby
-Program spusťte a zjistěte co dělá
+    V programu odstraňte syntaktické chyby
+    Program spusťte a zjistěte co dělá
 
-    step = 0.1
-    sum = 0
-    for is in range(1, 11):
-        sum += step
-        if suma == is / 10:
-            print("Plati", sum, "rovno", is / 10)
-         else:
-           print("Neplati", sum, "nerovno", is / 10)
+        step = 0.1
+        sum = 0
+        for is in range(1, 11):
+            sum += step
+            if suma == is / 10:
+                print("Plati", sum, "rovno", is / 10)
+             else:
+               print("Neplati", sum, "nerovno", is / 10)
 
 """
 

@@ -1,10 +1,11 @@
 """
 Break cykl
-Napište program, který načte číslo n a najde jeho nejmenšího dělitele většího než 1.
 
-Je vhodné použít konstrukci break, cyklus můžete použít while i for.
+    Napište program, který načte číslo n a najde jeho nejmenšího dělitele většího než 1.
 
-Otestujte svůj program na čísle 999962000357
+    Je vhodné použít konstrukci break, cyklus můžete použít while i for.
+
+    Otestujte svůj program na čísle 999962000357
 """
 
 # Find Prime Numbers Function

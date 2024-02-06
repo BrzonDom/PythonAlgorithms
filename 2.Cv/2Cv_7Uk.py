@@ -1,5 +1,6 @@
 """
 Vypočtěte třetí odmocninu kladného čísla y, zadaného jako vstup Vašeho programu následujícím postupem:
+
     - Přičítejte k proměnné v číslo 1 dokud je třetí mocnina této proměnné menší než y
     - Přičítejte k proměnné v číslo 0.1 dokud je třetí mocnina této proměnné menší než y
     - Přičítejte k proměnné v číslo 0.01 dokud je třetí mocnina této proměnné menší než y
