@@ -1,0 +1,19 @@
+
+7Cv_0Uk.py      ( 1. )
+    Rekurze
+
+7Cv_1Uk.py      ( 1. )
+    Binomický koeficient
+
+7Cv_2Uk.py      ( 1. )
+    Výpočet Fibonacciho posloupnosti
+
+7Cv_3Uk.py      ( 1. )
+    Rychlejší výpočet Fibonacciho posloupnosti
+
+7Cv_4Uk.py      ( 1. )
+    Narovnání
+
+7Cv_5Uk.py      ( 1. )
+    Hanojské věže
+
