@@ -197,7 +197,71 @@ print()
 
 """     Manual swap of rows     """
 
-print("Manu. swap.rows:")
+print("Manu. swap of rows:")
+print("\tManu. max.:")
+MatSwap = copy.deepcopy(Mat)
+
+for c in range(cols):
+    """     Loop through all columns    """
+    maxLoop = False
+
+    """     Manual maximum of matrix columns  """
+
+    for r in range(c, rows):
+        """     Loop through rows under diagonal
+                    to find Max     """
+        # print(Mat[r][c], end=" ")
+        forDebug = MatSwap[r][c]
+
+        if r == c:
+            """     1. instance = initial values
+                        Skips 1.loop    """
+
+            Max = abs(MatSwap[r][c])
+            maxLoop = True
+            index = c
+            rowMax = c
+
+        elif (abs(MatSwap[r][c]) > Max):
+            """     Find the max of the column      """
+
+            Max = abs(MatSwap[r][c])
+            rowMax = index
+
+        index += 1
+
+    """     Print max values of the column    """
+    if maxLoop:
+        print(f"\t\tCol {c}: Max = {Max} on Row {rowMax}")
+
+        """     Manual swap of rows     """
+
+        if c != rowMax:
+            """     Check if swap has effect    """
+
+            swap = [c, rowMax]
+            swap_row = [copy.deepcopy(MatSwap[c]), copy.deepcopy(MatSwap[rowMax])]
+
+            """     Row swap    """
+            MatSwap[swap[1]] = swap_row[0]
+            MatSwap[swap[0]] = swap_row[1]
+
+            # for line in Mat:
+            #     print(line)
+
+"""     Print final swapped matrix  """
+print("\n\tManu. swap.mat.:", end="\n\t\t")
+
+for row in MatSwap:
+    for col in row:
+        print(f"{col:2}", end=" ")
+    print("", end="\n\t\t")
+print()
+
+
+"""     Manual modify rows     """
+
+print("Manu. swap of rows:")
 print("\tManu. max.:")
 MatSwap = copy.deepcopy(Mat)
 
@@ -277,7 +341,38 @@ print("")
 
 """     Function swap of rows     """
 
-print("Func. swap.rows:")
+print("Func. swap of rows:")
+print("\tFunc. max.:")
+MatSwap = copy.deepcopy(Mat)
+
+for c in range(cols):
+    """     Loop through all columns    """
+
+    """     Find maximum of the column      """
+    r = maximum(MatSwap, c)
+
+    """     Print max values of the column      """
+    if r == -1:
+        continue
+    print(f"\t\tCol {c}: Max = {abs(MatSwap[r][c])} on Row {r}")
+
+    """     Swap rows to achieve final swapped matrix    """
+    MatSwap = swap_rows(MatSwap, c)
+
+print()
+
+"""     Print final swapped matrix  """
+print("\tFunc. swap.mat.:", end="\n\t\t")
+for row in MatSwap:
+    for col in row:
+        print(f"{col:2}", end=" ")
+    print("", end="\n\t\t")
+print()
+
+
+"""     Function modify rows     """
+
+print("Func. swap of rows:")
 print("\tFunc. max.:")
 MatSwap = copy.deepcopy(Mat)
 
