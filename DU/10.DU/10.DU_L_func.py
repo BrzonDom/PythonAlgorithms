@@ -64,7 +64,8 @@ def findJump(coord, dir):
             return
 
 
-def splitCheck(neighbr, jump_dict):
+def splitCheck(neighbr):
+
 
     spltStck = [neighbr]
     spltChcked = []
@@ -74,18 +75,21 @@ def splitCheck(neighbr, jump_dict):
                     to check if jump split the hive     """
 
         curRow = spltStck[-1][0]
-        curCol = spltStck[-1][0]
+        curCol = spltStck[-1][1]
+        spltStck.pop()
+
 
         for move in move_list:
             row = curRow + move[0]
             col = curCol + move[1]
 
             if isIn(row, col, size):
-                if jump_dict[row][col] != 0 and [row, col] not in spltChcked:
+                if value_dict[row][col] == 1 and [row, col] not in spltChcked:
                     spltChcked.append([row, col])
                     spltStck.append([row, col])
 
-    if len(spltChcked) != pieces_cnt:
+    # print(len(spltChcked))
+    if len(spltChcked) != pieces_cnt - 1:
         return False
     else:
         return True
@@ -188,7 +192,17 @@ for neigh in neighbr_list:
     print(neigh, end=" ")
 print("\n")
 
-print("All possible jumps:\n", end="\t\t")
-for jump in jump_list:
-    print(jump, end=" ")
-print()
+print("Split check:\n", end="\t\t")
+if splitCheck(neighbr_list[0]):
+    print(f"Jump doesn't split the hive\n")
+
+
+    print("All possible jumps:\n", end="\t\t")
+    for jump in jump_list:
+        print(jump, end=" ")
+    print()
+
+else:
+    print("! Jump does split the hive !")
+
+
