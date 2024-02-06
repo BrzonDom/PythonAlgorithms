@@ -9,7 +9,7 @@ class myBoard:
         self.size = size
         self.board = {}
 
-        # create empty board as a dictionary
+        # create empty expBoard as a dictionary
         self.b2 = {}
         for p in range(-self.size, self.size):
             for q in range(-self.size, self.size):
@@ -44,7 +44,7 @@ class myBoard:
 
 
     def saveImage(self, filename):
-        """ draw actual board to png
+        """ draw actual expBoard to png
         """
 
         cellRadius = 60
@@ -103,7 +103,10 @@ def canPlace(board, coord, piece, size):
 
     return True
 
-file_name = "PrL_1"
+file_list = ["PrL_1", "PrL_2", "PrL_3", "PrL_4"]
+
+file_name = file_list[2]
+file_folder = file_name + "_vis"
 
 fileOpen = "visual\\" + file_name + ".txt"
 print(f"File: {file_name}.txt")
@@ -212,7 +215,7 @@ for stone in stones:
 
                 inOut_board = myBoard(size)
                 inOut_board.board = board
-                inOut_board.saveImage(f"visual\\{file_name}.{stoneCnt}_{posCnt}.png")
+                inOut_board.saveImage(f"visual\\{file_folder}\\{file_name}.{stoneCnt}_{posCnt}.png")
 
                 print(board)
                 for pp in board:
