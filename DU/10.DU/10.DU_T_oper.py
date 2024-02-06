@@ -158,7 +158,7 @@ print(next_list)
 # for next in stackNext:
 #     fin_dict[next[0]][next[1]] = 3
 #
-# inOut_board.board = fin_dict
+# inOut_board.expBoard = fin_dict
 # inOut_board.saveImage(f"{file_name}_out.png")
 #
 # print(neighb_list)
@@ -172,7 +172,7 @@ print(next_list)
 #
 #
 # for move in moves:
-#     # if [hooper_coord[0]+move[0], hooper_coord[1]+move[1]] in border:
+#     # if [hopper_coord[0]+move[0], hopper_coord[1]+move[1]] in border:
 #     row = ant_coord[0] + move[0]
 #     col = ant_coord[1] + move[1]
 #     isOut = False
@@ -180,8 +180,8 @@ print(next_list)
 #
 #     if isIn(row, col, size):
 #
-#         # row = hooper_coord[0]+move[0]
-#         # col = hooper_coord[1]+move[1]
+#         # row = hopper_coord[0]+move[0]
+#         # col = hopper_coord[1]+move[1]
 #
 #         if value_dict[row][col] == 1:
 #             neighbour_list.append([row, col])
@@ -210,7 +210,7 @@ print(next_list)
 #
 #             # while value_dict[row][col] != 0 and isIn(row, col, size):
 #             #
-#             #     if [row-move[0], col-move[1]] != hooper_coord:
+#             #     if [row-move[0], col-move[1]] != hopper_coord:
 #             #         next_list.append([row, col])
 #             #         print(f"{move} to [{row}, {col}] possible")
 #             #     else:
