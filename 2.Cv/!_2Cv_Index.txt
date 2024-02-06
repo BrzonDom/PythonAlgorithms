@@ -26,7 +26,7 @@
 2Cv_8Uk.py      ( 1. )
     Výpočet třetí odmocniny přičítáním se zadanou přesností
 
-2Cv_9Uk.py      ( .0 )
+2Cv_9Uk.py      ( 1. )
     Metoda půlení intervalu
 
 2Cv_10Uk.py     ( .0 )
