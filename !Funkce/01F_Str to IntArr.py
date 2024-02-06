@@ -29,6 +29,17 @@ def Str_IntArr(str):
 
     return intArr
 
+
+def Str_MapIntArr(str):
+    int_lst = list(map(int, str.split()))
+
+    # int_lst = []
+    # int_lst.append(list(map(int, str.split())))
+
+    print(int_lst)
+    return int_lst
+
+
 str = "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3"
 
 str_mat = ["28 6 -12 -4 10 -44 -46 -38 -80 -28 18",
@@ -90,11 +101,11 @@ for char in str:
     else:
         print("\n\nEnd")
 
+print("Basic function written in operator code\n")
 
 print("Str:")
-print(intArr)
-print(Str_IntArr(str))
-
+print("\t", intArr)
+print("\t", Str_IntArr(str))
 print()
 
 res = Str_IntArr(str)
@@ -104,12 +115,11 @@ for i in res:
 
 print("\n\nStr_mat:")
 
-print(str_mat)
+print("\t", str_mat)
 print()
 
 for s in str_mat:
     print(Str_IntArr(s))
-
 print()
 
 for s in str_mat:
@@ -117,3 +127,5 @@ for s in str_mat:
     for i in res:
         print(f"{i}", end=' ')
     print()
+
+print()
