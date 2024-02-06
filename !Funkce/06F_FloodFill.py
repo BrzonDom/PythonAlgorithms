@@ -70,22 +70,31 @@ boardCol = [item for item in range(0, matCol)]
 # print(boardRow)
 # print(boardCol)
 
-print(f"Row: {matRow}\nCol: {matCol}")
+print(f"Row: {matRow}")
+print(f"Col: {matCol}")
+print()
 
 # showMat(Mat)
 
 stackFill = []
 stackVisit = []
 
+print(f"Input: {input[1]}")
+print()
+
 stackFill.append(input[1])
-print(stackFill)
+
+# print(stackFill)
+
 # stackFill.append([3,2])
 # stackFill.append([7,5])
 # print(stackFill)
 
-print(stackFill[-1][0])
+# print(stackFill[-1][0])
 
+print("Input board:", end="")
 showMat(Mat)
+print()
 
 while len(stackFill) > 0:
 
@@ -116,5 +125,5 @@ while len(stackFill) > 0:
         if Mat[curRow][curCol-1] == 0 and [curRow, curCol-1] not in stackVisit:
             stackFill.append([curRow, curCol-1])
 
-
+print("Solved board:", end="")
 showMat(Mat)
