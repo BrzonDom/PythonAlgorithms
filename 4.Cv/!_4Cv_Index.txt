@@ -1,0 +1,13 @@
+
+4Cv_1Uk.py      ( 1. )
+    Najdi a změň
+
+4Cv_2Uk.py      ( 1. )
+    Záměna slova
+
+4Cv_3Uk.py      ( 1. )
+    Nalezení maxima
+
+4Cv_4Uk.py      ( 1. )
+    Nalezení druhého největšího prvku
+
