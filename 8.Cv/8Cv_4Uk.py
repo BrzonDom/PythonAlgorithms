@@ -1,13 +1,12 @@
-
 """
 Objekt komlexní číslo
 
-Třídy pro komplexní čísla:
+    Třídy pro komplexní čísla:
 
-    Třída obsahuje dvě proměnné real a imag
-    Konstruktor (metoda _init_()) nastavuje tyto proměnné defaultně na 0
-    Pro přímý výpis funkcí print je vhodné definovat metodu _repr_, která vrací string
-    Pozor: init a repr má v názvu dvě podtržítka!!!
+        Třída obsahuje dvě proměnné real a imag
+        Konstruktor (metoda _init_()) nastavuje tyto proměnné defaultně na 0
+        Pro přímý výpis funkcí print je vhodné definovat metodu _repr_, která vrací string
+        Pozor: init a repr má v názvu dvě podtržítka!!!
 
 """
 
