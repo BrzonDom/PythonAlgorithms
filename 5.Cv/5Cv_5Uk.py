@@ -6,7 +6,6 @@ Načtení zakódovaného obrázku ze souboru
 
 """
 
-
 ## | ------------------ Functions definition ------------------ |
 
 # [You should understand this function]
