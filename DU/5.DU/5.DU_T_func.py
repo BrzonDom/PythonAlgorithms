@@ -268,7 +268,7 @@ coRN = {
 file_list = ["setup_T_01", "setup_T_02", "setup_T_03",
              "setup_myT_04"]
 
-inOp = 1
+inOp = 3
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
@@ -500,12 +500,14 @@ for piece in moves_piece:
                     print("🟥", end="")
                 elif board[piece[0][0]][piece[0][1]] == 2:
                     print("🟦", end="")
-            elif board[row][col] in (3, 4) and [row, col] in piece:
-                print("🔳", end="")
-            elif [row, col] in piece:
-                print("🟩", end="")
+            # elif board[row][col] in (3, 4) and [row, col] in piece:
+            #     print("🔳", end="")
             elif board[row][col] in (3, 4):
                 print("⬛", end="")
+            elif [row, col] in piece:
+                print("🟩", end="")
+            # elif board[row][col] in (3, 4):
+            #     print("⬛", end="")
             else:
                 print("⬜", end="")
         print("", end="\n\t\t")
