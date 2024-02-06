@@ -1,17 +1,17 @@
 """
 Funkce
 
-Při programování často potřebujeme vykonat určité operace opakovaně. K tomu se hodí tzv. funkce.
+    Při programování často potřebujeme vykonat určité operace opakovaně. K tomu se hodí tzv. funkce.
 
-    Funkce je seskupení příkazů
-    Vstupem funkce jsou argumenty (jsou nepovinné)
-    Složitý problém se typicky rozdělí na jednodušší úkony, které se naprogramují do funkcí
-    Takový kód je snáze udržovatelný/čitelný
-    Funkce mohou obsahovat lokální proměnné, které “nejsou vidět” ve zbytku programu
-    V Pythonu se funkce definují klíčovým slovem def a tělo funkce (vnitřní příkazy) jsou odsazeny
+        Funkce je seskupení příkazů
+        Vstupem funkce jsou argumenty (jsou nepovinné)
+        Složitý problém se typicky rozdělí na jednodušší úkony, které se naprogramují do funkcí
+        Takový kód je snáze udržovatelný/čitelný
+        Funkce mohou obsahovat lokální proměnné, které “nejsou vidět” ve zbytku programu
+        V Pythonu se funkce definují klíčovým slovem def a tělo funkce (vnitřní příkazy) jsou odsazeny
 
-        def jmenoFunkce( parametry ):
-           telo_funkce
+            def jmenoFunkce( parametry ):
+               telo_funkce
 
     Maximum ze dvou čísel:
 
