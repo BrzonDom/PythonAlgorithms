@@ -39,6 +39,9 @@ Příklady:
 import copy
 
 
+
+
+
 def sumArr(Arr):
 
     sum = 0
