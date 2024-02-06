@@ -43,7 +43,7 @@ def decode(mat):
 
 
 ## | -------------- Python starts processing here ------------- |
-encoded = loadFile('encoded.txt')  # load the encoded file
+encoded = loadFile('data/encoded.txt')  # load the encoded file
 decoded = decode(encoded)  # decode the encoded file
 for line in decoded:  # print our decoded file
     print(line)
