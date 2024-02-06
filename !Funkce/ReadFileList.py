@@ -1,5 +1,7 @@
 
-file_name = "data_01"
+file_list = ["data_01", "data_02"]
+
+file_name = file_list[0]
 file_path = "data\\" + file_name + ".txt"
 
 Mat = []
