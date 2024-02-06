@@ -162,7 +162,6 @@ while len(splitStack) > 0:
                 splitStack.append([row, col])
 
 
-
 if len(splitCheck) != pieces_cnt:
     print([])
 else:
