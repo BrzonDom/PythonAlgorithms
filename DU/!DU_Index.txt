@@ -1,0 +1,64 @@
+
+01.DU   ( 1. / 1.)
+    L:  počítá součet mocnin posloupnosti čísel
+
+    T:  v posloupnosti čísel najde podposloupnost, která má největší součet.
+
+
+02.DU   ( 1. / .9 )
+    L:  metodou půlení intervalu spočítá kořen polynomu 5-tého stupně
+
+    T:  od sebe odečte dvě reálná čísla zadané v binární číselné soustavě
+
+
+03.DU   ( 1. / .8 )
+    L:  V zadané množině čísel najděte číslo, které má největší společný dělitel
+        s prvním zadaným číslem a tento největší společný dělitel
+
+    T:  převádí čísla mezi slovní a číselnou reprezentací.
+
+
+04.DU   ( .9 / .9 )
+    L:  načte dvě řádky pole celých čísel ze standardního vstupu a v nich
+        najde nejdelší podposloupnost, která se vyskytuje v první řádce i v druhé řádce
+
+    T:  v posloupnosti čísel najde souvislé podposloupnosti, které se v posloupnosti
+        vyskytují dvakrát. Pokud je takových dvojic podposloupností více, program
+        nalezne tu s největším součtem.
+
+
+05.DU   ( .8 / .8 )
+    L:  zjistí, zda existuje bílý kamen, který může skočit přes nějaký černý kámen.
+
+    T:  najde kamen (obyčejný kamen, nebo dámu) která může provést nejdelší skok.
+
+
+06.DU   ( .8 / .8 )
+    L:  najde, kde se vzor vyskytuje uvnitř obrazu.
+
+    T:  najde největší souvislou podmatici libovolného rozměru,
+        která obsahuje pouze záporné hodnoty.
+
+
+07.DU   ( .9 / .7 )
+    L:  přečte sekvenci kladných čísel X a číslo S a najde čísla v X, jejichž součet je roven S
+
+    T:  přečte sekvenci kladných čísel X a dvě čísla s1 a s2 a najde, jejíž součet je roven s1 a zbytek jejíž součet je roven s2
+
+
+08.DU   ( .9 / .0 )
+    L:   vyplní hexagonální hrací desku zadanými kameny
+
+    T:   vyplnily hrací desku s tím, že je možné použít jak translace, tak i rotace kamenů
+
+
+10.DU   ( .9 / .8 )
+    L:  pohyby “kobylky” v hexagonálním hnízdě
+
+    T:  pohyby “mravence” kolem hnízda, přičemž se jedná o pohyb na hexagonální mřížce
+
+
+11.DU   ( .9 / .0 )
+    L:  řešení zmenšené Babylónské věže v nejmenším počtu kroků
+
+    T:  najde řešení zadaného problému Nurikabe.
