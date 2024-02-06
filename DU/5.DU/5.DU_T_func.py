@@ -298,7 +298,7 @@ for row in board:
     print("", end="\n\t\t")
 print()
 
-# ⬜⬛🟥🟪🟦
+# ⬜⬛🟥🟪🟦🔳
 
 print("\tInput board visual:\n")
 print("", end="\t\t")
@@ -357,10 +357,11 @@ print()
 moves_res = []
 moves_otRes = []
 moves_all = []
+moves_piece = []
 
 pathLenMax = 0
 tileStrt = []
-tileCnt = 0
+pieceCnt = 0
 resCnt = 1
 
 
@@ -396,6 +397,10 @@ for moves_pth in moves_lst:
             if tileStrt != moves:
                 tileStrt = copy.deepcopy(moves)
 
+                pieceCnt = len(moves_piece)
+                moves_piece.append([])
+                moves_piece[pieceCnt].append(moves)
+
                 print(f"\n\tFor tile: {coCon(moves)} {moves}")
             print(f"\t\tPath len: {pathLen:2}", end="\t\t")
         elif moves:
@@ -409,6 +414,9 @@ for moves_pth in moves_lst:
 
         if moves not in moves_all:
             moves_all.append(moves)
+
+        if moves not in moves_piece[pieceCnt]:
+            moves_piece[pieceCnt].append(moves)
 
     print()
 print("\n")
@@ -458,5 +466,49 @@ print("\t⬛ = opponent's pieces")
 print("\t🟩 = possible moves")
 print("\t🟨 = path of longest possible move")
 
-# print("\n\nMoves of pieces:")
+print("\n\nMoves of pieces:")
+
+for piece in moves_piece:
+
+    if board[piece[0][0]][piece[0][1]] == 1:
+        print(f"\n\tFor man piece on starting tile: {piece[0]}")
+
+        if len(piece) == 1:
+            print("\t\tNo moves found")
+            continue
+        else:
+            print(f"\t\t{len(piece)-1} moves found", end="\n\t\t\t")
+
+
+    elif board[piece[0][0]][piece[0][1]] == 2:
+        print(f"\n\tFor king piece on starting tile: {piece[0]}")
+
+        if len(piece) == 1:
+            print("\t\tNo moves found")
+            continue
+        else:
+            print(f"\t\t{len(piece)-1} moves found", end="\n\t\t\t")
+
+    print("The moves: ", end="")
+    print(piece[1:])
+
+    print("\n", end="\t\t")
+    for row in range(8):
+        for col in range(8):
+            if [row, col] == piece[0]:
+                if board[piece[0][0]][piece[0][1]] == 1:
+                    print("🟥", end="")
+                elif board[piece[0][0]][piece[0][1]] == 2:
+                    print("🟦", end="")
+            elif board[row][col] in (3, 4) and [row, col] in piece:
+                print("🔳", end="")
+            elif [row, col] in piece:
+                print("🟩", end="")
+            elif board[row][col] in (3, 4):
+                print("⬛", end="")
+            else:
+                print("⬜", end="")
+        print("", end="\n\t\t")
+    print()
+
 
