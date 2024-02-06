@@ -1,3 +1,4 @@
+import copy
 
 from board import *
 
@@ -24,6 +25,8 @@ def data_scan(data):
         if line[2] == 2:
             """     Find the coordinates of grasshopper    """
             hopperCo = [line[0], line[1]]
+            piecesCnt += 1
+
         elif line[2] == 1:
             """     Count the number of other pieces    """
             piecesCnt += 1
@@ -45,6 +48,7 @@ def findJump(coord, dir):
 
             while isIn(row, col, size):
                 if value_dict[row][col] == 0:
+
                     print(f"\tJump to [{row}, {col}] possible")
                     print(f"\t\tJump of direction ({dir[0]}, {dir[1]})")
                     print()
@@ -60,6 +64,31 @@ def findJump(coord, dir):
             return
 
 
+def splitCheck(neighbr, jump_dict):
+
+    spltStck = [neighbr]
+    spltChcked = []
+
+    while len(spltStck) > 0:
+        """     While-loop of flood fill
+                    to check if jump split the hive     """
+
+        curRow = spltStck[-1][0]
+        curCol = spltStck[-1][0]
+
+        for move in move_list:
+            row = curRow + move[0]
+            col = curCol + move[1]
+
+            if isIn(row, col, size):
+                if jump_dict[row][col] != 0 and [row, col] not in spltChcked:
+                    spltChcked.append([row, col])
+                    spltStck.append([row, col])
+
+    if len(spltChcked) != pieces_cnt:
+        return False
+    else:
+        return True
 
 
 file_list = ["PrL_1", "PrL_2", "PrL_3", "eboard-5002.txt", "eboard-5412", "eboard-6759", "eboard-7089", "eboard-7141", "eboard-7639", "eboard-8904"]
@@ -153,3 +182,13 @@ jump_list = []
 for move in move_list:
 
     findJump(hopper_coord, move)
+
+print("All the neighbring tiles:\n", end="\t\t")
+for neigh in neighbr_list:
+    print(neigh, end=" ")
+print("\n")
+
+print("All possible jumps:\n", end="\t\t")
+for jump in jump_list:
+    print(jump, end=" ")
+print()
