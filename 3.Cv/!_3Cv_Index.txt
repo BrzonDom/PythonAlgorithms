@@ -1,0 +1,28 @@
+
+3Cv_0Uk.py      ( 1. )
+    Ramanujan Taxi
+
+3Cv_1Uk.py      ( 1. )
+    Funkce
+
+3Cv_2Uk.py      ( 1. )
+    Funkce quit()
+
+3Cv_3Uk.py      ( 1. )
+    Absolutní hodnota
+
+3Cv_4Uk.py      ( 1. )
+    Sexy prvočísla
+
+3Cv_5Uk.py      ( 1. )
+    Dokonalá čísla
+
+3Cv_6Uk.py      ( 1. )
+    Super-dokonalá čísla
+
+3Cv_7Uk.py      ( 1. )
+    Největší společný dělitel
+
+3Cv_8Uk.py      ( 1. )
+    Césarova šifra
+
