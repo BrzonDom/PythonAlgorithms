@@ -207,6 +207,7 @@ def prtRes(resLst, addRes):
     resMovPrt = ""
 
     print(f"\tStart tile: {coCon(resLst[0])} {resLst[0]}")
+    print(f"\t\t\tPath len: {pathLenMax}")
     print(f"\t\t\t{len(resLst) - 1} Moves: ", end="")
 
     for moves in resLst[1:]:
@@ -348,14 +349,16 @@ for r in range(8):
             nextMovesKing(tile, direction, [tile], board, 0)
 
 
-for moves in moves_lst:
-    print(moves)
-print("\n")
+# for moves in moves_lst:
+#     print(moves)
+# print("\n")
+print()
 
 moves_res = []
 moves_otRes = []
 moves_all = []
-moves_strt = []
+
+pathLenMax = 0
 tileStrt = []
 tileCnt = 0
 resCnt = 1
@@ -366,6 +369,18 @@ print("Paths found:")
 
 for moves_pth in moves_lst:
 
+    pathLen = moves_pth[0]
+
+    if pathLen > pathLenMax:
+        pathLenMax = pathLen
+        moves_res = copy.deepcopy(moves_pth[1])
+        moves_otRes = []
+        resCnt = 1
+
+    elif pathLen == pathLenMax:
+        moves_otRes.append(copy.deepcopy(moves_pth[1]))
+        resCnt += 1
+
     # if len(moves_res) < len(moves_pth):
     #     moves_res = copy.deepcopy(moves_pth)
     #     moves_otRes = []
@@ -374,8 +389,6 @@ for moves_pth in moves_lst:
     # elif len(moves_res) == len(moves_pth):
     #     resCnt += 1
     #     moves_otRes.append(copy.deepcopy(moves_pth))
-
-    pathLen = moves_pth[0]
 
     for m, moves in enumerate(moves_pth[1]):
 
@@ -400,7 +413,6 @@ for moves_pth in moves_lst:
     print()
 print("\n")
 
-quit()
 
 print("Result:\n")
 
@@ -411,6 +423,8 @@ if moves_otRes:
     for otRes in moves_otRes:
         prtRes(otRes, True)
 
+
+# quit()
 
 print("", end="   ")
 for i in range(8):
