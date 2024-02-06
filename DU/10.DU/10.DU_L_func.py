@@ -31,10 +31,40 @@ def data_scan(data):
     return piecesCnt, hopperCo
 
 
+def findJump(coord, dir):
+
+    row = coord[0] + dir[0]
+    col = coord[1] + dir[1]
+
+    if isIn(row, col, size):
+        if value_dict[row][col] == 1:
+            neighbr_list.append([row, col])
+
+            row += dir[0]
+            col += dir[1]
+
+            while isIn(row, col, size):
+                if value_dict[row][col] == 0:
+                    print(f"\tJump to [{row}, {col}] possible")
+                    print(f"\t\tJump of direction ({dir[0]}, {dir[1]})")
+                    print()
+                    jump_list.append([row, col])
+                    return
+
+                row += dir[0]
+                col += dir[1]
+
+        else:
+            print(f"\tJump in direction of ({dir[0]}, {dir[1]}) so to [{row}, {col}], not possible")
+            print()
+            return
+
+
+
 
 file_list = ["PrL_1", "PrL_2", "PrL_3", "eboard-5002.txt", "eboard-5412", "eboard-6759", "eboard-7089", "eboard-7141", "eboard-7639", "eboard-8904"]
 
-file_name = file_list[1]
+file_name = file_list[0]
 # file_name = "eboard-7296"
 file_path = "data\\" + file_name + ".txt"
 
@@ -110,5 +140,16 @@ pieces_cnt, hopper_coord = data_scan(data_list)
 
 print(f"Grasshopper coordinates: [{hopper_coord[0]}, {hopper_coord[1]}]")
 print(f"Number of pieces: {pieces_cnt}")
+print()
 
+"""     List of possible moves on hex-grid  """
+move_list = [[1, -1], [1, 0],
+             [0, 1], [-1, 1],
+             [-1, 0], [0, -1]]
 
+neighbr_list = []
+jump_list = []
+
+for move in move_list:
+
+    findJump(hopper_coord, move)
