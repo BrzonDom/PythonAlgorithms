@@ -1,0 +1,30 @@
+File: setup_myT_05.txt
+
+! Checkers with ONLY jumping allowed !
+
+	Input board:
+
+		0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0
+
+	Input board visual:
+
+		⬜⬜⬜⬜⬜⬜⬜⬜
+		⬜⬜⬜⬜⬜⬜⬜⬜
+		⬜⬜⬜⬜⬜⬜⬜⬜
+		⬜⬜⬜⬜⬜⬜⬜⬜
+		⬜⬜⬜⬜⬜⬜⬜⬜
+		⬜⬜⬜⬜⬜⬜⬜⬜
+		⬜⬜⬜⬜⬜⬜⬜⬜
+		⬜⬜⬜⬜⬜⬜⬜⬜
+
+
+
+	! No pieces found !
+

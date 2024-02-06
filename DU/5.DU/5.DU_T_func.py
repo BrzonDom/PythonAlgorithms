@@ -266,9 +266,9 @@ coRN = {
 
 
 file_list = ["setup_T_01", "setup_T_02", "setup_T_03",
-             "setup_myT_04"]
+             "setup_myT_04", "setup_myT_05", "setup_myT_06"]
 
-inOp = 3
+inOp = 5
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
@@ -354,6 +354,10 @@ for r in range(8):
 # print("\n")
 print()
 
+if not moves_lst:
+    print("\t! No pieces found !")
+    quit()
+
 moves_res = []
 moves_otRes = []
 moves_all = []
@@ -363,7 +367,6 @@ pathLenMax = 0
 tileStrt = []
 pieceCnt = 0
 resCnt = 1
-
 
 
 print("Paths found:")
@@ -421,6 +424,9 @@ for moves_pth in moves_lst:
     print()
 print("\n")
 
+if not moves_res:
+    print("\t! No moves found !")
+    quit()
 
 print("Result:\n")
 
@@ -431,8 +437,6 @@ if moves_otRes:
     for otRes in moves_otRes:
         prtRes(otRes, True)
 
-
-# quit()
 
 print("", end="   ")
 for i in range(8):
