@@ -223,6 +223,10 @@ def prtRes(resLst, addRes):
     print("\n")
 
 
+# def movesPiece(strtTile):
+
+
+
 def coCon(coord):
 
     return coCL[coord[1]] + coRN[coord[0]]
@@ -248,8 +252,8 @@ coRN = {
     7: "1",
     6: "2",
     5: "3",
-    4: "5",
-    3: "4",
+    4: "4",
+    3: "5",
     2: "6",
     1: "7",
     0: "8"
@@ -260,7 +264,7 @@ coRN = {
 file_list = ["setup_T_01", "setup_T_02", "setup_T_03",
              "setup_myT_04"]
 
-inOp = 0
+inOp = 1
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"
@@ -290,6 +294,23 @@ for row in board:
     print("", end="\n\t\t")
 print()
 
+# ⬜⬛🟥🟪🟦
+
+print("\tInput board visual:\n")
+print("", end="\t\t")
+for row in board:
+    for col in row:
+        if col == 0:
+            print("⬜", end="")
+        elif col == 1:
+            print("🟥", end="")
+        elif col == 2:
+            print("🟦", end="")
+        elif col == 3 or col == 4:
+            print("⬛", end="")
+    print("", end="\n\t\t")
+print()
+print()
 
 moves_lst = []
 # moves_tile = []
@@ -390,8 +411,10 @@ for r in range(8):
     print(8 - r, end=" ")
     for c in range(8):
         # print(f"{r}{c}", end=" ")
-        if board[r][c] == 1 or board[r][c] == 2:
+        if board[r][c] == 1:
             print("🟥", end="")
+        elif board[r][c] == 2:
+            print("🟦", end="")
         elif [r, c] in moves_res:
             print("🟨", end="")
         elif [r, c] in moves_all:
@@ -405,7 +428,11 @@ print()
 
 print("Explanatory note:")
 print("\t⬜ = empty tile")
-print("\t🟥 = your pieces")
+print("\t🟥 = your man pieces")
+print("\t🟦 = your king pieces")
 print("\t⬛ = opponent's pieces")
 print("\t🟩 = possible moves")
 print("\t🟨 = path of longest possible move")
+
+# print("\n\nMoves of pieces:")
+
