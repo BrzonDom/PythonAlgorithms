@@ -18,17 +18,13 @@ print(f"File: {file_name}.txt\n")
 
 graph = []
 
+
+"""     Read file input     """
 # line = file.readline()
 # print(line)
 #
 # res = list(map(int, line.split()))
 # print(res)
-
-# graph.append([[4, 2],1])
-# print(graph)
-# print(graph[0])
-# print(graph[0][0])
-# print(graph[0][1])
 
 data_list = []
 value_dict = {}
@@ -41,12 +37,15 @@ val_line = ["-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 for str_line in file:
     # print(str_line, end="")
+    """     Check if input is valid     """
     if str_line[0] in val_line:
     #     line_cnt += 1
     # else:
         line = list(map(int, str_line.split()))
         # print(f"{line[0]}:{line[1]}")
 
+        """     Store input board   
+                    Not sure why 2 times    """
         border.append([line[0], line[1]])
         data_list.append(line)
         # print(line)
@@ -68,29 +67,35 @@ print()
 
 for row, col, val in data_list:
 
+    """     Make graph(dictionary) out of data  """
     if row not in value_dict:
         value_dict[row] = {}
     value_dict[row][col] = val
 
     # print(f"[{row:2} : {col:2} = {val}]")
 
+"""     For visual board print  """
 # set_board = Board(0)
 # set_pieces = set_board.loadBoard(file_path)
-#
 # set_board.saveImage(f"{file_name}_out.png")
+
 pieces_cnt = 0
 
 for line in data_list:
+
     if line[2] == 2:
-        hooper_coord = [line[0], line[1]]
+        """     Find the coordinates of grasshopper    """
+        hopper_coord = [line[0], line[1]]
     elif line[2] == 1:
+        """     Count the number of other pieces    """
         pieces_cnt += 1
 
 print()
-print(f"Grasshoper coordinates: {hooper_coord[0]}:{hooper_coord[1]}")
-print(hooper_coord)
+print(f"Grasshopper coordinates: {hopper_coord[0]}:{hopper_coord[1]}")
+print(hopper_coord)
 # print(value_dict[3][5])
 
+"""     List of possible moves on hex-grid  """
 move_list = [[1, -1], [1, 0],
              [0, 1], [-1, 1],
              [-1, 0], [0, -1]]
@@ -98,23 +103,23 @@ next_list = []
 
 for move in move_list:
     print(move)
-
 print()
 
 neighbour_list = []
 
-
 for move in move_list:
-    # if [hooper_coord[0]+move[0], hooper_coord[1]+move[1]] in border:
-    row = hooper_coord[0] + move[0]
-    col = hooper_coord[1] + move[1]
+    # if [hopper_coord[0]+move[0], hopper_coord[1]+move[1]] in border:
+    row = hopper_coord[0] + move[0]
+    col = hopper_coord[1] + move[1]
+
+    """     Bool-val to check if the jump is possible   """
     isOut = False
     # print(f"Direction: {move}")
 
     if isIn(row, col, size):
 
-        # row = hooper_coord[0]+move[0]
-        # col = hooper_coord[1]+move[1]
+        # row = hopper_coord[0]+move[0]
+        # col = hopper_coord[1]+move[1]
 
         if value_dict[row][col] == 1:
             neighbour_list.append([row, col])
@@ -130,6 +135,8 @@ for move in move_list:
 
         # else:
             while value_dict[row][col] != 0 and not isOut:
+                """     While loop to travel to the end of pieces   
+                            Breaks either when out of board or lands on empty tile  """
 
                 row += move[0]
                 col += move[1]
@@ -140,46 +147,14 @@ for move in move_list:
                     break
 
             if not isOut:
+                """     If hopper got to an empty tile  """
                 next_list.append([row, col])
                 print(f"Jump to {next_list[-1]} possible")
 
-
-
-            # while value_dict[row][col] != 0 and isIn(row, col, size):
-            #
-            #     if [row-move[0], col-move[1]] != hooper_coord:
-            #         next_list.append([row, col])
-            #         print(f"{move} to [{row}, {col}] possible")
-            #     else:
-            #         print("No jump")
-
     else:
         print(f"{move} not possible because out of border")
-
 print()
 
-# for i in range(len(move_list)-1):
-#     print(f"{move_list[i]} -> {move_list[i+1]}")
-
-# if len(neighbour_list) >= 2:
-# #     print(next_list)
-# #
-# # elif len(neighbour_list) == 2:
-# #     split = True
-#
-#     for i in range(len(neighbour_list)-1):
-#         # if (-1 <= (neighbour_list[i][0] - neighbour_list[i+1][0]) <= 1) and (-1 <= (neighbour_list[i][1] - neighbour_list[i+1][1]) <= 1):
-#         if [neighbour_list[i][0]-neighbour_list[i+1][0], neighbour_list[i][1]-neighbour_list[i+1][1]] in move_list:
-#             print(next_list)
-#             # split = False
-#         else:
-#             print(f"Moves not possible since it would split the hive, neighbours aren't next to each other")
-#
-#     # if split:
-#     #     print(f"Moves not possible since it would split the hive, neighbours aren't next to each other")
-#
-# else:
-#     print(f"Moves not possible since it would split the hive")
 
 split = False
 
@@ -233,6 +208,8 @@ splitStack = [neighbour_list[0]]
 splitCheck = []
 
 while len(splitStack) > 0:
+    """     While-loop of flood fill
+                to check if jump split the hive     """
 
     curRow = splitStack[-1][0]
     curCol = splitStack[-1][1]
@@ -256,9 +233,11 @@ while len(splitStack) > 0:
 print(f"Split Check {len(splitCheck)}/{pieces_cnt}:")
 print(splitCheck)
 
+split = bool(len(splitCheck) == pieces_cnt)
+print(split)
 
 
-if split:
+if not split:
     print(f"Moves not possible since it would split the hive, neighbours aren't next to each other")
 else:
     print(next_list)
