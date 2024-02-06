@@ -1,8 +1,8 @@
 
-2Cv_0Uk.py      ( 1. )
+6Cv_0Uk.py      ( 1. )
     Inicializace a kopírování 2D polí
 
-2Cv_1Uk.py      ( 1. )
+6Cv_1Uk.py      ( 1. )
     Life
 
 6Cv_2Uk.py      ( 1. )
