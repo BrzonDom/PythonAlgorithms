@@ -42,7 +42,7 @@ def inBoard(coord):
     return 0 <= coord <= 7
 
 
-def nextMovesMan(tile, prevTiles):
+def nextMovesMan(tile, prevTiles, pathLen):
 
     if inBoard(tile[0] - 2) and inBoard(tile[1] - 2):
         if board[tile[0] - 2][tile[1] - 2] == 0 and board[tile[0] - 1][tile[1] - 1] not in [0, 1, 2]:
@@ -52,7 +52,7 @@ def nextMovesMan(tile, prevTiles):
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 2, tile[1] - 2])
 
-            nextMovesMan([tile[0] - 2, tile[1] - 2], newTiles)
+            nextMovesMan([tile[0] - 2, tile[1] - 2], newTiles, pathLen + 2)
 
     if inBoard(tile[0] - 2) and inBoard(tile[1] + 2):
         if board[tile[0] - 2][tile[1] + 2] == 0 and board[tile[0] - 1][tile[1] + 1] not in [0, 1, 2]:
@@ -62,12 +62,12 @@ def nextMovesMan(tile, prevTiles):
             newTiles = copy.deepcopy(prevTiles)
             newTiles.append([tile[0] - 2, tile[1] + 2])
 
-            nextMovesMan([tile[0] - 2, tile[1] + 2], newTiles)
+            nextMovesMan([tile[0] - 2, tile[1] + 2], newTiles, pathLen + 2)
 
-    moves_lst.append(prevTiles)
+    moves_lst.append([pathLen, prevTiles])
 
 
-def nextMovesKing(tile, inDir, prevTiles, prevBoard):
+def nextMovesKing(tile, inDir, prevTiles, prevBoard, pathLen):
 
     # direcOfMov = [[tile[0] - 1, tile[1] - 1], [tile[0] - 1, tile[1] + 1], [tile[0] + 1, tile[1] - 1], [tile[0] + 1, tile[1] + 1]]
 
@@ -85,7 +85,7 @@ def nextMovesKing(tile, inDir, prevTiles, prevBoard):
             newBoard[tile[0] - 1][tile[1] - 1] = 2
             newBoard[tile[0]][tile[1]] = 0
 
-            nextMovesKing([tile[0] - 1, tile[1] - 1], newDir, newTiles, newBoard)
+            nextMovesKing([tile[0] - 1, tile[1] - 1], newDir, newTiles, newBoard, pathLen + 1)
 
         elif prevBoard[tile[0] - 1][tile[1] - 1] == 3 or prevBoard[tile[0] - 1][tile[1] - 1] == 4:
             if inBoard(tile[0] - 2) and inBoard(tile[1] - 2):
@@ -100,7 +100,7 @@ def nextMovesKing(tile, inDir, prevTiles, prevBoard):
                     newBoard[tile[0] - 1][tile[1] - 1] = 0
                     newBoard[tile[0]][tile[1]] = 0
 
-                    nextMovesKing([tile[0] - 2, tile[1] - 2], newDir, newTiles, newBoard)
+                    nextMovesKing([tile[0] - 2, tile[1] - 2], newDir, newTiles, newBoard, pathLen + 2)
 
 
     if inBoard(tile[0] - 1) and inBoard(tile[1] + 1) and inDir[1]:
@@ -117,7 +117,7 @@ def nextMovesKing(tile, inDir, prevTiles, prevBoard):
             newBoard[tile[0] - 1][tile[1] + 1] = 2
             newBoard[tile[0]][tile[1]] = 0
 
-            nextMovesKing([tile[0] - 1, tile[1] + 1], newDir, newTiles, newBoard)
+            nextMovesKing([tile[0] - 1, tile[1] + 1], newDir, newTiles, newBoard, pathLen + 1)
 
         elif prevBoard[tile[0] - 1][tile[1] + 1] == 3 or prevBoard[tile[0] - 1][tile[1] + 1] == 4:
             if inBoard(tile[0] - 2) and inBoard(tile[1] + 2):
@@ -132,7 +132,7 @@ def nextMovesKing(tile, inDir, prevTiles, prevBoard):
                     newBoard[tile[0] - 1][tile[1] + 1] = 0
                     newBoard[tile[0]][tile[1]] = 0
 
-                    nextMovesKing([tile[0] - 2, tile[1] + 2], newDir, newTiles, newBoard)
+                    nextMovesKing([tile[0] - 2, tile[1] + 2], newDir, newTiles, newBoard, pathLen + 2)
 
 
     if inBoard(tile[0] + 1) and inBoard(tile[1] - 1) and inDir[2]:
@@ -150,7 +150,7 @@ def nextMovesKing(tile, inDir, prevTiles, prevBoard):
             newBoard[tile[0] + 1][tile[1] - 1] = 2
             newBoard[tile[0]][tile[1]] = 0
 
-            nextMovesKing([tile[0] + 1, tile[1] - 1], newDir, newTiles, newBoard)
+            nextMovesKing([tile[0] + 1, tile[1] - 1], newDir, newTiles, newBoard, pathLen + 1)
 
         elif prevBoard[tile[0] + 1][tile[1] - 1] == 3 or prevBoard[tile[0] + 1][tile[1] - 1] == 4:
             if inBoard(tile[0] + 2) and inBoard(tile[1] - 2):
@@ -165,7 +165,7 @@ def nextMovesKing(tile, inDir, prevTiles, prevBoard):
                     newBoard[tile[0] + 1][tile[1] - 1] = 0
                     newBoard[tile[0]][tile[1]] = 0
 
-                nextMovesKing([tile[0] + 2, tile[1] - 2], newDir, newTiles, newBoard)
+                nextMovesKing([tile[0] + 2, tile[1] - 2], newDir, newTiles, newBoard, pathLen + 2)
 
 
     if inBoard(tile[0] + 1) and inBoard(tile[1] + 1) and inDir[3]:
@@ -182,7 +182,7 @@ def nextMovesKing(tile, inDir, prevTiles, prevBoard):
             newBoard[tile[0] + 1][tile[1] + 1] = 2
             newBoard[tile[0]][tile[1]] = 0
 
-            nextMovesKing([tile[0] + 1, tile[1] + 1], newDir, newTiles, newBoard)
+            nextMovesKing([tile[0] + 1, tile[1] + 1], newDir, newTiles, newBoard, pathLen + 1)
 
         elif prevBoard[tile[0] + 1][tile[1] + 1] == 3 or prevBoard[tile[0] + 1][tile[1] + 1] == 4:
             if inBoard(tile[0] + 2) and inBoard(tile[1] + 2):
@@ -197,9 +197,9 @@ def nextMovesKing(tile, inDir, prevTiles, prevBoard):
                     newBoard[tile[0] + 1][tile[1] + 1] = 0
                     newBoard[tile[0]][tile[1]] = 0
 
-                nextMovesKing([tile[0] + 2, tile[1] + 2], newDir, newTiles, newBoard)
+                nextMovesKing([tile[0] + 2, tile[1] + 2], newDir, newTiles, newBoard, pathLen + 2)
 
-    moves_lst.append(prevTiles)
+    moves_lst.append([pathLen ,prevTiles])
 
 
 
@@ -221,6 +221,9 @@ def prtRes(resLst, addRes):
     if resMovPrt:
         print(resMovPrt[:-3])
     print("\n")
+
+
+# def prtPaths(movLst):
 
 
 # def movesPiece(strtTile):
@@ -334,7 +337,7 @@ for r in range(8):
             tile = [r, c]
 
             # def nextMoves(tile, noJump, prevTiles):
-            nextMovesMan(tile, [tile])
+            nextMovesMan(tile, [tile], 0)
 
         elif board[r][c] == 2:
             """     Found white king    """
@@ -342,10 +345,12 @@ for r in range(8):
             tile = [r, c]
             direction = [True, True, True, True]
 
-            nextMovesKing(tile, direction, [tile], board)
-# for moves in moves_lst:
-#     print(moves)
+            nextMovesKing(tile, direction, [tile], board, 0)
 
+
+for moves in moves_lst:
+    print(moves)
+print("\n")
 
 moves_res = []
 moves_otRes = []
@@ -355,27 +360,31 @@ tileStrt = []
 tileCnt = 0
 resCnt = 1
 
+
+
 print("Paths found:")
 
 for moves_pth in moves_lst:
 
-    if len(moves_res) < len(moves_pth):
-        moves_res = copy.deepcopy(moves_pth)
-        moves_otRes = []
-        resCnt = 1
+    # if len(moves_res) < len(moves_pth):
+    #     moves_res = copy.deepcopy(moves_pth)
+    #     moves_otRes = []
+    #     resCnt = 1
+    #
+    # elif len(moves_res) == len(moves_pth):
+    #     resCnt += 1
+    #     moves_otRes.append(copy.deepcopy(moves_pth))
 
-    elif len(moves_res) == len(moves_pth):
-        resCnt += 1
-        moves_otRes.append(copy.deepcopy(moves_pth))
+    pathLen = moves_pth[0]
 
-    for m, moves in enumerate(moves_pth):
+    for m, moves in enumerate(moves_pth[1]):
 
         if not m:
             if tileStrt != moves:
                 tileStrt = copy.deepcopy(moves)
 
                 print(f"\n\tFor tile: {coCon(moves)} {moves}")
-            print("\t\t", end="\t\t\t")
+            print(f"\t\tPath len: {pathLen:2}", end="\t\t")
         elif moves:
 
             """
@@ -391,6 +400,7 @@ for moves_pth in moves_lst:
     print()
 print("\n")
 
+quit()
 
 print("Result:\n")
 
