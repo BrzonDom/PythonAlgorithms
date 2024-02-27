@@ -38,16 +38,20 @@ Příklady:
         8 12
 """
 
-# Input = "1 2 3 4 5 6"
-# Input = "-2 -1 -3 -4 -5 -6"
-# Input = "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3"
 
-Input_list = ["1 2 3 4 5 6", "-2 -1 -3 -4 -5 -6", "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3"]
-Input = Input_list[2]
+"""
+ ! Algorithm that finds a direct sequence with the biggest sum ! 
+"""
 
 # Input = "1 2 3 4 5 6"
 # Input = "-2 -1 -3 -4 -5 -6"
 # Input = "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3"
+
+Input_list = ["1 2 3 4 5 6",
+              "-2 -1 -3 -4 -5 -6",
+              "1 2 5 -10 8 -3 2 1 -1 2 -2 5 -16 8 -10 2 3",
+              "1, 3, 4, -2, -1, 0, 1, 4, 5, 6, 1, 2"]
+Input = Input_list[3]
 
 # Input = input()
 
@@ -78,7 +82,7 @@ for i in range(In_Len):
 numCnt += 1
 
 print()
-print("List of numbers:")
+print("List of numbers: ", end="")
 
 for i in range(numCnt-1):
     print(numList[i], end=", ")
@@ -122,7 +126,7 @@ print("\nMax sequence: ", end="")
 for i in range(maxSeqCnt-1):
     print(maxSeq[i], end=", ")
 print(maxSeq[maxSeqCnt-1])
-print("\nMax sequence count: ", end="")
+print("Max sequence count: ", end="")
 print(maxSeqCnt)
-print("\nMax sequence total: ", end="")
+print("Max sequence total: ", end="")
 print(maxSeqTot)
