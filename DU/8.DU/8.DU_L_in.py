@@ -44,9 +44,9 @@ def solve(board, piec_lst, piec_ind, size):
 
             solBoard.append(copy.deepcopy(board))
             print(board)
-            # for row in board:
-            #     for col in board[row]:
-            #         print(board[row][col], end=" ")
+            # for row in expBoard:
+            #     for col in expBoard[row]:
+            #         print(expBoard[row][col], end=" ")
             #     print()
             # print()
 
@@ -70,7 +70,7 @@ def solve(board, piec_lst, piec_ind, size):
                     # for block in piece:
                     #     rB = row + block[0]
                     #     cB = col + block[1]
-                    #     board[rB][cB] = 0
+                    #     expBoard[rB][cB] = 0
 
 
 def isIn(row, col, size):
@@ -112,7 +112,7 @@ fileOpen = "data\\" + file_name + ".txt"
 fileWrite = "data\\" + file_name + "_out.txt"
 
 size = 4
-# board = base.Board(size)
+# expBoard = base.Board(size)
 # stones_In = base.loadStones(fileOpen)
 
 print(f"File: {file_name}.txt")
@@ -165,7 +165,7 @@ stones = copy.deepcopy(stones_In)
 # print()
 
 
-"""     Shift till in board     """
+"""     Shift till in expBoard     """
 
 # pShift = True
 # qShift = True
@@ -267,35 +267,35 @@ for sol in solBoard:
 #     for q in range(-size, size):
 #
 #         if isIn(p, q, size):
-#             if not p in board:
-#                 board[p] = {}
+#             if not p in expBoard:
+#                 expBoard[p] = {}
 #
-#             board[p][q] = 2
+#             expBoard[p][q] = 2
 #
 # print()
-# print(board)
-# board[1][2] = 0
-# board[1][1] = 0
-# print(board)
+# print(expBoard)
+# expBoard[1][2] = 0
+# expBoard[1][1] = 0
+# print(expBoard)
 #
-# print(leftSpace(board))
+# print(leftSpace(expBoard))
 
 # space = 0
-# for line in board:
-#     # if board[line] == 0:
+# for line in expBoard:
+#     # if expBoard[line] == 0:
 #     #     space += 1
-#     for tile in board[line]:
-#         if board[line][tile] == 0:
+#     for tile in expBoard[line]:
+#         if expBoard[line][tile] == 0:
 #             space += 1
 #
 #         # print(tile, end=" ")
-#         # print(f"{tile} : {board[line][tile]}", end=" , ")
+#         # print(f"{tile} : {expBoard[line][tile]}", end=" , ")
 #     # print()
 
 
 """     Test can place      """
 
-# # def canPlace(board, coord, piece, size):
+# # def canPlace(expBoard, coord, piece, size):
 # #     rwCo = coord[0]
 # #     clCo = coord[1]
 # #
@@ -304,7 +304,7 @@ for sol in solBoard:
 # #         clBl = clCo + block[1]
 # #
 # #         if isIn(rwBl, clBl, size):
-# #             if board[rwBl][clBl] != 0:
+# #             if expBoard[rwBl][clBl] != 0:
 # #                 return False
 # #         else:
 # #             return False
@@ -314,27 +314,27 @@ for sol in solBoard:
 # print()
 # stone = stones[1]
 #
-# for p in board:
-#     for q in board[p]:
+# for p in expBoard:
+#     for q in expBoard[p]:
 #
-#         if canPlace(board, [p, q], stone, size):
+#         if canPlace(expBoard, [p, q], stone, size):
 #             for block in stone:
 #                 pB = p + block[0]
 #                 qB = q + block[1]
-#                 board[pB][qB] = 1
+#                 expBoard[pB][qB] = 1
 #
-#             print(board)
-#             for pp in board:
-#                 for qp in board[pp]:
-#                     print(board[pp][qp], end=" ")
+#             print(expBoard)
+#             for pp in expBoard:
+#                 for qp in expBoard[pp]:
+#                     print(expBoard[pp][qp], end=" ")
 #                 print()
 #             print()
 #             for block in stone:
 #                 pB = p + block[0]
 #                 qB = q + block[1]
-#                 board[pB][qB] = 0
+#                 expBoard[pB][qB] = 0
 
-    #     print(board[p][q], end=" ")
+    #     print(expBoard[p][q], end=" ")
     # print()
 
 
