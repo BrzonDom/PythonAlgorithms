@@ -1,4 +1,34 @@
 
+def my_findMax(Set):
+
+    if len(Set) == 0:
+        return -1
+
+    index_list = []
+    index = 0
+    Max = Set[0]
+
+    for num in Set:
+
+        if num > Max:
+            Max = num
+            index_list = [index]
+
+        elif num == Max:
+            index_list.append(index)
+
+        index += 1
+
+    print(f"Max: {Max}\n\tIndex: ", end="")
+    for i in index_list:
+        print(i, end=" ")
+
+    return [num, index_list]
+
+
+# def numIndex(numbers, num):
+#
+
 
 
 numbers = [0, 1, 2, 3, 4, 5, 3, 6, 7, 8, 9, 10]
