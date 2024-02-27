@@ -179,8 +179,8 @@ coRN = {
     7: "1",
     6: "2",
     5: "3",
-    4: "5",
-    3: "4",
+    4: "4",
+    3: "5",
     2: "6",
     1: "7",
     0: "8"
@@ -190,7 +190,7 @@ coRN = {
 file_list = ["setup_L_01", "setup_L_02", "setup_L_03",
              "setup_myL_04", "setup_myL_05", "setup_myL_06"]
 
-inOp = 5
+inOp = 6
 
 file_name = file_list[inOp]
 # file_name = "setup_L_01"

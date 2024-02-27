@@ -180,8 +180,8 @@ coRN = {
     7: "1",
     6: "2",
     5: "3",
-    4: "5",
-    3: "4",
+    4: "4",
+    3: "5",
     2: "6",
     1: "7",
     0: "8"
@@ -253,7 +253,7 @@ for r in range(8):
             # def nextMoves(tile, noJump, prevTiles):
             nextMoves(tile, True, [tile])
 
-# for moves in moves_lst:
+# for moves in moves:
 #     print(moves)
 
 
