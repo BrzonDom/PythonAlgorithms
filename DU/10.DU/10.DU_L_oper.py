@@ -7,8 +7,8 @@ def isIn(row, col, size):
 
 file_list = ["PrL_1", "PrL_2", "PrL_3", "eboard-5002.txt", "eboard-5412", "eboard-6759", "eboard-7089", "eboard-7141", "eboard-7639", "eboard-8904"]
 
-# file_name = file_list[1]
-file_name = "eboard-7296"
+file_name = file_list[0]
+# file_name = "eboard-7296"
 file_path = "data\\" + file_name + ".txt"
 
 file = open(file_path, "r")
@@ -44,10 +44,11 @@ for str_line in file:
         line = list(map(int, str_line.split()))
         # print(f"{line[0]}:{line[1]}")
 
-        """     Store input board   
-                    Not sure why 2 times    """
+        """     Store input board of coords     """
         border.append([line[0], line[1]])
+        """     Store input board with values   """
         data_list.append(line)
+
         # print(line)
         # graph[[line[0], line[1]]] = line[2]
 
@@ -131,7 +132,7 @@ for move in move_list:
             isOut = True
 
         if isIn(row, col, size):
-            print(f"Jump in direction of [{row}, {col}] not possible due to lack of space")
+            # print(f"Jump in direction of [{row}, {col}] is possible")
 
         # else:
             while value_dict[row][col] != 0 and not isOut:
