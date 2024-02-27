@@ -90,8 +90,15 @@ lineCnt = 0
 for str_line in file:
 
     line = list(map(int, str_line.split()))
-    print("\t", line)
+    # print("\t", line)
+
     data.append(line)
+
+    print("\t", end="")
+    for itm in line:
+        print(itm, end=" ")
+    print()
+
 
 file.close()
 print()
@@ -109,8 +116,15 @@ dataIn = []
 for str_line in file:
 
     line = list(map(int, str_line.split()))
-    print("\t", line)
+    # print("\t", line)
+
     dataIn.append(line)
+
+    print("\t", end="")
+    for itm in line:
+        print(itm, end=" ")
+    print()
+
 
 file.close()
 
