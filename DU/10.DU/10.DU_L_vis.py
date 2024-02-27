@@ -84,9 +84,11 @@ def isIn(row, col, size):
     return (col >= 0) and (col < size) and (row >= -(col // 2)) and (row < (size - col // 2))
 
 
-file_list = ["PrL_1", "PrL_2", "PrL_3", "eboard-5002", "eboard-5412", "eboard-6759", "eboard-7089", "eboard-7141", "eboard-7639", "eboard-8904"]
+file_list = ["PrL_1", "PrL_2", "PrL_3",
+             "eboard-5002", "eboard-5412", "eboard-6759",
+             "eboard-7089", "eboard-7141", "eboard-7639", "eboard-8904"]
 
-file_name = file_list[2]
+file_name = file_list[9]
 # file_name = "eboard-7296"
 file_path = "data\\" + file_name + ".txt"
 
@@ -169,7 +171,7 @@ neighbour_list = []
 
 
 for move in move_list:
-    # if [hooper_coord[0]+move[0], hooper_coord[1]+move[1]] in border:
+    # if [hopper_coord[0]+move[0], hopper_coord[1]+move[1]] in border:
     row = hooper_coord[0] + move[0]
     col = hooper_coord[1] + move[1]
     isOut = False
@@ -177,8 +179,8 @@ for move in move_list:
 
     if isIn(row, col, size):
 
-        # row = hooper_coord[0]+move[0]
-        # col = hooper_coord[1]+move[1]
+        # row = hopper_coord[0]+move[0]
+        # col = hopper_coord[1]+move[1]
 
         if value_dict[row][col] == 1:
             neighbour_list.append([row, col])
@@ -211,7 +213,7 @@ for move in move_list:
 
             # while value_dict[row][col] != 0 and isIn(row, col, size):
             #
-            #     if [row-move[0], col-move[1]] != hooper_coord:
+            #     if [row-move[0], col-move[1]] != hopper_coord:
             #         next_list.append([row, col])
             #         print(f"{move} to [{row}, {col}] possible")
             #     else:
