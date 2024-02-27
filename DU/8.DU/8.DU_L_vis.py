@@ -43,7 +43,7 @@ class myBoard:
         self.size = size
         self.board = {}
 
-        # create empty board as a dictionary
+        # create empty expBoard as a dictionary
         self.b2 = {}
         for p in range(-self.size, self.size):
             for q in range(-self.size, self.size):
@@ -78,7 +78,7 @@ class myBoard:
 
 
     def saveImage(self, filename):
-        """ draw actual board to png
+        """ draw actual expBoard to png
         """
 
         cellRadius = 60
@@ -131,9 +131,9 @@ def solve(board, piec_lst, piec_ind, size):
 
             solBoard.append(copy.deepcopy(board))
             print(board)
-            # for row in board:
-            #     for col in board[row]:
-            #         print(board[row][col], end=" ")
+            # for row in expBoard:
+            #     for col in expBoard[row]:
+            #         print(expBoard[row][col], end=" ")
             #     print()
             # print()
 
@@ -157,7 +157,7 @@ def solve(board, piec_lst, piec_ind, size):
                     # for block in piece:
                     #     rB = row + block[0]
                     #     cB = col + block[1]
-                    #     board[rB][cB] = 0
+                    #     expBoard[rB][cB] = 0
 
 
 def canPlace(board, coord, piece, size):
@@ -194,7 +194,7 @@ fileOpen = "data\\" + file_name + ".txt"
 fileWrite = "data\\" + file_name + "_out.txt"
 
 size = 3
-# board = base.Board(size)
+# expBoard = base.Board(size)
 # stones = base.loadStones(fileOpen)
 
 print(f"File: {file_name}.txt")
