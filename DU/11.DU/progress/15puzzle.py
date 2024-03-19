@@ -126,7 +126,7 @@ def down(orgBoard):
 org_board = [[8, 5, 6], [4, 0, 3], [1, 2, 7]]
 board = copy.deepcopy(org_board)
 
-print("Original board:", end="\n\t")
+print("Original expBoard:", end="\n\t")
 
 for row in org_board:
     for col in row:
@@ -134,7 +134,7 @@ for row in org_board:
     print("", end="\n\t")
 print()
 
-print("Solved board:", end="\n\t")
+print("Solved expBoard:", end="\n\t")
 slv_board = copy.deepcopy(org_board)
 
 iOrd = 0
@@ -156,48 +156,48 @@ print()
 
 # print("\tMoves\n")
 # print("Right:", end="\n\t")
-# board = right(board)[1]
+# expBoard = right(expBoard)[1]
 #
-# for row in board:
+# for row in expBoard:
 #     for col in row:
 #         print(col, end=" ")
 #     print("", end="\n\t")
 # print()
 #
-# board = copy.deepcopy(org_board)
+# expBoard = copy.deepcopy(org_board)
 #
 # print("Left:", end="\n\t")
-# board = left(board)[1]
+# expBoard = left(expBoard)[1]
 #
-# for row in board:
+# for row in expBoard:
 #     for col in row:
 #         print(col, end=" ")
 #     print("", end="\n\t")
 # print()
 #
-# board = copy.deepcopy(org_board)
+# expBoard = copy.deepcopy(org_board)
 #
 # print("Up:", end="\n\t")
-# board = up(board)[1]
+# expBoard = up(expBoard)[1]
 #
-# for row in board:
+# for row in expBoard:
 #     for col in row:
 #         print(col, end=" ")
 #     print("", end="\n\t")
 # print()
 #
-# board = copy.deepcopy(org_board)
+# expBoard = copy.deepcopy(org_board)
 #
 # print("Down:", end="\n\t")
-# board = down(board)[1]
+# expBoard = down(expBoard)[1]
 #
-# for row in board:
+# for row in expBoard:
 #     for col in row:
 #         print(col, end=" ")
 #     print("", end="\n\t")
 # print()
 #
-# board = copy.deepcopy(org_board)
+# expBoard = copy.deepcopy(org_board)
 
 print()
 
