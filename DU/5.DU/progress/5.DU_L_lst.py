@@ -304,7 +304,7 @@ print("Explanatory note:")
 print("\t⬜ = empty tile")
 print("\t🟥 = your pieces")
 print("\t⬛ = opponent's pieces")
-print("\t🟩 = possible moves_lst")
+print("\t🟩 = possible moves")
 print("\t🟨 = longest possible move")
 
 
