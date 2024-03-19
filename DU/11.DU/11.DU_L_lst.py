@@ -155,9 +155,20 @@ def BFS(strSta):
         curSta = queue.get()
 
         if solved(curSta.state):
-            print("SOLVED")
+            print("!!   SOLVED   !!\n")
 
-            return curSta.state
+            path_moves = [curSta.action]
+            path_towers = [curSta.state]
+
+            curSta = curSta.parent
+
+            while curSta.action != None:
+                path_moves.append(curSta.action)
+                path_towers.append(curSta.state)
+
+                curSta = curSta.parent
+
+            return path_towers[::-1], path_moves[::-1]
 
         for next in State.nextState(curSta):
             if not str(next.state) in visited:
@@ -230,4 +241,21 @@ for row in tower:
 print()
 print()
 
-slv_tower = BFS(orgState)
+path_towers, path_moves = BFS(orgState)
+
+print("Start:", end="\n\t")
+for row in org_tower:
+    for col in row:
+        print(col, end=" ")
+    print("\n", end="\t")
+print()
+
+
+for p, path in enumerate(path_towers):
+    print(path_moves[p], end="\n\t")
+
+    for row in path:
+        for col in row:
+            print(col, end=" ")
+        print("\n", end="\t")
+    print()
